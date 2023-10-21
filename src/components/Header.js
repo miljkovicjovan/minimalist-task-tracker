@@ -6,12 +6,12 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
 function Header() {
   return (
-    <Stack direction='horizontal' gap={4} className='mx-auto text-white'>
+    <Stack direction='horizontal' gap={4} className='d-flex justify-content-center'>
       <span>
         <h1 className='m-0'>minimalist task manager</h1>
         <p className='m-0'>
           by 
-          <a href="https://github.com/miljkovicjovan" target='_blank'>
+          <a href="https://github.com/miljkovicjovan" target='_blank'  rel="noreferrer">
             @miljkovicjovan
           </a>
         </p>
