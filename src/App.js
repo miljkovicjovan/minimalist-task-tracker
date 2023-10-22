@@ -35,7 +35,7 @@ function App() {
       <Header/>
       <AddTask onAdd={addTask}/>
       <Tasks onComplete={completeTask} onDelete={deleteTask} onEdit={editTask} tasks={tasks}/>
-      <Footer/>
+      {/* TODO make this footer better then add it back <Footer/> */}
     </div>
   );
 }
