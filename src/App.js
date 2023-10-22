@@ -2,7 +2,7 @@ import { useState } from "react";
 import AddTask from "./components/AddTask";
 import Header from "./components/Header";
 import Tasks from "./components/Tasks";
-import Footer from "./components/Footer";
+// TODO uncomment when footer is done import Footer from "./components/Footer";
 import "./styles.scss";
 
 function App() {
