@@ -37,7 +37,7 @@ function Tasks() {
 				(tasks.map((task) => (
 					<Task key={task.id} id={task.id} name={task.name} onDelete={deleteTask} onEdit={editTask}/>
 				))
-			) : <NoTasks/>/* 'No tasks' */}
+			) : <NoTasks/>}
 		</Stack>
 	)
 }

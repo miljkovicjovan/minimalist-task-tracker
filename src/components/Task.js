@@ -1,6 +1,6 @@
 import { Button, Stack } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 function Task({ id, name, onDelete, onEdit }) {
   return (
@@ -9,6 +9,12 @@ function Task({ id, name, onDelete, onEdit }) {
       <span>
         <Button 
           className="bg-success border-success border-2 rounded-0"
+          onClick={() => onEdit(id)}
+        >
+          <FontAwesomeIcon icon={faCheck}/>
+        </Button>
+        <Button 
+          className="bg-primary border-primary border-2 rounded-0"
           onClick={() => onEdit(id)}
         >
           <FontAwesomeIcon icon={faPenToSquare}/>
