@@ -13,6 +13,11 @@ function AddTask({ onAdd }) {
       return;
     }
 
+    if (!name.replace(/\s/g, '').length) {
+        setName('');
+        return;
+    }
+
     onAdd({name});
     setName('');
   }
