@@ -28,14 +28,26 @@ function Tasks() {
 
 	// TODO make edit function when add form is done
 	function editTask(id) {
-		console.log(tasks.filter((task) => task.id === id))
+		console.log(tasks.filter((task) => task.id === id));
+	}
+
+	// TODO make complete task function 
+	function completeTask(id) {
+		console.log(tasks.filter((task) => task.id === id));
 	}
 
 	return (
 		<Stack className="my-3 mx-5">
 			{tasks.length ? 
 				(tasks.map((task) => (
-					<Task key={task.id} id={task.id} name={task.name} onDelete={deleteTask} onEdit={editTask}/>
+					<Task 
+						key={task.id}
+						id={task.id}
+						name={task.name}
+						onDelete={deleteTask}
+						onEdit={editTask}
+						onComplete={completeTask}
+					/>
 				))
 			) : <NoTasks/>}
 		</Stack>
