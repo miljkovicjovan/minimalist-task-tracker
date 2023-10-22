@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Stack } from "react-bootstrap";
 import Task from "./Task";
+import NoTasks from "./NoTasks";
 
 
 function Tasks() {
@@ -32,9 +33,11 @@ function Tasks() {
 
 	return (
 		<Stack className="my-3 mx-5">
-			{tasks.map((task) => (
-				<Task key={task.id} id={task.id} name={task.name} onDelete={deleteTask} onEdit={editTask}/>
-			))}
+			{tasks.length ? 
+				(tasks.map((task) => (
+					<Task key={task.id} id={task.id} name={task.name} onDelete={deleteTask} onEdit={editTask}/>
+				))
+			) : <NoTasks/>/* 'No tasks' */}
 		</Stack>
 	)
 }
