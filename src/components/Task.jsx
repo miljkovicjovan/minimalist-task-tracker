@@ -9,7 +9,7 @@ function Task({ id, name, onDelete, onEdit, onComplete }) {
       <span>
         <Button 
           className="bg-success border-success border-2 rounded-0"
-          onClick={() => onComplete(id)}
+          onClick={() => onComplete(name, id)}
         >
           <FontAwesomeIcon icon={faCheck}/>
         </Button>

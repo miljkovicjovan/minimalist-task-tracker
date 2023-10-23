@@ -2,11 +2,13 @@ import { useState } from "react";
 import AddTask from "./components/AddTask";
 import Header from "./components/Header";
 import Tasks from "./components/Tasks";
+import FinishedTasks from "./components/FinishedTasks";
 // TODO uncomment when footer is done import Footer from "./components/Footer";
 import "./styles.scss";
 
 function App() {
   const [tasks, setTasks] = useState([]);
+  const [finishedTasks, setFinishedTasks] = useState([]);
 
 	function deleteTask(id) {
 		setTasks(tasks.filter((task) => task.id !== id));
@@ -17,9 +19,9 @@ function App() {
 		console.log(tasks.filter((task) => task.id === id));
 	}
 
-	// TODO make complete task function 
-	function completeTask(id) {
-		console.log(tasks.filter((task) => task.id === id));
+	function completeTask(name, id) {
+    setFinishedTasks([...finishedTasks, name]);
+    setTasks(tasks.filter((task) => task.id !== id));
 	}
 
   function addTask(name) {
@@ -35,6 +37,9 @@ function App() {
       <Header/>
       <AddTask onAdd={addTask}/>
       <Tasks onComplete={completeTask} onDelete={deleteTask} onEdit={editTask} tasks={tasks}/>
+      {finishedTasks.length ?
+        <FinishedTasks finishedTasks={finishedTasks} tasks={tasks}/> : ''        
+      }
       {/* TODO make this footer better then add it back <Footer/> */}
     </div>
   );
