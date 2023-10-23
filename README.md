@@ -1,4 +1,4 @@
 # Minimalist Task Tracker
 [Try it here](https://minimalist-task-tracker.netlify.app)
 
-this project was made for practicing/learning purposes 
+This was made as a personal project for making a tool I will use for my daily tasks.
