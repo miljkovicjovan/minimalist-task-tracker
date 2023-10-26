@@ -9,12 +9,12 @@ import "./styles.scss";
 function App() {
   const [tasks, setTasks] = useState(
     JSON.parse(
-      window.localStorage.getItem('my-minimalistic-tracker-tasks')
+      window.localStorage.getItem('my-minimalistic-tracker-tasks') || "[]"
     )
   );
   const [finishedTasks, setFinishedTasks] = useState(
     JSON.parse(
-      window.localStorage.getItem('my-minimalistic-tracker-tasks-finished')
+      window.localStorage.getItem('my-minimalistic-tracker-tasks-finished') || "[]"
     )
   );
 
