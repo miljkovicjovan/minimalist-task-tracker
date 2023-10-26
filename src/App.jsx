@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AddTask from "./components/AddTask";
 import Header from "./components/Header";
 import Tasks from "./components/Tasks";
@@ -7,8 +7,16 @@ import FinishedTasks from "./components/FinishedTasks";
 import "./styles.scss";
 
 function App() {
-  const [tasks, setTasks] = useState([]);
-  const [finishedTasks, setFinishedTasks] = useState([]);
+  const [tasks, setTasks] = useState(
+    JSON.parse(
+      window.localStorage.getItem('my-minimalistic-tracker-tasks')
+    )
+  );
+  const [finishedTasks, setFinishedTasks] = useState(
+    JSON.parse(
+      window.localStorage.getItem('my-minimalistic-tracker-tasks-finished')
+    )
+  );
 
 	function deleteTask(id) {
 		setTasks(tasks.filter((task) => task.id !== id));
@@ -34,6 +42,11 @@ function App() {
     });
     setTasks(updatedTasks);
   }
+
+  useEffect(() => {
+    window.localStorage.setItem('my-minimalistic-tracker-tasks', JSON.stringify(tasks));
+    window.localStorage.setItem('my-minimalistic-tracker-tasks-finished', JSON.stringify(finishedTasks));
+  }, [tasks, finishedTasks]);
 
   return (
     <div className="vh-100 pt-4 bg-dark text-white">
