@@ -14,11 +14,6 @@ function App() {
 		setTasks(tasks.filter((task) => task.id !== id));
 	}
 
-	// TODO make edit function when add form is done
-	function editTask(id) {
-		console.log(tasks.filter((task) => task.id === id));
-	}
-
 	function completeTask(name, id) {
     setFinishedTasks([...finishedTasks, name]);
     setTasks(tasks.filter((task) => task.id !== id));
@@ -30,6 +25,14 @@ function App() {
     const id = Math.floor(Math.random() * 1000) + 1;
     const newTask = { id, ...name };
     setTasks([...tasks, newTask]);
+  }
+
+  function editTask(name, id) {
+    // TODO change name to task for better understanding
+    const updatedTasks = tasks.map((task) => {
+      return task.id === id ? { ...task, name: name } : task;
+    });
+    setTasks(updatedTasks);
   }
 
   return (
