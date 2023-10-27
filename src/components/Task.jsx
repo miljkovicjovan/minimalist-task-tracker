@@ -2,6 +2,7 @@ import { Button, Stack } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import { Tooltip } from "react-tooltip";
 
 function Task({ id, name, onDelete, onEdit, onComplete }) {
   const [editedName, setEditedName] = useState(name);
@@ -28,23 +29,35 @@ function Task({ id, name, onDelete, onEdit, onComplete }) {
       </span>}
       <span>
         <Button 
-          className="bg-success border-success border-2 rounded-0"
+          className="bg-success border-success border-2 rounded-0 finish-task"
           onClick={() => onComplete(name, id)}
         >
           <FontAwesomeIcon icon={faCheck}/>
         </Button>
+        <Tooltip
+            anchorSelect=".finish-task"
+            content="Finish Task"
+        />
         <Button 
-          className="bg-primary border-primary border-2 rounded-0"
+          className="bg-primary border-primary border-2 rounded-0 edit-task"
           onClick={() => setEditMode(!editMode)}
         >
           <FontAwesomeIcon icon={faPenToSquare}/>
         </Button>
+        <Tooltip
+            anchorSelect=".edit-task"
+            content="Edit Task"
+        />
         <Button 
-          className="bg-danger border-danger border-2 rounded-0 rounded-end"
+          className="bg-danger border-danger border-2 rounded-0 rounded-end delete-task"
           onClick={() => onDelete(id)}
         >
           <FontAwesomeIcon icon={faTrash}/>
         </Button>
+        <Tooltip
+            anchorSelect=".delete-task"
+            content="Delete Task"
+        />
       </span>
     </Stack>
   )
