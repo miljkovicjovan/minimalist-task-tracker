@@ -1,4 +1,4 @@
-# Minimalist Task Tracker
-[Try it here](https://minimalist-task-tracker.netlify.app)
-
-This was made as a personal project for making a tool I will use for my daily tasks.
+[try it out](https://minimalist-task-tracker.netlify.app)
+## 🖊️Minimalist Task Tracker
+- 📣 Simple way to create, track and delete tasks
+- 📣 Seemless storage on any device
