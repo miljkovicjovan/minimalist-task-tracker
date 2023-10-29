@@ -24,7 +24,7 @@ function AddTask({ onAdd }) {
   }
 
   return (
-    <form onSubmit={onSubmit} className='pt-3 d-flex justify-content-center'>
+    <form onSubmit={onSubmit} className='pt-4 d-flex justify-content-center'>
         <input 
             type="text" 
             value={name}

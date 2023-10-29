@@ -53,7 +53,7 @@ function App() {
   }, [tasks, finishedTasks]);
 
   return (
-    <div className="pt-4 text-white">
+    <div className="pt-4 text-white text-center">
       <Header/>
       <AddTask onAdd={addTask}/>
       <Tasks onComplete={completeTask} onDelete={deleteTask} onEdit={editTask} tasks={tasks}/>
