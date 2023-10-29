@@ -1,10 +1,12 @@
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { Stack, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import NoTasks from "./NoTasks";
 
 function FinishedTasks({ finishedTasks, tasks, onReset }) {
   return (
     <Stack className="text-center pt-4">
+        <NoTasks/>
         <h4>Finished Tasks &#129321;</h4>
         <p className="text-secondary">
           {`Finished: ${finishedTasks.length} `}
