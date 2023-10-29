@@ -1,9 +1,13 @@
 function Footer() {
   return (
-    <span>
-        by <a href="https://github.com/miljkovicjovan" target='_blank'  rel="noreferrer">
-        @miljkovicjovan
-        </a>
+    <span className="fixed-bottom text-center pb-3">
+        Contribute or support us on <a 
+          href="https://github.com/miljkovicjovan/minimalist-task-tracker"
+          target='_blank' 
+          rel="noreferrer"
+          className="text-primary text-decoration-none">
+            GitHub &#10084;&#65039;
+          </a>
     </span>
   )
 }

@@ -3,7 +3,7 @@ import AddTask from "./components/AddTask";
 import Header from "./components/Header";
 import Tasks from "./components/Tasks";
 import FinishedTasks from "./components/FinishedTasks";
-// TODO uncomment when footer is done import Footer from "./components/Footer";
+import Footer from "./components/Footer";
 import "./styles.scss";
 
 function App() {
@@ -53,14 +53,14 @@ function App() {
   }, [tasks, finishedTasks]);
 
   return (
-    <div className="vh-100 pt-4 bg-dark text-white">
+    <div className="pt-4 text-white">
       <Header/>
       <AddTask onAdd={addTask}/>
       <Tasks onComplete={completeTask} onDelete={deleteTask} onEdit={editTask} tasks={tasks}/>
       {finishedTasks.length ?
         <FinishedTasks finishedTasks={finishedTasks} tasks={tasks} onReset={resetFinishedTask}/> : ''        
       }
-      {/* TODO make this footer better then add it back <Footer/> */}
+      <Footer/>
     </div>
   );
 }
