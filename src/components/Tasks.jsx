@@ -8,7 +8,7 @@ function Tasks({tasks, onDelete, onEdit, onComplete, onDeleteAll}) {
 			{tasks.length ? 
 				<>
 					<hr className="mx-auto w-25"/>
-					<h3 className="text-decoration-underline mb-3">Active tasks</h3>
+					<h3 className="text-decoration-underline mb-3">Active tasks &#129488;</h3>
 				</> : ""
 			}
 			{tasks.map((task, index) => (

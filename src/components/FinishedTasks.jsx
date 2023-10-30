@@ -1,11 +1,15 @@
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { Stack, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
 
 function FinishedTasks({ finishedTasks, tasks, onReset }) {
+  const [hover, setHover] = useState(false);
+  const toggleHover = () => setHover(!hover);
   return (
     <Stack className="text-center pt-4">
-        <h4>Finished Tasks &#129321;</h4>
+        <hr className="mx-auto w-25"/>
+        <h4 className="text-decoration-underline">Finished Tasks &#129321;</h4>
         <p className="text-secondary">
           {`Finished: ${finishedTasks.length} `}
           {`- Total: ${finishedTasks.length+tasks.length} `}
@@ -16,12 +20,14 @@ function FinishedTasks({ finishedTasks, tasks, onReset }) {
         ))}
         <span className="mt-4">
           <Button 
-            type='submit' 
-            className='bg-danger border-danger text-light w-25'
+            type='submit'
+            className={`border-danger ${hover ? "bg-dark text-danger" : "bg-danger text-white"}`}
+            onMouseEnter={toggleHover}
+            onMouseLeave={toggleHover}
             onClick={() => onReset()}
           >
               <FontAwesomeIcon icon={faTrashCan} className='pe-1'/>
-              Reset Finished Tasks
+              Delete Finished Tasks
           </Button>
         </span> 
     </Stack>
