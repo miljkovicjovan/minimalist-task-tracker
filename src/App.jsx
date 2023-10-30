@@ -47,6 +47,10 @@ function App() {
     setFinishedTasks([]);
   }
 
+  function deleteAll() {
+    setTasks([]);
+  }
+
   useEffect(() => {
     window.localStorage.setItem('my-minimalistic-tracker-tasks', JSON.stringify(tasks));
     window.localStorage.setItem('my-minimalistic-tracker-tasks-finished', JSON.stringify(finishedTasks));
@@ -56,7 +60,7 @@ function App() {
     <div className="pt-4 text-white text-center">
       <Header/>
       <AddTask onAdd={addTask}/>
-      <Tasks onComplete={completeTask} onDelete={deleteTask} onEdit={editTask} tasks={tasks}/>
+      <Tasks onComplete={completeTask} onDelete={deleteTask} onEdit={editTask} tasks={tasks} onDeleteAll={deleteAll}/>
       {finishedTasks.length ?
         <FinishedTasks finishedTasks={finishedTasks} tasks={tasks} onReset={resetFinishedTask}/> : ''        
       }

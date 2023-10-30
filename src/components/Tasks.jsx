@@ -1,7 +1,8 @@
 import { Stack } from "react-bootstrap";
 import Task from "./Task";
+import DeleteTasks from "./DeleteTasks";
 
-function Tasks({tasks, onDelete, onEdit, onComplete}) {
+function Tasks({tasks, onDelete, onEdit, onComplete, onDeleteAll}) {
 	return (
 		<Stack className="my-3 mx-5">
 			{tasks.map((task, index) => (
@@ -14,6 +15,7 @@ function Tasks({tasks, onDelete, onEdit, onComplete}) {
 					onComplete={onComplete}
 				/>
 			))}
+			{tasks.length ? <DeleteTasks onDeleteAll={onDeleteAll}/> : ""}
 		</Stack>
 	)
 }
