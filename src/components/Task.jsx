@@ -4,7 +4,7 @@ import { faCheck, faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-ico
 import { useState } from "react";
 import { Tooltip } from "react-tooltip";
 
-function Task({ id, name, onDelete, onEdit, onComplete }) {
+function Task({ id, index, name, onDelete, onEdit, onComplete }) {
   const [editedName, setEditedName] = useState(name);
   const [editMode, setEditMode] = useState(false);
 
@@ -17,7 +17,7 @@ function Task({ id, name, onDelete, onEdit, onComplete }) {
 
   return (
     <Stack direction="horizontal" className="task m-2 mx-auto border rounded d-flex justify-content-between">
-      {!editMode ? <span className="p-2">{name}</span> :
+      {!editMode ? <span className="p-2">#{index+1} {name}</span> :
       <span className="d-flex align-items-center">
         <span className="text-secondary ps-2 pe-1"><i>Edit Mode</i></span>
         <form onSubmit={(e) => {

@@ -6,7 +6,7 @@ function DeleteTasks({onDeleteAll}) {
     const toggleHover = () => setHover(!hover);
     return (
         <Button 
-            className={`mx-auto mt-2 border-danger ${hover ? "bg-danger text-white" : "bg-dark text-danger"}`}
+            className={`mx-auto mt-3 border-danger ${hover ? "bg-danger text-white" : "bg-dark text-danger"}`}
             onMouseEnter={toggleHover}
             onMouseLeave={toggleHover}
             onClick={onDeleteAll}
