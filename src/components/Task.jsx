@@ -8,6 +8,13 @@ function Task({ id, name, onDelete, onEdit, onComplete }) {
   const [editedName, setEditedName] = useState(name);
   const [editMode, setEditMode] = useState(false);
 
+  const [finishHover, setFinishHover] = useState(false);
+  const toggleHoverFinish = () => setFinishHover(!finishHover);
+  const [editHover, setEditHover] = useState(false);
+  const toggleHoverEdit = () => setEditHover(!editHover);
+  const [deleteHover, setDeleteHover] = useState(false);
+  const toggleHoverDelete = () => setDeleteHover(!deleteHover);
+
   return (
     <Stack direction="horizontal" className="task m-2 mx-auto border rounded d-flex justify-content-between">
       {!editMode ? <span className="p-2">{name}</span> :
@@ -29,7 +36,9 @@ function Task({ id, name, onDelete, onEdit, onComplete }) {
       </span>}
       <span>
         <Button 
-          className="bg-success border-success border-2 rounded-0 finish-task"
+          className={`border-success border-2 rounded-0 finish-task ${finishHover ? "bg-light border-light text-success" : "bg-success text-light"}`}
+          onMouseEnter={toggleHoverFinish}
+          onMouseLeave={toggleHoverFinish}
           onClick={() => onComplete(name, id)}
         >
           <FontAwesomeIcon icon={faCheck}/>
@@ -39,7 +48,9 @@ function Task({ id, name, onDelete, onEdit, onComplete }) {
             content="Finish Task"
         />
         <Button 
-          className="bg-primary border-primary border-2 rounded-0 edit-task"
+          className={`border-primary border-2 rounded-0 edit-task ${editHover ? "bg-light border-light text-primary" : "bg-primary text-light"}`}
+          onMouseEnter={toggleHoverEdit}
+          onMouseLeave={toggleHoverEdit}
           onClick={() => setEditMode(!editMode)}
         >
           <FontAwesomeIcon icon={faPenToSquare}/>
@@ -49,7 +60,9 @@ function Task({ id, name, onDelete, onEdit, onComplete }) {
             content="Edit Task"
         />
         <Button 
-          className="bg-danger border-danger border-2 rounded-0 rounded-end delete-task"
+          className={`border-danger border-2 rounded-0 rounded-end delete-task ${deleteHover ? "bg-light border-light text-danger" : "bg-danger text-light"}`}
+          onMouseEnter={toggleHoverDelete}
+          onMouseLeave={toggleHoverDelete}
           onClick={() => onDelete(id)}
         >
           <FontAwesomeIcon icon={faTrash}/>
