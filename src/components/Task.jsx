@@ -9,7 +9,7 @@ function Task({ id, name, onDelete, onEdit, onComplete }) {
   const [editMode, setEditMode] = useState(false);
 
   return (
-    <Stack direction="horizontal" className="m-2 border rounded d-flex justify-content-between">
+    <Stack direction="horizontal" className="task m-2 mx-auto border rounded d-flex justify-content-between">
       {!editMode ? <span className="p-2">{name}</span> :
       <span className="d-flex align-items-center">
         <span className="text-secondary ps-2 pe-1"><i>Edit Mode</i></span>
