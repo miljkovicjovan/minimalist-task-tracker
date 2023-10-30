@@ -6,6 +6,8 @@ import { Tooltip } from 'react-tooltip';
 
 function AddTask({ onAdd }) {
   const [name, setName] = useState('');
+  const [hover, setHover] = useState(false);
+  const toggleHover = () => setHover(!hover);
 
   function onSubmit(e) {
     e.preventDefault();
@@ -32,7 +34,12 @@ function AddTask({ onAdd }) {
             className='bg-dark text-light rounded p-1 me-3'
             onChange={(e) => setName(e.target.value)}
         />
-        <Button type='submit' className='bg-light border-light text-dark add-task'>
+        <Button
+          type='submit'
+          className={`border-light add-task ${hover ? "bg-dark text-light" : "bg-light text-dark"}`}
+          onMouseEnter={toggleHover}
+          onMouseLeave={toggleHover}
+        >
             <FontAwesomeIcon icon={faPlus} className='pe-1'/>
             task
         </Button>
