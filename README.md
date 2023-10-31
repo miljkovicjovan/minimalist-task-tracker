@@ -1,9 +1,9 @@
 <div align="center">
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
 <img width="245" height="72" src="https://github.com/miljkovicjovan/minimalist-task-tracker/assets/77690201/768bb45e-0488-48d2-8ce0-9f1bee620aff"/>
   
+[![All Contributors](https://img.shields.io/github/all-contributors/miljkovicjovan/minimalist-task-tracker?color=ee8449&style=flat-square)](#contributors)
+[![Star on GitHub](https://img.shields.io/github/stars/miljkovicjovan/minimalist-task-tracker.svg?style=social)](https://github.com/miljkovicjovan/minimalist-task-tracker/stargazers)
+
 [Official Website](https://minimalist-task-tracker.netlify.app) 
 
 ## 🖊️Minimalist Task Tracker
