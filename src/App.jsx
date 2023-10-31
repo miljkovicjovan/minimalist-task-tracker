@@ -9,23 +9,24 @@ import "./styles.scss";
 function App() {
   const [tasks, setTasks] = useState(
     JSON.parse(
-      window.localStorage.getItem('my-minimalistic-tracker-tasks') || "[]"
+      window.localStorage.getItem("my-minimalistic-tracker-tasks") || "[]"
     )
   );
   const [finishedTasks, setFinishedTasks] = useState(
     JSON.parse(
-      window.localStorage.getItem('my-minimalistic-tracker-tasks-finished') || "[]"
+      window.localStorage.getItem("my-minimalistic-tracker-tasks-finished") ||
+        "[]"
     )
   );
 
-	function deleteTask(id) {
-		setTasks(tasks.filter((task) => task.id !== id));
-	}
+  function deleteTask(id) {
+    setTasks(tasks.filter((task) => task.id !== id));
+  }
 
-	function completeTask(name, id) {
+  function completeTask(name, id) {
     setFinishedTasks([...finishedTasks, name]);
     setTasks(tasks.filter((task) => task.id !== id));
-	}
+  }
 
   function addTask(name) {
     // TODO change name to task for better understanding
@@ -52,19 +53,37 @@ function App() {
   }
 
   useEffect(() => {
-    window.localStorage.setItem('my-minimalistic-tracker-tasks', JSON.stringify(tasks));
-    window.localStorage.setItem('my-minimalistic-tracker-tasks-finished', JSON.stringify(finishedTasks));
+    window.localStorage.setItem(
+      "my-minimalistic-tracker-tasks",
+      JSON.stringify(tasks)
+    );
+    window.localStorage.setItem(
+      "my-minimalistic-tracker-tasks-finished",
+      JSON.stringify(finishedTasks)
+    );
   }, [tasks, finishedTasks]);
 
   return (
-    <div className="pt-4 text-white text-center">
-      <Header/>
-      <AddTask onAdd={addTask}/>
-      <Tasks onComplete={completeTask} onDelete={deleteTask} onEdit={editTask} tasks={tasks} onDeleteAll={deleteAll}/>
-      {finishedTasks.length ?
-        <FinishedTasks finishedTasks={finishedTasks} tasks={tasks} onReset={resetFinishedTask}/> : ''        
-      }
-      <Footer/>
+    <div className="pt-4 text-white text-center app">
+      <Header />
+      <AddTask onAdd={addTask} />
+      <Tasks
+        onComplete={completeTask}
+        onDelete={deleteTask}
+        onEdit={editTask}
+        tasks={tasks}
+        onDeleteAll={deleteAll}
+      />
+      {finishedTasks.length ? (
+        <FinishedTasks
+          finishedTasks={finishedTasks}
+          tasks={tasks}
+          onReset={resetFinishedTask}
+        />
+      ) : (
+        ""
+      )}
+      <Footer />
     </div>
   );
 }

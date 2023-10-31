@@ -1,4 +1,11 @@
 input {
-    border: 1px solid white;
-    outline: none;
+  border: 1px solid white;
+  outline: none;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
