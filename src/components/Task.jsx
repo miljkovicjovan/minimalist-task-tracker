@@ -44,6 +44,7 @@ function Task({ id, index, name, onDelete, onEdit, onComplete }) {
           <FontAwesomeIcon icon={faCheck}/>
         </Button>
         <Tooltip
+            className="d-none d-lg-block"
             anchorSelect=".finish-task"
             content="Finish Task"
         />
@@ -56,6 +57,7 @@ function Task({ id, index, name, onDelete, onEdit, onComplete }) {
           <FontAwesomeIcon icon={faPenToSquare}/>
         </Button>
         <Tooltip
+            className="d-none d-lg-block"
             anchorSelect=".edit-task"
             content="Edit Task"
         />
@@ -68,6 +70,7 @@ function Task({ id, index, name, onDelete, onEdit, onComplete }) {
           <FontAwesomeIcon icon={faTrash}/>
         </Button>
         <Tooltip
+            className="d-none d-lg-block"
             anchorSelect=".delete-task"
             content="Delete Task"
         />
