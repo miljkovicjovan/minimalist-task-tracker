@@ -16,7 +16,10 @@ function Task({ id, index, name, onDelete, onEdit, onComplete }) {
   const toggleHoverDelete = () => setDeleteHover(!deleteHover);
 
   return (
-    <Stack direction="horizontal" className="task m-2 mx-auto border rounded d-flex justify-content-between">
+    <Stack 
+      direction="horizontal" 
+      className="task m-2 mx-auto border rounded d-flex justify-content-between"
+    >
       {!editMode ? <span className="p-2">#{index+1} {name}</span> :
       <span className="d-flex align-items-center">
         <span className="text-secondary ps-2 pe-1"><i>Edit Mode</i></span>
@@ -36,7 +39,8 @@ function Task({ id, index, name, onDelete, onEdit, onComplete }) {
       </span>}
       <span>
         <Button 
-          className={`border-success border-2 rounded-0 finish-task ${finishHover ? "bg-light border-light text-success" : "bg-success text-light"}`}
+          className={`border-success border-2 rounded-0 finish-task 
+          ${finishHover ? "bg-light border-light text-success" : "bg-success text-light"}`}
           onMouseEnter={toggleHoverFinish}
           onMouseLeave={toggleHoverFinish}
           onClick={() => onComplete(name, id)}
@@ -49,7 +53,8 @@ function Task({ id, index, name, onDelete, onEdit, onComplete }) {
             content="Finish Task"
         />
         <Button 
-          className={`border-primary border-2 rounded-0 edit-task ${editHover ? "bg-light border-light text-primary" : "bg-primary text-light"}`}
+          className={`border-primary border-2 rounded-0 edit-task 
+          ${editHover ? "bg-light border-light text-primary" : "bg-primary text-light"}`}
           onMouseEnter={toggleHoverEdit}
           onMouseLeave={toggleHoverEdit}
           onClick={() => setEditMode(!editMode)}
@@ -62,7 +67,8 @@ function Task({ id, index, name, onDelete, onEdit, onComplete }) {
             content="Edit Task"
         />
         <Button 
-          className={`border-danger border-2 rounded-0 rounded-end delete-task ${deleteHover ? "bg-light border-light text-danger" : "bg-danger text-light"}`}
+          className={`border-danger border-2 rounded-0 rounded-end delete-task 
+          ${deleteHover ? "bg-light border-light text-danger" : "bg-danger text-light"}`}
           onMouseEnter={toggleHoverDelete}
           onMouseLeave={toggleHoverDelete}
           onClick={() => onDelete(id)}
