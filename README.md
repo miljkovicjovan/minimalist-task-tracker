@@ -22,17 +22,15 @@
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
   <!--* [Usage](#usage)-->
-- [Roadmap](#roadmap)
-- [Contributing](#contributing)
-- [License](#license)
+- [Contributors](#Contributors)
+  - [How to Contribute](#How-to-Contribute)
 - [Contact](#contact)
-- [Acknowledgements](#acknowledgements)
 
 <!-- ABOUT THE PROJECT -->
 
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](/readme-only//minimalist-task-tracker.png)
+[![Product Name Screen Shot][product-screenshot]](/readme-only/minimalist-task-tracker.png)
 
 ### Built With
 
@@ -50,8 +48,8 @@ Here is a list of the major frameworks used to build this project.
 
 ### Prerequisites
 
-- [node](https://nodejs.org/en/)
-- [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+- install [node](https://nodejs.org/en/)
+- install [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 
 ### Installation
 
@@ -113,6 +111,7 @@ Thanks to all our amazing contributors who have helped make OpenQuotes an inspir
 </table>
 
 ### How to Contribute
+
 The open-source community thrives on contributions, fostering an incredible environment for learning, inspiration, and innovation. Your contributions are valued and immensely appreciated.
 
 #### Step 1: Fork this repository
@@ -171,8 +170,8 @@ Save the file, and then in your terminal, execute the following commands:
 
 ```shell
 git status
-git add quotes.js
-git commit -m "Commit to "your-branch-name"
+git add *
+git commit -m "Commit to your-branch-name"
 ```
 
 To Commit you must fill in the Summary field. This is the commit message explaining what you have changed.
@@ -200,24 +199,13 @@ You've completed the standard fork, clone, edit, and pull request workflow. Cong
 Share your contribution and our project with your friends and followers. Encourage them to join the open source community and start their own journey. Together, we can inspire and make the world a better place, one quote at a time.
 
 <!-- CONTACT -->
+
 ## Contact
 
 Miljković Jovan - [https://github.com/miljkovicjovan]
 
 Project Link: [https://github.com/miljkovicjovan/minimalist-task-tracker][product-url]
 
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
-<table>
-  <tbody>
-    <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Sky-De"><img src="https://avatars.githubusercontent.com/u/79264045?v=4?s=100" width="100px;" alt="sky_de_1991"/><br /><sub><b>sky_de_1991</b></sub></a><br /><a href="https://github.com/miljkovicjovan/minimalist-task-tracker/commits?author=Sky-De" title="Code">💻</a> <a href="https://github.com/miljkovicjovan/minimalist-task-tracker/issues?q=author%3ASky-De" title="Bug reports">🐛</a></td>
-    </tr>
-  </tbody>
-</table>
-
-<!-- markdownlint-restore -->
-<!-- prettier-ignore-end -->
-
 <!-- ALL-CONTRIBUTORS-LIST:END -->
+
+[product-screenshot]: assets/images/screenshot.png
