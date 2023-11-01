@@ -30,7 +30,7 @@
 
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](/readme-only/minimalist-task-tracker.png)
+[![Product Name Screen Shot][product-screenshot]](https://i.imgur.com/VyK5Wuq.png)
 
 ### Built With
 
@@ -120,8 +120,8 @@ The open-source community thrives on contributions, fostering an incredible envi
 - A repository (repo) is how a project is called on GitHub and a fork is a copy of it.
 - Make sure you are on the [main page](https://github.com/miljkovicjovan/minimalist-task-tracker "https://github.com/miljkovicjovan/minimalist-task-tracker") of this repo.
 
-| ![Fork](/readme-only//fork.png "click on 'Fork'") |
-| :-----------------------------------------------: |
+| ![Fork](https://i.imgur.com/1fCPDB2.png "click on 'Fork'") |
+| :--------------------------------------------------------: |
 
 | **Click on the _Fork_ button**
 
@@ -131,7 +131,7 @@ The open-source community thrives on contributions, fostering an incredible envi
 
 #### Step 2: Clone the repository |
 
-<img align="right" width="300" src="/readme-only//Clone-This-Repository.png" alt="clone this repository" />
+<img align="right" width="300" src="https://i.imgur.com/6M1OxH2.png" alt="clone this repository" />
 - Clone your forked repository to your local machine. In your GitHub account, navigate to your forked repository and click the "Code" button. Copy the URL.
 
 - Open your terminal and run the following command, replacing `"url you just copied"` with the URL you copied:
