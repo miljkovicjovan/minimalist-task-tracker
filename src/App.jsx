@@ -67,13 +67,17 @@ function App() {
     <div className="pt-4 text-white text-center app">
       <Header />
       <AddTask onAdd={addTask} />
-      <Tasks
-        onComplete={completeTask}
-        onDelete={deleteTask}
-        onEdit={editTask}
-        tasks={tasks}
-        onDeleteAll={deleteAll}
-      />
+      {tasks.length ? (
+        <Tasks
+          onComplete={completeTask}
+          onDelete={deleteTask}
+          onEdit={editTask}
+          tasks={tasks}
+          onDeleteAll={deleteAll}
+        />
+      ) : (
+        ""
+      )}
       {finishedTasks.length ? (
         <FinishedTasks
           finishedTasks={finishedTasks}
