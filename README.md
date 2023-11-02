@@ -12,6 +12,8 @@
 
 📣 Seemless storage on any device
 
+</div>
+
 <!-- TABLE OF CONTENTS -->
 
 ## Table of Contents
@@ -30,7 +32,7 @@
 
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://i.imgur.com/VyK5Wuq.png)
+<img src="https://i.imgur.com/VyK5Wuq.png">
 
 ### Built With
 
@@ -48,8 +50,8 @@ Here is a list of the major frameworks used to build this project.
 
 ### Prerequisites
 
-- install [node](https://nodejs.org/en/)
-- install [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+- Install [node](https://nodejs.org/en/)
+- Install [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 
 ### Installation
 
@@ -58,7 +60,7 @@ Here is a list of the major frameworks used to build this project.
 ##### 1. Clone the project
 
 ```bash
-git clone https://github.com/your-username/your-project.git
+git clone git@github.com:miljkovicjovan/minimalist-task-tracker.git
 ```
 
 ##### 2. Navigate to the project directory
@@ -79,22 +81,7 @@ npm install
 npm start
 ```
 
-### Running the project
-
-1. Development server
-
-```sh
-npm run dev
-```
-
-2. Production build
-
-```sh
-npm run-script build
-npm start -p 3000
-```
-
-#### 5. Open the app in your browser
+This will start the development server, and your project will be available at http://localhost:3000
 
 ## Contributors
 
@@ -120,10 +107,9 @@ The open-source community thrives on contributions, fostering an incredible envi
 - A repository (repo) is how a project is called on GitHub and a fork is a copy of it.
 - Make sure you are on the [main page](https://github.com/miljkovicjovan/minimalist-task-tracker "https://github.com/miljkovicjovan/minimalist-task-tracker") of this repo.
 
-| ![Fork](https://i.imgur.com/1fCPDB2.png "click on 'Fork'") |
-| :--------------------------------------------------------: |
-
-| **Click on the _Fork_ button**
+| ![Fork](https://i.imgur.com/1fCPDB2.png "Tooltip Text") |
+| :-----------------------------------------------------: |
+|             **Click on the _Fork_ button**              |
 
 - You now have a complete copy of the project in your own account.
 
@@ -207,5 +193,3 @@ Miljković Jovan - [https://github.com/miljkovicjovan]
 Project Link: [https://github.com/miljkovicjovan/minimalist-task-tracker][product-url]
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
-
-[product-screenshot]: assets/images/screenshot.png
