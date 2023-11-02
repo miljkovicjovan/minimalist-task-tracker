@@ -19,6 +19,21 @@ function Task({ id, index, name, onDelete, onEdit, onComplete }) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const [showEditConfirmation, setShowEditConfirmation] = useState(false);
+  const handleCloseEditConfirmation = () => setShowEditConfirmation(false);
+  const handleShowEditConfirmation = () => setShowEditConfirmation(true);
+
+  const handleEdit = () => {
+    onEdit(editedName, id);
+    setEditMode(false); 
+    handleCloseEditConfirmation(); 
+  };
+
+  const handleCancelEdit = () => {
+    setEditMode(false);
+    handleCloseEditConfirmation();
+  };
+
   return (
     <>
       <Stack 
@@ -30,8 +45,7 @@ function Task({ id, index, name, onDelete, onEdit, onComplete }) {
           <span className="text-secondary ps-2 pe-1"><i>Edit Mode</i></span>
           <form onSubmit={(e) => {
             e.preventDefault();
-            onEdit(editedName, id);
-            setEditMode(false);
+            handleShowEditConfirmation();
           }}>
             <input 
               type="text" 
@@ -62,7 +76,10 @@ function Task({ id, index, name, onDelete, onEdit, onComplete }) {
             ${editHover ? "bg-light border-light text-primary" : "bg-primary text-light"}`}
             onMouseEnter={toggleHoverEdit}
             onMouseLeave={toggleHoverEdit}
-            onClick={() => setEditMode(!editMode)}
+            onClick={() => {
+              setEditMode(true);
+              setEditedName(name);
+            }}
           >
             <FontAwesomeIcon icon={faPenToSquare}/>
           </Button>
@@ -102,6 +119,23 @@ function Task({ id, index, name, onDelete, onEdit, onComplete }) {
             onDelete(id);
           }}>
             I'm sure
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      <Modal show={showEditConfirmation} onHide={handleCloseEditConfirmation}>
+        <Modal.Header closeButton>
+          <Modal.Title>Are you sure?</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Are you sure you want to edit this task?
+          <br/>You will lose your previous one!
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCancelEdit}>
+            Cancel
+          </Button>
+          <Button variant="primary" onClick={handleEdit}>
+            Save
           </Button>
         </Modal.Footer>
       </Modal>
