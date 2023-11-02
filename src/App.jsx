@@ -7,89 +7,103 @@ import Footer from "./components/Footer";
 import "./styles.scss";
 
 function App() {
-  const [tasks, setTasks] = useState(
-    JSON.parse(
-      window.localStorage.getItem("my-minimalistic-tracker-tasks") || "[]"
-    )
-  );
-  const [finishedTasks, setFinishedTasks] = useState(
-    JSON.parse(
-      window.localStorage.getItem("my-minimalistic-tracker-tasks-finished") ||
-        "[]"
-    )
-  );
-
-  function deleteTask(id) {
-    setTasks(tasks.filter((task) => task.id !== id));
-  }
-
-  function completeTask(name, id) {
-    setFinishedTasks([...finishedTasks, name]);
-    setTasks(tasks.filter((task) => task.id !== id));
-  }
-
-  function addTask(name) {
-    // TODO change name to task for better understanding
-    // TODO fix this and make it into a backend server for making and storing the tasks
-    const id = Math.floor(Math.random() * 1000) + 1;
-    const newTask = { id, ...name };
-    setTasks([...tasks, newTask]);
-  }
-
-  function editTask(name, id) {
-    // TODO change name to task for better understanding
-    const updatedTasks = tasks.map((task) => {
-      return task.id === id ? { ...task, name: name } : task;
-    });
-    setTasks(updatedTasks);
-  }
-
-  function resetFinishedTask() {
-    setFinishedTasks([]);
-  }
-
-  function deleteAll() {
-    setTasks([]);
-  }
-
-  useEffect(() => {
-    window.localStorage.setItem(
-      "my-minimalistic-tracker-tasks",
-      JSON.stringify(tasks)
+    const [tasks, setTasks] = useState(
+        JSON.parse(
+            window.localStorage.getItem("my-minimalistic-tracker-tasks") || "[]"
+        )
     );
-    window.localStorage.setItem(
-      "my-minimalistic-tracker-tasks-finished",
-      JSON.stringify(finishedTasks)
+    const [finishedTasks, setFinishedTasks] = useState(
+        JSON.parse(
+            window.localStorage.getItem(
+                "my-minimalistic-tracker-tasks-finished"
+            ) || "[]"
+        )
     );
-  }, [tasks, finishedTasks]);
 
-  return (
-    <div className="pt-4 text-white text-center app">
-      <Header />
-      <AddTask onAdd={addTask} />
-      {tasks.length ? (
-        <Tasks
-          onComplete={completeTask}
-          onDelete={deleteTask}
-          onEdit={editTask}
-          tasks={tasks}
-          onDeleteAll={deleteAll}
-        />
-      ) : (
-        ""
-      )}
-      {finishedTasks.length ? (
-        <FinishedTasks
-          finishedTasks={finishedTasks}
-          tasks={tasks}
-          onReset={resetFinishedTask}
-        />
-      ) : (
-        ""
-      )}
-      <Footer />
-    </div>
-  );
+    function deleteTask(id) {
+        setTasks(tasks.filter((task) => task.id !== id));
+    }
+
+    function completeTask(name, id) {
+        // create method to get date
+        const timeMethod = new Date();
+
+        // define date & time
+        const date = `${timeMethod.getMonth()}/${timeMethod.getDate()}/${timeMethod.getFullYear()}`;
+        const time = `${timeMethod.getHours()}:${timeMethod.getMinutes()}:${timeMethod.getSeconds()}`;
+
+        // combine it into createdAt
+        const createdAt = `${date} ${time}`;
+
+        // define a data variabale stored the task's name & createdAt
+        const data = { name: name, createdAt: createdAt };
+
+        setFinishedTasks([...finishedTasks, data]);
+        setTasks(tasks.filter((task) => task.id !== id));
+    }
+
+    function addTask(name) {
+        // TODO change name to task for better understanding
+        // TODO fix this and make it into a backend server for making and storing the tasks
+        const id = Math.floor(Math.random() * 1000) + 1;
+        const newTask = { id, ...name };
+        setTasks([...tasks, newTask]);
+    }
+
+    function editTask(name, id) {
+        // TODO change name to task for better understanding
+        const updatedTasks = tasks.map((task) => {
+            return task.id === id ? { ...task, name: name } : task;
+        });
+        setTasks(updatedTasks);
+    }
+
+    function resetFinishedTask() {
+        setFinishedTasks([]);
+    }
+
+    function deleteAll() {
+        setTasks([]);
+    }
+
+    useEffect(() => {
+        window.localStorage.setItem(
+            "my-minimalistic-tracker-tasks",
+            JSON.stringify(tasks)
+        );
+        window.localStorage.setItem(
+            "my-minimalistic-tracker-tasks-finished",
+            JSON.stringify(finishedTasks)
+        );
+    }, [tasks, finishedTasks]);
+
+    return (
+        <div className="pt-4 text-white text-center app">
+            <Header />
+            <AddTask onAdd={addTask} />
+            {tasks.length ? (
+                <Tasks
+                    onComplete={completeTask}
+                    onDelete={deleteTask}
+                    onEdit={editTask}
+                    tasks={tasks}
+                    onDeleteAll={deleteAll}
+                />
+            ) : (
+                ""
+            )}
+            {finishedTasks.length ? (
+                <FinishedTasks
+                    finishedTasks={finishedTasks}
+                    tasks={tasks}
+                    onReset={resetFinishedTask}
+                />
+            ) : (
+                ""
+            )}
+            <Footer />
+        </div>
+    );
 }
 
 export default App;
