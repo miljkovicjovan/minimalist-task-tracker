@@ -133,8 +133,8 @@ function Task({ id, index, name, onDelete, onEdit, onComplete }) {
         <Modal.Header closeButton>
           <Modal.Title>Are you sure?</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          You will lose your previous one!
+        <Modal.Body>Are you sure you want to edit this task?
+          <br/>You will lose your previous one!
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleCancelEdit}>
