@@ -19,21 +19,18 @@ function Task({ id, index, name, onDelete, onEdit, onComplete }) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const [showEditConfirmation, setShowEditConfirmation] = useState(false); // Edit confirmation
+  const [showEditConfirmation, setShowEditConfirmation] = useState(false);
   const handleCloseEditConfirmation = () => setShowEditConfirmation(false);
   const handleShowEditConfirmation = () => setShowEditConfirmation(true);
 
-    const handleEdit = () => {
-    if (showEditConfirmation) {
-      onEdit(editedName, id);
-      setEditMode(false); // Turn off edit mode
-      handleCloseEditConfirmation(); // Close the edit confirmation dialog
-    }
+  const handleEdit = () => {
+    onEdit(editedName, id);
+    setEditMode(false); 
+    handleCloseEditConfirmation(); 
   };
 
-    const handleCancelEdit = () => {
-    setEditMode(false); 
-    setEditedName(name);
+  const handleCancelEdit = () => {
+    setEditMode(false);
     handleCloseEditConfirmation();
   };
 
@@ -48,8 +45,6 @@ function Task({ id, index, name, onDelete, onEdit, onComplete }) {
           <span className="text-secondary ps-2 pe-1"><i>Edit Mode</i></span>
           <form onSubmit={(e) => {
             e.preventDefault();
-            // onEdit(editedName, id);
-            // setEditMode(false);
             handleShowEditConfirmation();
           }}>
             <input 
@@ -81,10 +76,9 @@ function Task({ id, index, name, onDelete, onEdit, onComplete }) {
             ${editHover ? "bg-light border-light text-primary" : "bg-primary text-light"}`}
             onMouseEnter={toggleHoverEdit}
             onMouseLeave={toggleHoverEdit}
-            // onClick={() => setEditMode(!editMode)}
             onClick={() => {
-              setEditMode(true); // Turn on edit mode when "Edit" button is clicked
-              setEditedName(name); // Reset editedName to the current task name
+              setEditMode(true);
+              setEditedName(name);
             }}
           >
             <FontAwesomeIcon icon={faPenToSquare}/>
