@@ -19,7 +19,7 @@ function Task({ id, index, name, onDelete, onEdit, onComplete }) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-    const [showEditConfirmation, setShowEditConfirmation] = useState(false); // Edit confirmation
+  const [showEditConfirmation, setShowEditConfirmation] = useState(false); // Edit confirmation
   const handleCloseEditConfirmation = () => setShowEditConfirmation(false);
   const handleShowEditConfirmation = () => setShowEditConfirmation(true);
 
@@ -29,6 +29,12 @@ function Task({ id, index, name, onDelete, onEdit, onComplete }) {
       setEditMode(false); // Turn off edit mode
       handleCloseEditConfirmation(); // Close the edit confirmation dialog
     }
+  };
+
+    const handleCancelEdit = () => {
+    setEditMode(false); 
+    setEditedName(name);
+    handleCloseEditConfirmation();
   };
 
   return (
@@ -125,13 +131,13 @@ function Task({ id, index, name, onDelete, onEdit, onComplete }) {
 
       <Modal show={showEditConfirmation} onHide={handleCloseEditConfirmation}>
         <Modal.Header closeButton>
-          <Modal.Title>Are you sure ?</Modal.Title>
+          <Modal.Title>Are you sure?</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Are you sure you want to save this task?
+          You will lose your previous one!
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseEditConfirmation}>
+          <Button variant="secondary" onClick={handleCancelEdit}>
             Cancel
           </Button>
           <Button variant="primary" onClick={handleEdit}>
