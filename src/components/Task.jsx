@@ -19,6 +19,18 @@ function Task({ id, index, name, onDelete, onEdit, onComplete }) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+    const [showEditConfirmation, setShowEditConfirmation] = useState(false); // Edit confirmation
+  const handleCloseEditConfirmation = () => setShowEditConfirmation(false);
+  const handleShowEditConfirmation = () => setShowEditConfirmation(true);
+
+    const handleEdit = () => {
+    if (showEditConfirmation) {
+      onEdit(editedName, id);
+      setEditMode(false); // Turn off edit mode
+      handleCloseEditConfirmation(); // Close the edit confirmation dialog
+    }
+  };
+
   return (
     <>
       <Stack 
@@ -30,8 +42,9 @@ function Task({ id, index, name, onDelete, onEdit, onComplete }) {
           <span className="text-secondary ps-2 pe-1"><i>Edit Mode</i></span>
           <form onSubmit={(e) => {
             e.preventDefault();
-            onEdit(editedName, id);
-            setEditMode(false);
+            // onEdit(editedName, id);
+            // setEditMode(false);
+            handleShowEditConfirmation();
           }}>
             <input 
               type="text" 
@@ -62,7 +75,11 @@ function Task({ id, index, name, onDelete, onEdit, onComplete }) {
             ${editHover ? "bg-light border-light text-primary" : "bg-primary text-light"}`}
             onMouseEnter={toggleHoverEdit}
             onMouseLeave={toggleHoverEdit}
-            onClick={() => setEditMode(!editMode)}
+            // onClick={() => setEditMode(!editMode)}
+            onClick={() => {
+              setEditMode(true); // Turn on edit mode when "Edit" button is clicked
+              setEditedName(name); // Reset editedName to the current task name
+            }}
           >
             <FontAwesomeIcon icon={faPenToSquare}/>
           </Button>
@@ -102,6 +119,23 @@ function Task({ id, index, name, onDelete, onEdit, onComplete }) {
             onDelete(id);
           }}>
             I'm sure
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      <Modal show={showEditConfirmation} onHide={handleCloseEditConfirmation}>
+        <Modal.Header closeButton>
+          <Modal.Title>Are you sure?</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Are you sure you want to save this task?
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseEditConfirmation}>
+            Cancel
+          </Button>
+          <Button variant="primary" onClick={handleEdit}>
+            Save
           </Button>
         </Modal.Footer>
       </Modal>
