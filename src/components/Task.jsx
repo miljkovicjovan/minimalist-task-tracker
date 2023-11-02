@@ -125,7 +125,7 @@ function Task({ id, index, name, onDelete, onEdit, onComplete }) {
 
       <Modal show={showEditConfirmation} onHide={handleCloseEditConfirmation}>
         <Modal.Header closeButton>
-          <Modal.Title>Are you sure?</Modal.Title>
+          <Modal.Title>Are you sure ?</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           Are you sure you want to save this task?
