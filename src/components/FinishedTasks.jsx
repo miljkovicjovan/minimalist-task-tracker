@@ -104,7 +104,8 @@ function FinishedTasks({ finishedTasks, setFinishedTasks, tasks, onReset, onArch
       />
       <ConfirmationModal
         title="Are you sure?"
-        body="Are you sure you want to delete all of these tasks?"
+        body={<>Are you sure you want to delete all your finished tasks?<br/>
+        Once you delete your tasks you cannot get them back!</>}
         handleClose={handleCloseDeleteAll}
         handleShow={showDeleteAll}
         onConfirm={() => {

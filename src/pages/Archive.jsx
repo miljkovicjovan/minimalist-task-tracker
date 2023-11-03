@@ -148,7 +148,8 @@ function Archive() {
       />
       <ConfirmationModal
         title="Are you sure?"
-        body="Are you sure you want to delete all of these tasks?"
+        body={<>Are you sure you want to delete all your archived tasks?<br/>
+        Once you delete your tasks you cannot get them back!</>}
         handleClose={handleCloseDeleteAll}
         handleShow={showDeleteAll}
         onConfirm={() => {
@@ -159,7 +160,8 @@ function Archive() {
       />
       <ConfirmationModal
         title="Are you sure?"
-        body="Are you sure you want to delete this task?"
+        body={<>Are you sure you want to delete this task?<br/>
+        Once you delete your task you cannot get it back!</>}
         handleClose={handleCloseDelete}
         handleShow={showDelete}
         onConfirm={() => {
