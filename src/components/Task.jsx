@@ -20,20 +20,12 @@ function Task({ id, index, name, onDelete, onEdit, onComplete }) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const [showEditConfirmation, setShowEditConfirmation] = useState(false);
-  const handleCloseEditConfirmation = () => setShowEditConfirmation(false);
-  const handleShowEditConfirmation = () => setShowEditConfirmation(true);
-
-  const handleEdit = () => {
-    onEdit(editedName, id);
-    setEditMode(false); 
-    handleCloseEditConfirmation(); 
-  };
-
-  const handleCancelEdit = () => {
+  const [showEdit, setShowEdit] = useState(false);
+  const handleCloseEdit = () => {
+    setShowEdit(false)
     setEditMode(false);
-    handleCloseEditConfirmation();
   };
+  const handleShowEdit = () => setShowEdit(true);
 
   return (
     <>
@@ -46,7 +38,7 @@ function Task({ id, index, name, onDelete, onEdit, onComplete }) {
           <span className="text-secondary ps-2 pe-1"><i>Edit Mode</i></span>
           <form onSubmit={(e) => {
             e.preventDefault();
-            handleShowEditConfirmation();
+            handleShowEdit(editedName, id);
           }}>
             <input 
               type="text" 
@@ -121,10 +113,12 @@ function Task({ id, index, name, onDelete, onEdit, onComplete }) {
         title="Are you sure?"
         body={<>Are you sure you want to edit this task?<br/>
           You will lose your previous one!</>}
-        handleClose={handleCloseEditConfirmation}
-        handleShow={showEditConfirmation}
+        handleClose={handleCloseEdit}
+        handleShow={showEdit}
         onConfirm={() => {
-          handleEdit();
+          onEdit(editedName, id);
+          setEditMode(false); 
+          handleCloseEdit(); 
         }}
         color="primary"
       />
