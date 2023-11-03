@@ -12,8 +12,7 @@ function Home() {
   );
   const [finishedTasks, setFinishedTasks] = useState(
     JSON.parse(
-      window.localStorage.getItem("my-minimalistic-tracker-tasks-finished") ||
-        "[]"
+      window.localStorage.getItem("my-minimalistic-tracker-tasks-finished") || "[]"
     )
   );
 
@@ -30,15 +29,12 @@ function Home() {
   }
 
   function addTask(name) {
-    // TODO change name to task for better understanding
-    // TODO fix this and make it into a backend server for making and storing the tasks
     const id = Math.floor(Math.random() * 1000) + 1;
     const newTask = { id, ...name };
     setTasks([...tasks, newTask]);
   }
 
   function editTask(name, id) {
-    // TODO change name to task for better understanding
     const updatedTasks = tasks.map((task) => {
       return task.id === id ? { ...task, name: name } : task;
     });
