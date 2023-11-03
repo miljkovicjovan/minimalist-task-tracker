@@ -1,16 +1,9 @@
 import { faTrashCan, faBoxArchive } from "@fortawesome/free-solid-svg-icons";
 import { Stack, Button, Modal } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-function FinishedTasks({ tasks, onReset, onArchive }) {
-  const [finishedTasks, setFinishedTasks] = useState(
-    JSON.parse(
-      window.localStorage.getItem("my-minimalistic-tracker-tasks-finished") ||
-        "[]"
-    )
-  );
-
+function FinishedTasks({ finishedTasks, setFinishedTasks, tasks, onReset, onArchive }) {
   const [hover, setHover] = useState(false);
   const toggleHover = () => setHover(!hover);
 
@@ -36,12 +29,6 @@ function FinishedTasks({ tasks, onReset, onArchive }) {
     setFinishedTasks(updatedTasks);
   }
 
-  useEffect(() => {
-    window.localStorage.setItem(
-      "my-minimalistic-tracker-tasks-finished",
-      JSON.stringify(finishedTasks)
-    );
-  }, [finishedTasks]);
   return (
     <>
       <Stack className="text-center pt-4">
@@ -54,8 +41,8 @@ function FinishedTasks({ tasks, onReset, onArchive }) {
         </p>       
         {finishedTasks.map((finishedTask, index) => {
           return finishedTask.archived === false ?
-            <span className="my-1">
-              <span key={index}>&#x2705; {finishedTask.name}</span>
+            <span  key={index} className="my-1">
+              <span>&#x2705; {finishedTask.name}</span>
               <Button className="ms-2" size="sm" onClick={() => handleShow(finishedTask.id)}>
                 <FontAwesomeIcon icon={faBoxArchive} className='pe-1' />
                 Archive Task

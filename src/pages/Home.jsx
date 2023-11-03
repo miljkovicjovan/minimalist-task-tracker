@@ -84,6 +84,8 @@ function Home() {
       )}
       {finishedTasks.length ? (
         <FinishedTasks
+          finishedTasks={finishedTasks}
+          setFinishedTasks={setFinishedTasks}
           tasks={tasks}
           onReset={resetFinishedTask}
           onArchive={archiveTask}
