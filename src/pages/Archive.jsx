@@ -6,6 +6,10 @@ import { faTrashCan, faBoxOpen } from "@fortawesome/free-solid-svg-icons";
 function Archive() {
   const [hover, setHover] = useState(false);
   const toggleHover = () => setHover(!hover);
+
+  const [hoverUnarchive, setHoverUnarchive] = useState(false);
+  const toggleHoverUnarchive = () => setHoverUnarchive(!hoverUnarchive);
+
   const [finishedTasks, setFinishedTasks] = useState(
     JSON.parse(
       window.localStorage.getItem("my-minimalistic-tracker-tasks-finished") ||
@@ -33,6 +37,13 @@ function Archive() {
     setFinishedTasks(updatedFinishedTasks);
   }
 
+  function unarchiveAll() {
+    const updatedTasks = finishedTasks.map((task) => {
+      return { ...task, archived: false }
+    });
+    setFinishedTasks(updatedTasks);
+  }
+
   useEffect(() => {
     window.localStorage.setItem(
       "my-minimalistic-tracker-tasks-finished",
@@ -58,6 +69,18 @@ function Archive() {
               : ""
             })}
             <span className="mt-4">
+              <Button 
+                type='submit'
+                className={`border-primary ${hoverUnarchive ? "bg-dark text-primary" : "bg-primary text-white"}`}
+                onMouseEnter={toggleHoverUnarchive}
+                onMouseLeave={toggleHoverUnarchive}
+                onClick={() => unarchiveAll()}
+              >
+                <FontAwesomeIcon icon={faBoxOpen} className='pe-1'/>
+                Unarchive All Tasks
+            </Button>
+          </span>
+            <span className="mt-2">
               <Button 
                 type='submit'
                 className={`border-danger ${hover ? "bg-dark text-danger" : "bg-danger text-white"}`}
