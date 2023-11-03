@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { Stack, Button } from "react-bootstrap";
+import { Stack, Button, Modal } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { faTrashCan, faBoxOpen } from "@fortawesome/free-solid-svg-icons";
 
 function Archive() {
   const [hover, setHover] = useState(false);
@@ -12,6 +12,14 @@ function Archive() {
         "[]"
     )
   );
+
+  const [show, setShow] = useState(false);
+  const [selectedTask, setSelectedTask] = useState();
+  const handleClose = () => setShow(false);
+  const handleShow = (id) => {
+    setShow(true); 
+    setSelectedTask(id);
+  }
 
   function unarchive(id) {
     const updatedTasks = finishedTasks.map((task) => {
@@ -32,37 +40,56 @@ function Archive() {
     );
   }, [finishedTasks]);
   return (
-    <Stack className="text-white text-center pt-4">
-      {finishedTasks.some(task => task.archived === true) ? (
-        <>
-          <hr className="mx-auto w-25"/>
-          <h4 className="text-decoration-underline">Archived Tasks &#128193;</h4>
-          {finishedTasks.map((finishedTask, index) => {
-            return finishedTask.archived === true ?
-              <span className="my-1">
-                <span key={index}>{finishedTask.name}</span>
-                <Button className="ms-2" size="sm" variant="danger" onClick={() => unarchive(finishedTask.id)}>
-                  <FontAwesomeIcon icon={faTrash} className='pe-1' />
-                  Unarchive Task
-                </Button>
-              </span>
-            : ""
-          })}
-          <span className="mt-4">
-            <Button 
-              type='submit'
-              className={`border-danger ${hover ? "bg-dark text-danger" : "bg-danger text-white"}`}
-              onMouseEnter={toggleHover}
-              onMouseLeave={toggleHover}
-              onClick={() => resetArchivedTasks()}
-            >
-                <FontAwesomeIcon icon={faTrashCan} className='pe-1'/>
-                Delete Archived Tasks
-            </Button>
-          </span>
-        </>
-      ) : "There are currently no archived tasks."}
-    </Stack>
+    <>
+      <Stack className="text-white text-center pt-4">
+        {finishedTasks.some(task => task.archived === true) ? (
+          <>
+            <hr className="mx-auto w-25"/>
+            <h4 className="text-decoration-underline">Archived Tasks &#128193;</h4>
+            {finishedTasks.map((finishedTask, index) => {
+              return finishedTask.archived === true ?
+                <span className="my-1">
+                  <span key={index}>{finishedTask.name}</span>
+                  <Button className="ms-2" size="sm" variant="primary" onClick={() => handleShow(finishedTask.id)}>
+                    <FontAwesomeIcon icon={faBoxOpen} className="pe-1"/>
+                    Unarchive Task
+                  </Button>
+                </span>
+              : ""
+            })}
+            <span className="mt-4">
+              <Button 
+                type='submit'
+                className={`border-danger ${hover ? "bg-dark text-danger" : "bg-danger text-white"}`}
+                onMouseEnter={toggleHover}
+                onMouseLeave={toggleHover}
+                onClick={() => resetArchivedTasks()}
+              >
+                  <FontAwesomeIcon icon={faTrashCan} className='pe-1'/>
+                  Delete Archived Tasks
+              </Button>
+            </span>
+          </>
+        ) : "There are currently no archived tasks."}
+      </Stack>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Are you sure?</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Are you sure you want to unarchive this task?</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Cancel
+          </Button>
+          <Button variant="primary" onClick={() => {
+            unarchive(selectedTask);
+            handleClose();
+          }}>
+            I'm sure
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
   )
 }
 
