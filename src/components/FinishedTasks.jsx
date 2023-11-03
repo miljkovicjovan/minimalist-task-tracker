@@ -9,30 +9,26 @@ function FinishedTasks({ finishedTasks, tasks, onReset }) {
 
   return (
     <Stack className="text-center pt-4">
-      <hr className="mx-auto w-25" />
+      <hr className="mx-auto w-25"/>
       <h4 className="text-decoration-underline">Finished Tasks &#129321;</h4>
       <p className="text-secondary">
         {`Finished: ${finishedTasks.length} `}
-        {`- Total: ${finishedTasks.length + tasks.length} `}
-        {`- Percentage: ${Math.round(
-          (finishedTasks.length / (finishedTasks.length + tasks.length)) * 100
-        )}% `}
-      </p>
+        {`- Total: ${finishedTasks.length+tasks.length} `}
+        {`- Percentage: ${Math.round((finishedTasks.length / (finishedTasks.length+tasks.length)) * 100)}% `}
+      </p>       
       {finishedTasks.map((finishedTask, index) => (
         <span key={index}>&#x2705; {finishedTask.name}</span>
       ))}
       <span className="mt-4">
-        <Button
+        <Button 
           type="submit"
-          className={`border-danger ${
-            hover ? "bg-dark text-danger" : "bg-danger text-white"
-          }`}
+          className={`border-danger ${hover ? "bg-dark text-danger" : "bg-danger text-white"}`}
           onMouseEnter={toggleHover}
           onMouseLeave={toggleHover}
           onClick={() => onReset()}
         >
-          <FontAwesomeIcon icon={faTrashCan} className="pe-1" />
-          Delete Finished Tasks
+            <FontAwesomeIcon icon={faTrashCan} className="pe-1"/>
+            Delete Finished Tasks
         </Button>
       </span>
     </Stack>
