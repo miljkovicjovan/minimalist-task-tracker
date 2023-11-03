@@ -24,12 +24,8 @@ function App() {
   }
 
   function completeTask(name, id) {
-    // create method to get date
     const createdAt = new Date();
-
-    // define an object variabale stored the task's name & createdAt
     const data = { name: name, createdAt: createdAt };
-
     setFinishedTasks([...finishedTasks, data]);
     setTasks(tasks.filter((task) => task.id !== id));
   }
