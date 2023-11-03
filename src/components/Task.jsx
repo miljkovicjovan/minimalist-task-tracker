@@ -56,7 +56,7 @@ function Task({ id, index, name, onDelete, onEdit, onComplete }) {
             <form
               onSubmit={(e) => {
                 e.preventDefault();
-                handleShowEditConfirmation();
+                setEditMode(false);
               }}
             >
               <input
@@ -150,25 +150,6 @@ function Task({ id, index, name, onDelete, onEdit, onComplete }) {
             }}
           >
             I'm sure
-          </Button>
-        </Modal.Footer>
-      </Modal>
-
-      <Modal show={showEditConfirmation} onHide={handleCloseEditConfirmation}>
-        <Modal.Header closeButton>
-          <Modal.Title>Are you sure?</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          Are you sure you want to edit this task?
-          <br />
-          You will lose your previous one!
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleCancelEdit}>
-            Cancel
-          </Button>
-          <Button variant="primary" onClick={handleEdit}>
-            Save
           </Button>
         </Modal.Footer>
       </Modal>
