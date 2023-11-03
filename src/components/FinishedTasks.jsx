@@ -23,6 +23,10 @@ function FinishedTasks({ finishedTasks, setFinishedTasks, tasks, onReset, onArch
   const handleCloseArchiveAll = () => setShowArchiveAll(false);
   const handleShowArchiveAll = () => setShowArchiveAll(true);
 
+  const [showDeleteAll, setShowDeleteAll] = useState(false);
+  const handleCloseDeleteAll = () => setShowDeleteAll(false);
+  const handleShowDeleteAll = () => setShowDeleteAll(true);
+
   function archiveAll() {
     const updatedTasks = finishedTasks.map((task) => {
       return { ...task, archived: true }
@@ -69,10 +73,10 @@ function FinishedTasks({ finishedTasks, setFinishedTasks, tasks, onReset, onArch
             className={`border-danger ${hover ? "bg-dark text-danger" : "bg-danger text-white"}`}
             onMouseEnter={toggleHover}
             onMouseLeave={toggleHover}
-            onClick={() => onReset()}
+            onClick={() => handleShowDeleteAll()}
           >
               <FontAwesomeIcon icon={faTrashCan} className='pe-1'/>
-              Delete Finished Tasks
+              Delete All Tasks
           </Button>
         </span> 
       </Stack>
@@ -97,6 +101,17 @@ function FinishedTasks({ finishedTasks, setFinishedTasks, tasks, onReset, onArch
           handleCloseArchiveAll();
         }}
         color="primary"
+      />
+      <ConfirmationModal
+        title="Are you sure?"
+        body="Are you sure you want to delete all of these tasks?"
+        handleClose={handleCloseDeleteAll}
+        handleShow={showDeleteAll}
+        onConfirm={() => {
+          onReset()
+          handleCloseDeleteAll();
+        }}
+        color="danger"
       />
     </>
   )
