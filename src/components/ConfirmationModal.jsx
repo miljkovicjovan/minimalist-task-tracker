@@ -1,6 +1,6 @@
 import { Modal, Button } from "react-bootstrap";
 
-function ConfirmationModal({ title, body, handleClose, handleShow, onConfirm }) {
+function ConfirmationModal({ title, body, handleClose, handleShow, onConfirm, color }) {
   return (
     <Modal show={handleShow} onHide={handleClose}>
 			<Modal.Header closeButton>
@@ -11,7 +11,7 @@ function ConfirmationModal({ title, body, handleClose, handleShow, onConfirm }) 
 					<Button variant="secondary" onClick={handleClose}>
 						Cancel
 					</Button>
-					<Button variant="primary" onClick={onConfirm}>
+					<Button variant={color} onClick={onConfirm}>
 						I'm sure
 					</Button>
 			</Modal.Footer>
