@@ -49,6 +49,10 @@ function Archive() {
   const handleCloseUnarchiveAll = () => setShowUnarchiveAll(false);
   const handleShowUnarchiveAll = () => setShowUnarchiveAll(true);
 
+  const [showDeleteAll, setShowDeleteAll] = useState(false);
+  const handleCloseDeleteAll = () => setShowDeleteAll(false);
+  const handleShowDeleteAll = () => setShowDeleteAll(true);
+
   const [showDelete, setShowDelete] = useState(false);
   const handleCloseDelete = () => setShowDelete(false);
   const handleShowDelete = (id) => {
@@ -111,7 +115,7 @@ function Archive() {
                 className={`border-danger ${hover ? "bg-dark text-danger" : "bg-danger text-white"}`}
                 onMouseEnter={toggleHover}
                 onMouseLeave={toggleHover}
-                onClick={() => resetArchivedTasks()}
+                onClick={() => handleShowDeleteAll()}
               >
                   <FontAwesomeIcon icon={faTrashCan} className='pe-1'/>
                   Delete Archived Tasks
@@ -141,6 +145,17 @@ function Archive() {
           handleCloseUnarchiveAll();
         }}
         color="primary"
+      />
+      <ConfirmationModal
+        title="Are you sure?"
+        body="Are you sure you want to delete all of these tasks?"
+        handleClose={handleCloseDeleteAll}
+        handleShow={showDeleteAll}
+        onConfirm={() => {
+          resetArchivedTasks();
+          handleCloseDeleteAll();
+        }}
+        color="danger"
       />
       <ConfirmationModal
         title="Are you sure?"
