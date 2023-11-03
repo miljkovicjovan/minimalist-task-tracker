@@ -49,6 +49,17 @@ function Archive() {
   const handleCloseUnarchiveAll = () => setShowUnarchiveAll(false);
   const handleShowUnarchiveAll = () => setShowUnarchiveAll(true);
 
+  const [showDelete, setShowDelete] = useState(false);
+  const handleCloseDelete = () => setShowDelete(false);
+  const handleShowDelete = (id) => {
+    setShowDelete(true); 
+    setSelectedTask(id);
+  }
+
+  function deleteTask(id) {
+    setFinishedTasks(finishedTasks.filter((task) => task.id !== id));
+  }
+
   useEffect(() => {
     window.localStorage.setItem(
       "my-minimalistic-tracker-tasks-finished",
@@ -69,6 +80,15 @@ function Archive() {
                   <Button className="ms-2" size="sm" variant="primary" onClick={() => handleShow(finishedTask.id)}>
                     <FontAwesomeIcon icon={faBoxOpen} className="pe-1"/>
                     Unarchive Task
+                  </Button>
+                  <Button 
+                    type="submit"
+                    variant="danger"
+                    size="sm"
+                    className="ms-2"
+                    onClick={() => handleShowDelete(finishedTask.id)}
+                  >
+                    <FontAwesomeIcon icon={faTrashCan} />
                   </Button>
                 </span>
               : ""
@@ -107,7 +127,7 @@ function Archive() {
         handleShow={show}
         onConfirm={() => {
           unarchive(selectedTask);
-            handleClose();
+          handleClose();
         }}
         color="primary"
       />
@@ -121,6 +141,17 @@ function Archive() {
           handleCloseUnarchiveAll();
         }}
         color="primary"
+      />
+      <ConfirmationModal
+        title="Are you sure?"
+        body="Are you sure you want to delete this task?"
+        handleClose={handleCloseDelete}
+        handleShow={showDelete}
+        onConfirm={() => {
+          deleteTask(selectedTask);
+          handleCloseDelete();
+        }}
+        color="danger"
       />
     </>
   )
