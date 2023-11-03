@@ -44,6 +44,10 @@ function Archive() {
     setFinishedTasks(updatedTasks);
   }
 
+  const [showUnarchiveAll, setShowUnarchiveAll] = useState(false);
+  const handleCloseUnarchiveAll = () => setShowUnarchiveAll(false);
+  const handleShowUnarchiveAll = () => setShowUnarchiveAll(true);
+
   useEffect(() => {
     window.localStorage.setItem(
       "my-minimalistic-tracker-tasks-finished",
@@ -74,7 +78,7 @@ function Archive() {
                 className={`border-primary ${hoverUnarchive ? "bg-dark text-primary" : "bg-primary text-white"}`}
                 onMouseEnter={toggleHoverUnarchive}
                 onMouseLeave={toggleHoverUnarchive}
-                onClick={() => unarchiveAll()}
+                onClick={() => handleShowUnarchiveAll()}
               >
                 <FontAwesomeIcon icon={faBoxOpen} className='pe-1'/>
                 Unarchive All Tasks
@@ -107,6 +111,23 @@ function Archive() {
           <Button variant="primary" onClick={() => {
             unarchive(selectedTask);
             handleClose();
+          }}>
+            I'm sure
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      <Modal show={showUnarchiveAll} onHide={handleCloseUnarchiveAll}>
+        <Modal.Header closeButton>
+          <Modal.Title>Are you sure?</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Are you sure you want to unarchive all of these tasks?</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseUnarchiveAll}>
+            Cancel
+          </Button>
+          <Button variant="primary" onClick={() => {
+            unarchiveAll();
+            handleCloseUnarchiveAll();
           }}>
             I'm sure
           </Button>
