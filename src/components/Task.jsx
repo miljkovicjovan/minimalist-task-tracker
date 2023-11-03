@@ -62,10 +62,7 @@ function Task({ id, index, name, onDelete, onEdit, onComplete }) {
               finishHover
                 ? "bg-light border-light text-success"
                 : "bg-success text-light"
-            }
-            ${editMode && "bg-dark text-light"}
-            `}
-            disabled={editMode && true}
+            }`}
             onMouseEnter={toggleHoverFinish}
             onMouseLeave={toggleHoverFinish}
             onClick={() => onComplete(name, id)}
@@ -101,10 +98,7 @@ function Task({ id, index, name, onDelete, onEdit, onComplete }) {
               deleteHover
                 ? "bg-light border-light text-danger"
                 : "bg-danger text-light"
-            }
-            ${editMode && "bg-dark text-light"}
-            `}
-            disabled={editMode && true}
+            }`}
             onMouseEnter={toggleHoverDelete}
             onMouseLeave={toggleHoverDelete}
             onClick={handleShow}
