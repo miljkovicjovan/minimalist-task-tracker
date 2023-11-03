@@ -41,6 +41,7 @@ function FinishedTasks({ finishedTasks, setFinishedTasks, tasks, onReset, onArch
         <h4 className="text-decoration-underline">Finished Tasks &#129321;</h4>
         <p className="text-secondary">
           {`Finished: ${finishedTasks.length} `}
+          {`- Archived: ${finishedTasks.filter((task) => task.archived).length} `}
           {`- Total: ${finishedTasks.length+tasks.length} `}
           {`- Percentage: ${Math.round((finishedTasks.length / (finishedTasks.length+tasks.length)) * 100)}% `}
         </p>       
