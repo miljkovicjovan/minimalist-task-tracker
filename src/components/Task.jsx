@@ -51,7 +51,7 @@ function Task({ id, index, name, onDelete, onEdit, onComplete }) {
               type="text" 
               value={editedName}
               placeholder="Add a Task"
-              className='bg-dark text-light rounded p-1 border-0'
+              className="bg-dark text-light rounded p-1 border-0"
               onChange={(e) => setEditedName(e.target.value)}
             />
           </form>        
@@ -122,7 +122,6 @@ function Task({ id, index, name, onDelete, onEdit, onComplete }) {
           </Button>
         </Modal.Footer>
       </Modal>
-
       <Modal show={showEditConfirmation} onHide={handleCloseEditConfirmation}>
         <Modal.Header closeButton>
           <Modal.Title>Are you sure?</Modal.Title>

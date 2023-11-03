@@ -24,7 +24,9 @@ function App() {
   }
 
   function completeTask(name, id) {
-    setFinishedTasks([...finishedTasks, name]);
+    const createdAt = new Date();
+    const data = { name: name, createdAt: createdAt };
+    setFinishedTasks([...finishedTasks, data]);
     setTasks(tasks.filter((task) => task.id !== id));
   }
 
