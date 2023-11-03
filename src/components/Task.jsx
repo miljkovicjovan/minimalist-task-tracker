@@ -20,6 +20,21 @@ function Task({ id, index, name, onDelete, onEdit, onComplete }) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const [showEditConfirmation, setShowEditConfirmation] = useState(false);
+  const handleCloseEditConfirmation = () => setShowEditConfirmation(false);
+  const handleShowEditConfirmation = () => setShowEditConfirmation(true);
+
+  const handleEdit = () => {
+    onEdit(editedName, id);
+    setEditMode(false); 
+    handleCloseEditConfirmation(); 
+  };
+
+  const handleCancelEdit = () => {
+    setEditMode(false);
+    handleCloseEditConfirmation();
+  };
+
   return (
     <>
       <Stack 
@@ -31,14 +46,13 @@ function Task({ id, index, name, onDelete, onEdit, onComplete }) {
           <span className="text-secondary ps-2 pe-1"><i>Edit Mode</i></span>
           <form onSubmit={(e) => {
             e.preventDefault();
-            onEdit(editedName, id);
-            setEditMode(false);
+            handleShowEditConfirmation();
           }}>
             <input 
               type="text" 
               value={editedName}
               placeholder="Add a Task"
-              className='bg-dark text-light rounded p-1 border-0'
+              className="bg-dark text-light rounded p-1 border-0"
               onChange={(e) => setEditedName(e.target.value)}
             />
           </form>        
@@ -63,7 +77,10 @@ function Task({ id, index, name, onDelete, onEdit, onComplete }) {
             ${editHover ? "bg-light border-light text-primary" : "bg-primary text-light"}`}
             onMouseEnter={toggleHoverEdit}
             onMouseLeave={toggleHoverEdit}
-            onClick={() => setEditMode(!editMode)}
+            onClick={() => {
+              setEditMode(true);
+              setEditedName(name);
+            }}
           >
             <FontAwesomeIcon icon={faPenToSquare}/>
           </Button>
@@ -99,6 +116,17 @@ function Task({ id, index, name, onDelete, onEdit, onComplete }) {
           onDelete(id);
         }}
         color="danger"
+      />
+      <ConfirmationModal
+        title="Are you sure?"
+        body={<>Are you sure you want to edit this task?<br/>
+          You will lose your previous one!</>}
+        handleClose={handleCloseEditConfirmation}
+        handleShow={showEditConfirmation}
+        onConfirm={() => {
+          handleEdit();
+        }}
+        color="primary"
       />
     </>
   )

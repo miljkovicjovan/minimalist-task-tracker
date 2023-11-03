@@ -8,6 +8,7 @@ function FinishedTasks({ finishedTasks, setFinishedTasks, tasks, onReset, onArch
   const [hover, setHover] = useState(false);
   const toggleHover = () => setHover(!hover);
 
+
   const [hoverArchive, setHoverArchive] = useState(false);
   const toggleHoverArchive = () => setHoverArchive(!hoverArchive);
 
@@ -33,7 +34,6 @@ function FinishedTasks({ finishedTasks, setFinishedTasks, tasks, onReset, onArch
     });
     setFinishedTasks(updatedTasks);
   }
-
   return (
     <>
       <Stack className="text-center pt-4">

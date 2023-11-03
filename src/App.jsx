@@ -5,7 +5,6 @@ import "./styles.scss";
 import Archive from './pages/Archive';
 
 function App() {
-
   return (
     <Router>
       <Header/>
