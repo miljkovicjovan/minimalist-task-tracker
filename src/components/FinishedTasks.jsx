@@ -1,7 +1,8 @@
 import { faTrashCan, faBoxArchive } from "@fortawesome/free-solid-svg-icons";
-import { Stack, Button, Modal } from "react-bootstrap";
+import { Stack, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
+import ConfirmationModal from "./ConfirmationModal";
 
 function FinishedTasks({ finishedTasks, setFinishedTasks, tasks, onReset, onArchive }) {
   const [hover, setHover] = useState(false);
@@ -75,40 +76,28 @@ function FinishedTasks({ finishedTasks, setFinishedTasks, tasks, onReset, onArch
           </Button>
         </span> 
       </Stack>
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Are you sure?</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Are you sure you want to archive this task?</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Cancel
-          </Button>
-          <Button variant="primary" onClick={() => {
-            onArchive(selectedTask);
-            handleClose();
-          }}>
-            I'm sure
-          </Button>
-        </Modal.Footer>
-      </Modal>
-      <Modal show={showArchiveAll} onHide={handleCloseArchiveAll}>
-        <Modal.Header closeButton>
-          <Modal.Title>Are you sure?</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Are you sure you want to archive all of these tasks?</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseArchiveAll}>
-            Cancel
-          </Button>
-          <Button variant="primary" onClick={() => {
-            archiveAll();
-            handleCloseArchiveAll();
-          }}>
-            I'm sure
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      <ConfirmationModal
+        title="Are you sure?"
+        body="Are you sure you want to archive this task?"
+        handleClose={handleClose}
+        handleShow={show}
+        onConfirm={() => {
+          onArchive(selectedTask);
+          handleClose();
+        }}
+        color="primary"
+      />
+      <ConfirmationModal
+        title="Are you sure?"
+        body="Are you sure you want to archive all of these tasks?"
+        handleClose={handleCloseArchiveAll}
+        handleShow={showArchiveAll}
+        onConfirm={() => {
+          archiveAll();
+          handleCloseArchiveAll();
+        }}
+        color="primary"
+      />
     </>
   )
 }

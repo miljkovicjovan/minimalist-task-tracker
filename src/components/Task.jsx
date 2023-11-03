@@ -1,8 +1,9 @@
-import { Button, Stack, Modal } from "react-bootstrap";
+import { Button, Stack } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { Tooltip } from "react-tooltip";
+import ConfirmationModal from "./ConfirmationModal";
 
 function Task({ id, index, name, onDelete, onEdit, onComplete }) {
   const [editedName, setEditedName] = useState(name);
@@ -87,24 +88,18 @@ function Task({ id, index, name, onDelete, onEdit, onComplete }) {
           />
         </span>
       </Stack>
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Are you sure?</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Are you sure you want to delete this task? 
-          <br/>Once you delete a task you cannot get it back!</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Cancel
-          </Button>
-          <Button variant="danger" onClick={() => {
-            handleClose();
-            onDelete(id);
-          }}>
-            I'm sure
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      <ConfirmationModal
+        title="Are you sure?"
+        body={<>Are you sure you want to delete this task?<br/>
+        Once you delete a task you cannot get it back!</>}
+        handleClose={handleClose}
+        handleShow={show}
+        onConfirm={() => {
+          handleClose();
+          onDelete(id);
+        }}
+        color="danger"
+      />
     </>
   )
 }

@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
-import { Stack, Button, Modal } from "react-bootstrap";
+import { Stack, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan, faBoxOpen } from "@fortawesome/free-solid-svg-icons";
+import ConfirmationModal from "../components/ConfirmationModal";
 
 function Archive() {
   const [hover, setHover] = useState(false);
@@ -99,40 +100,28 @@ function Archive() {
           </>
         ) : "There are currently no archived tasks."}
       </Stack>
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Are you sure?</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Are you sure you want to unarchive this task?</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Cancel
-          </Button>
-          <Button variant="primary" onClick={() => {
-            unarchive(selectedTask);
+      <ConfirmationModal
+        title="Are you sure?"
+        body="Are you sure you want to unarchive this task?"
+        handleClose={handleClose}
+        handleShow={show}
+        onConfirm={() => {
+          unarchive(selectedTask);
             handleClose();
-          }}>
-            I'm sure
-          </Button>
-        </Modal.Footer>
-      </Modal>
-      <Modal show={showUnarchiveAll} onHide={handleCloseUnarchiveAll}>
-        <Modal.Header closeButton>
-          <Modal.Title>Are you sure?</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Are you sure you want to unarchive all of these tasks?</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseUnarchiveAll}>
-            Cancel
-          </Button>
-          <Button variant="primary" onClick={() => {
-            unarchiveAll();
-            handleCloseUnarchiveAll();
-          }}>
-            I'm sure
-          </Button>
-        </Modal.Footer>
-      </Modal>
+        }}
+        color="primary"
+      />
+      <ConfirmationModal
+        title="Are you sure?"
+        body="Are you sure you want to unarchive all of these tasks?"
+        handleClose={handleCloseUnarchiveAll}
+        handleShow={showUnarchiveAll}
+        onConfirm={() => {
+          unarchiveAll();
+          handleCloseUnarchiveAll();
+        }}
+        color="primary"
+      />
     </>
   )
 }
