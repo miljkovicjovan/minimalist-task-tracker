@@ -1,6 +1,68 @@
+import { useState, useEffect } from "react";
+import { Stack, Button } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash, faTrashCan } from "@fortawesome/free-solid-svg-icons";
+
 function Archive() {
+  const [hover, setHover] = useState(false);
+  const toggleHover = () => setHover(!hover);
+  const [finishedTasks, setFinishedTasks] = useState(
+    JSON.parse(
+      window.localStorage.getItem("my-minimalistic-tracker-tasks-finished") ||
+        "[]"
+    )
+  );
+
+  function unarchive(id) {
+    const updatedTasks = finishedTasks.map((task) => {
+      return task.id === id ? { ...task, archived: false } : task;
+    });
+    setFinishedTasks(updatedTasks);
+  }
+
+  function resetArchivedTasks() {
+    const updatedFinishedTasks = finishedTasks.filter(task => task.archived === false);
+    setFinishedTasks(updatedFinishedTasks);
+  }
+
+  useEffect(() => {
+    window.localStorage.setItem(
+      "my-minimalistic-tracker-tasks-finished",
+      JSON.stringify(finishedTasks)
+    );
+  }, [finishedTasks]);
   return (
-    <div className="text-light">Archive</div>
+    <Stack className="text-white text-center pt-4">
+      {finishedTasks.some(task => task.archived === true) ? (
+        <>
+          <hr className="mx-auto w-25"/>
+          <h4 className="text-decoration-underline">Archived Tasks &#128193;</h4>
+          {finishedTasks.map((finishedTask, index) => {
+            return finishedTask.archived === true ?
+              <span className="my-1">
+                <span key={index}>{finishedTask.name}</span>
+                <Button className="ms-2" size="sm" variant="danger" onClick={() => unarchive(finishedTask.id)}>
+                  <FontAwesomeIcon icon={faTrash} className='pe-1' />
+                  Unarchive Task
+                </Button>
+              </span>
+            : ""
+          })}
+          <span className="mt-4">
+            <Button 
+              type='submit'
+              className={`border-danger ${hover ? "bg-dark text-danger" : "bg-danger text-white"}`}
+              onMouseEnter={toggleHover}
+              onMouseLeave={toggleHover}
+              onClick={() => resetArchivedTasks()}
+            >
+                <FontAwesomeIcon icon={faTrashCan} className='pe-1'/>
+                Delete Archived Tasks
+            </Button>
+          </span>
+        </>
+      ) : "There are currently no archived tasks."}
+    </Stack>
   )
 }
 

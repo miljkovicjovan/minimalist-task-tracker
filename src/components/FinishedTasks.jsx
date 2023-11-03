@@ -1,9 +1,9 @@
-import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { faTrashCan, faBoxArchive } from "@fortawesome/free-solid-svg-icons";
 import { Stack, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 
-function FinishedTasks({ finishedTasks, tasks, onReset }) {
+function FinishedTasks({ finishedTasks, tasks, onReset, onArchive }) {
   const [hover, setHover] = useState(false);
   const toggleHover = () => setHover(!hover);
   return (
@@ -15,9 +15,17 @@ function FinishedTasks({ finishedTasks, tasks, onReset }) {
           {`- Total: ${finishedTasks.length+tasks.length} `}
           {`- Percentage: ${Math.round((finishedTasks.length / (finishedTasks.length+tasks.length)) * 100)}% `}
         </p>       
-        {finishedTasks.map((finishedTask, index) => (
-          <span key={index}>&#x2705; {finishedTask}</span>
-        ))}
+        {finishedTasks.map((finishedTask, index) => {
+          return finishedTask.archived === false ?
+            <span className="my-1">
+              <span key={index}>&#x2705; {finishedTask.name}</span>
+              <Button className="ms-2" size="sm" onClick={() => onArchive(finishedTask.id)}>
+                <FontAwesomeIcon icon={faBoxArchive} className='pe-1' />
+                Archive Task
+              </Button>
+            </span>
+          : ""
+        })}
         <span className="mt-4">
           <Button 
             type='submit'

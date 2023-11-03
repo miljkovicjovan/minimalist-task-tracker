@@ -21,9 +21,12 @@ function Home() {
     setTasks(tasks.filter((task) => task.id !== id));
   }
 
-  function completeTask(name, id) {
-    setFinishedTasks([...finishedTasks, name]);
-    setTasks(tasks.filter((task) => task.id !== id));
+  function completeTask(name, oldId) {
+    const id = Math.floor(Math.random() * 1000) + 1;
+    const archived = false;
+    const data = { id: id, name: name, archived: archived };
+    setFinishedTasks([...finishedTasks, data]);
+    setTasks(tasks.filter((task) => task.id !== oldId));
   }
 
   function addTask(name) {
@@ -43,11 +46,19 @@ function Home() {
   }
 
   function resetFinishedTask() {
-    setFinishedTasks([]);
+    const updatedFinishedTasks = finishedTasks.filter(task => task.archived !== false);
+    setFinishedTasks(updatedFinishedTasks);
   }
 
   function deleteAll() {
     setTasks([]);
+  }
+
+  function archiveTask(id) {
+    const updatedTasks = finishedTasks.map((task) => {
+      return task.id === id ? { ...task, archived: true } : task;
+    });
+    setFinishedTasks(updatedTasks);
   }
 
   useEffect(() => {
@@ -80,6 +91,7 @@ function Home() {
           finishedTasks={finishedTasks}
           tasks={tasks}
           onReset={resetFinishedTask}
+          onArchive={archiveTask}
         />
       ) : (
         ""
