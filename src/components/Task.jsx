@@ -52,7 +52,9 @@ function Task({ id, index, name, onDelete, onEdit, onComplete }) {
         <span>
           <Button 
             className={`border-success border-2 rounded-0 finish-task 
-            ${finishHover ? "bg-light border-light text-success" : "bg-success text-light"}`}
+            ${finishHover ? "bg-light border-light text-success" : "bg-success text-light"}
+            ${editMode && "bg-dark text-light border-light"}`}
+            disabled={editMode == true ? true : false}
             onMouseEnter={toggleHoverFinish}
             onMouseLeave={toggleHoverFinish}
             onClick={() => onComplete(name, id)}
@@ -66,7 +68,9 @@ function Task({ id, index, name, onDelete, onEdit, onComplete }) {
           />
           <Button 
             className={`border-primary border-2 rounded-0 edit-task 
-            ${editHover ? "bg-light border-light text-primary" : "bg-primary text-light"}`}
+            ${editHover ? "bg-light border-light text-primary" : "bg-primary text-light"}
+            ${editMode && "bg-dark text-light border-light"}`}
+            disabled={editMode == true ? true : false}
             onMouseEnter={toggleHoverEdit}
             onMouseLeave={toggleHoverEdit}
             onClick={() => {
@@ -83,7 +87,9 @@ function Task({ id, index, name, onDelete, onEdit, onComplete }) {
           />
           <Button 
             className={`border-danger border-2 rounded-0 rounded-end delete-task 
-            ${deleteHover ? "bg-light border-light text-danger" : "bg-danger text-light"}`}
+            ${deleteHover ? "bg-light border-light text-danger" : "bg-danger text-light"}
+            ${editMode && "bg-dark text-light border-light"}`}
+            disabled={editMode == true ? true : false}
             onMouseEnter={toggleHoverDelete}
             onMouseLeave={toggleHoverDelete}
             onClick={handleShow}
