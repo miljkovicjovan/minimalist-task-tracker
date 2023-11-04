@@ -3,19 +3,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGear } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
 
-function SettingsModal() {
+function SettingsModal({ settings, setSettings }) {
 	const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-	const [settings, setSettings] = useState(
-    JSON.parse(window.localStorage.getItem("my-minimalistic-tracker-settings")) || {
-			askForBulkDeletingConfirmation: false,
-			askForDeletingConfirmation: false,
-			askForBulkArchivingConfirmation: false,
-			askForArchivingConfirmation: false
-		}
-  );
 	const handleSwitchBulkDeleteChange = (e) => setSettings({ ...settings, askForBulkDeletingConfirmation: e.target.checked });
 	const handleSwitchDeleteChange = (e) => setSettings({ ...settings, askForDeletingConfirmation: e.target.checked });
 	const handleSwitchBulkArchiveChange = (e) => setSettings({ ...settings, askForBulkArchivingConfirmation: e.target.checked });
