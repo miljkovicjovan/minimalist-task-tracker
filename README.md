@@ -62,6 +62,7 @@ Thanks to these wonderful people for contributing:
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/txlan1710"><img src="https://avatars.githubusercontent.com/u/128203119?v=4?s=100" width="100px;" alt="txlan1710"/><br /><sub><b>txlan1710</b></sub></a><br /><a href="https://github.com/miljkovicjovan/minimalist-task-tracker/commits?author=txlan1710" title="Documentation">📖</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/tkthib2015012"><img src="https://avatars.githubusercontent.com/u/146736127?v=4?s=100" width="100px;" alt="tkthib2015012"/><br /><sub><b>tkthib2015012</b></sub></a><br /><a href="https://github.com/miljkovicjovan/minimalist-task-tracker/commits?author=tkthib2015012" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/LittleCuong"><img src="https://avatars.githubusercontent.com/u/91473760?v=4?s=100" width="100px;" alt="Nguyen Phu Cuong"/><br /><sub><b>Nguyen Phu Cuong</b></sub></a><br /><a href="https://github.com/miljkovicjovan/minimalist-task-tracker/commits?author=LittleCuong" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/anhlee66"><img src="https://avatars.githubusercontent.com/u/125440141?v=4?s=100" width="100px;" alt="anhlee66"/><br /><sub><b>anhlee66</b></sub></a><br /><a href="https://github.com/miljkovicjovan/minimalist-task-tracker/issues?q=author%3Aanhlee66" title="Bug reports">🐛</a></td>
     </tr>
   </tbody>
 </table>
