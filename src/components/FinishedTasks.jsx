@@ -28,6 +28,17 @@ function FinishedTasks({ finishedTasks, setFinishedTasks, tasks, onReset, onArch
   const handleCloseDeleteAll = () => setShowDeleteAll(false);
   const handleShowDeleteAll = () => setShowDeleteAll(true);
 
+  const [showDelete, setShowDelete] = useState(false);
+  const handleCloseDelete = () => setShowDelete(false);
+  const handleShowDelete = (id) => {
+    setShowDelete(true); 
+    setSelectedTask(id);
+  }
+
+  function deleteTask(id) {
+    setFinishedTasks(finishedTasks.filter((task) => task.id !== id));
+  }
+
   function archiveAll() {
     const updatedTasks = finishedTasks.map((task) => {
       return { ...task, archived: true }
@@ -47,11 +58,20 @@ function FinishedTasks({ finishedTasks, setFinishedTasks, tasks, onReset, onArch
         </p>       
         {finishedTasks.map((finishedTask, index) => {
           return finishedTask.archived === false ?
-            <span  key={index} className="my-1">
-              <span>&#x2705; {finishedTask.name}</span>
+            <span  key={index} className="my-1 d-flex justify-content-center align-items-center">
+              <span>#{index + 1} {finishedTask.name}</span>
               <Button className="ms-2" size="sm" onClick={() => handleShow(finishedTask.id)}>
                 <FontAwesomeIcon icon={faBoxArchive} className='pe-1' />
                 Archive Task
+              </Button>
+              <Button 
+                type="submit"
+                variant="danger"
+                size="sm"
+                className="ms-2"
+                onClick={() => handleShowDelete(finishedTask.id)}
+              >
+                <FontAwesomeIcon icon={faTrashCan} />
               </Button>
             </span>
           : ""
@@ -112,6 +132,18 @@ function FinishedTasks({ finishedTasks, setFinishedTasks, tasks, onReset, onArch
         onConfirm={() => {
           onReset()
           handleCloseDeleteAll();
+        }}
+        color="danger"
+      />
+      <ConfirmationModal
+        title="Are you sure?"
+        body={<>Are you sure you want to delete this task?<br/>
+        Once you delete your task you cannot get it back!</>}
+        handleClose={handleCloseDelete}
+        handleShow={showDelete}
+        onConfirm={() => {
+          deleteTask(selectedTask);
+          handleCloseDelete();
         }}
         color="danger"
       />
