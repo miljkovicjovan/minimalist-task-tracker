@@ -2,7 +2,7 @@ import GitHubButton from 'react-github-btn';
 
 function Footer() {
   return (
-    <footer className="py-3 d-flex justify-content-center align-items-center">
+    <footer className="py-3 d-flex justify-content-center align-items-center text-white">
       Contribute or support us on{" "}
       <a
         href="https://github.com/miljkovicjovan/minimalist-task-tracker"

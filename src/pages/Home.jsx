@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import AddTask from "../components/AddTask";
 import Tasks from "../components/Tasks";
 import FinishedTasks from "../components/FinishedTasks";
-import Footer from "../components/Footer";
 
 function Home() {
   const [tasks, setTasks] = useState(
@@ -93,7 +92,6 @@ function Home() {
       ) : (
         ""
       )}
-      <Footer />
     </div>
   );
 }
