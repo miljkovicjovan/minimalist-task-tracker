@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { Button, Modal } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import ConfirmationModal from "./ConfirmationModal";
 
 function DeleteTasks({onDeleteAll}) {
     const [hover, setHover] = useState(false);
@@ -21,24 +22,18 @@ function DeleteTasks({onDeleteAll}) {
                 <FontAwesomeIcon icon={faTrashCan} className='pe-1'/>
                 Delete all Tasks
             </Button>
-            <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Are you sure?</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>Are you sure you want to delete all your active tasks?
-                    <br/>Once you delete your tasks you cannot get them back!</Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Cancel
-                    </Button>
-                    <Button variant="danger" onClick={() => {
-                        handleClose();
-                        onDeleteAll();
-                    }}>
-                        I'm sure
-                    </Button>
-                </Modal.Footer>
-            </Modal>
+            <ConfirmationModal
+                title="Are you sure?"
+                body={<>Are you sure you want to delete all your active tasks?<br/>
+                Once you delete your tasks you cannot get them back!</>}
+                handleClose={handleClose}
+                handleShow={show}
+                onConfirm={() => {
+                    handleClose();
+                    onDeleteAll();
+                }}
+                color="danger"
+            />
         </>
     )
 }
