@@ -58,8 +58,8 @@ function FinishedTasks({ finishedTasks, setFinishedTasks, tasks, onReset, onArch
         </p>       
         {finishedTasks.map((finishedTask, index) => {
           return finishedTask.archived === false ?
-            <span  key={index} className="my-1">
-              <span>&#x2705; {finishedTask.name}</span>
+            <span  key={index} className="my-1 d-flex justify-content-center align-items-center">
+              <span>#{index + 1} {finishedTask.name}</span>
               <Button className="ms-2" size="sm" onClick={() => handleShow(finishedTask.id)}>
                 <FontAwesomeIcon icon={faBoxArchive} className='pe-1' />
                 Archive Task

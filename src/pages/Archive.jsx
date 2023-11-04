@@ -79,8 +79,8 @@ function Archive() {
             <h4 className="text-decoration-underline">Archived Tasks &#128193;</h4>
             {finishedTasks.map((finishedTask, index) => {
               return finishedTask.archived === true ?
-                <span key={index} className="my-1">
-                  <span>{finishedTask.name}</span>
+                <span key={index} className="my-1 d-flex justify-content-center align-items-center">
+                  <span>#{index + 1} {finishedTask.name}</span>
                   <Button className="ms-2" size="sm" variant="primary" onClick={() => handleShow(finishedTask.id)}>
                     <FontAwesomeIcon icon={faBoxOpen} className="pe-1"/>
                     Unarchive Task
