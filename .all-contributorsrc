@@ -43,6 +43,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "anhlee66",
+      "name": "anhlee66",
+      "avatar_url": "https://avatars.githubusercontent.com/u/125440141?v=4",
+      "profile": "https://github.com/anhlee66",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
