@@ -4,10 +4,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import ConfirmationModal from "./ConfirmationModal";
 
-function FinishedTasks({ finishedTasks, setFinishedTasks, tasks, onReset, onArchive }) {
+function FinishedTasks(
+  { finishedTasks, setFinishedTasks, tasks, onReset, onArchive, settings, setSettings }
+) {
   const [hover, setHover] = useState(false);
   const toggleHover = () => setHover(!hover);
-
 
   const [hoverArchive, setHoverArchive] = useState(false);
   const toggleHoverArchive = () => setHoverArchive(!hoverArchive);
@@ -31,9 +32,11 @@ function FinishedTasks({ finishedTasks, setFinishedTasks, tasks, onReset, onArch
   const [showDelete, setShowDelete] = useState(false);
   const handleCloseDelete = () => setShowDelete(false);
   const handleShowDelete = (id) => {
-    setShowDelete(true); 
-    setSelectedTask(id);
-  }
+		if (settings.askForDeletingConfirmation) {
+      setShowDelete(true); 
+      setSelectedTask(id);
+    } else deleteTask(id);;
+	};
 
   function deleteTask(id) {
     setFinishedTasks(finishedTasks.filter((task) => task.id !== id));
@@ -146,6 +149,10 @@ function FinishedTasks({ finishedTasks, setFinishedTasks, tasks, onReset, onArch
           handleCloseDelete();
         }}
         color="danger"
+        onToggle={() => setSettings({ 
+          ...settings,
+          askForDeletingConfirmation: !settings.askForDeletingConfirmation 
+        })}
       />
     </>
   )
