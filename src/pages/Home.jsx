@@ -68,7 +68,7 @@ function Home() {
   }, [tasks, finishedTasks]);
 
   return (
-    <div className="text-white text-center">
+    <div className="text-white text-center" style={{'minHeight':'calc(100vh - 250px)'}}>
       <AddTask onAdd={addTask} />
       {tasks.length ? (
         <Tasks

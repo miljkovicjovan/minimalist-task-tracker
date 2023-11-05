@@ -72,7 +72,7 @@ function Archive() {
   }, [finishedTasks]);
   return (
     <>
-      <Stack className="text-white text-center pt-4">
+      <Stack className="text-white text-center pt-4" style={{'minHeight':'calc(100vh - 250px)'}}>
         {finishedTasks.some(task => task.archived === true) ? (
           <>
             <hr className="mx-auto w-25"/>
