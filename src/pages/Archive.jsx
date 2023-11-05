@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan, faBoxOpen } from "@fortawesome/free-solid-svg-icons";
 import ConfirmationModal from "../components/ConfirmationModal";
 
-function Archive() {
+function Archive({ settings, setSettings }) {
   const [hover, setHover] = useState(false);
   const toggleHover = () => setHover(!hover);
 
@@ -56,9 +56,11 @@ function Archive() {
   const [showDelete, setShowDelete] = useState(false);
   const handleCloseDelete = () => setShowDelete(false);
   const handleShowDelete = (id) => {
-    setShowDelete(true); 
-    setSelectedTask(id);
-  }
+		if (settings.askForDeletingConfirmation) {
+      setShowDelete(true); 
+      setSelectedTask(id);
+    } else deleteTask(id);;
+	};
 
   function deleteTask(id) {
     setFinishedTasks(finishedTasks.filter((task) => task.id !== id));
@@ -169,6 +171,10 @@ function Archive() {
           handleCloseDelete();
         }}
         color="danger"
+        onToggle={() => setSettings({ 
+          ...settings,
+          askForDeletingConfirmation: !settings.askForDeletingConfirmation 
+        })}
       />
     </>
   )
