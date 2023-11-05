@@ -68,7 +68,7 @@ function Home({ settings, setSettings }) {
   }, [tasks, finishedTasks]);
 
   return (
-    <div className="text-white text-center">
+    <div className="text-white text-center footer-push">
       <AddTask onAdd={addTask} />
       {tasks.length ? (
         <Tasks

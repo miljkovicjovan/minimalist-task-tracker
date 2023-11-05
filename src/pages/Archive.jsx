@@ -80,7 +80,7 @@ function Archive({ settings, setSettings }) {
   }, [finishedTasks]);
   return (
     <>
-      <Stack className="text-white text-center pt-4">
+      <Stack className="text-white text-center pt-4 footer-push">
         {finishedTasks.some(task => task.archived === true) ? (
           <>
             <hr className="mx-auto w-25"/>
