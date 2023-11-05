@@ -4,7 +4,7 @@ import Tasks from "../components/Tasks";
 import FinishedTasks from "../components/FinishedTasks";
 import Footer from "../components/Footer";
 
-function Home() {
+function Home({ settings, setSettings }) {
   const [tasks, setTasks] = useState(
     JSON.parse(
       window.localStorage.getItem("my-minimalistic-tracker-tasks") || "[]"
@@ -78,6 +78,8 @@ function Home() {
           onEdit={editTask}
           tasks={tasks}
           onDeleteAll={deleteAll}
+          settings={settings}
+          setSettings={setSettings}
         />
       ) : (
         ""
@@ -89,6 +91,8 @@ function Home() {
           tasks={tasks}
           onReset={resetFinishedTask}
           onArchive={archiveTask}
+          settings={settings}
+          setSettings={setSettings}
         />
       ) : (
         ""

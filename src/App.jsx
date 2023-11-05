@@ -9,10 +9,10 @@ import { useState } from 'react';
 function App() {
   const [settings, setSettings] = useState(
     JSON.parse(window.localStorage.getItem("my-minimalistic-tracker-settings")) || {
-			askForBulkDeletingConfirmation: false,
-			askForDeletingConfirmation: false,
-			askForBulkArchivingConfirmation: false,
-			askForArchivingConfirmation: false
+			askForBulkDeletingConfirmation: true,
+			askForDeletingConfirmation: true,
+			askForBulkArchivingConfirmation: true,
+			askForArchivingConfirmation: true
 		}
   );
 
@@ -21,7 +21,7 @@ function App() {
       <SettingsModal settings={settings} setSettings={setSettings}/>
       <Header/>
       <Routes>
-        <Route path="/" exact element={<Home/>} />
+        <Route path="/" exact element={<Home settings={settings} setSettings={setSettings}/>} />
         <Route path="/archive" element={<Archive/>} />
       </Routes>
     </Router>
