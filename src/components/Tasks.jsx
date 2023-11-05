@@ -2,7 +2,7 @@ import { Stack } from "react-bootstrap";
 import Task from "./Task";
 import DeleteTasks from "./DeleteTasks";
 
-function Tasks({tasks, onDelete, onEdit, onComplete, onDeleteAll}) {
+function Tasks({ tasks, onDelete, onEdit, onComplete, onDeleteAll, settings, setSettings }) {
 	return (
 		<Stack className="my-3 mx-5">
 			{tasks.length ? 
@@ -20,9 +20,13 @@ function Tasks({tasks, onDelete, onEdit, onComplete, onDeleteAll}) {
 					onDelete={onDelete}
 					onEdit={onEdit}
 					onComplete={onComplete}
+					settings={settings}
+					setSettings={setSettings}
 				/>
 			))}
-			{tasks.length ? <DeleteTasks onDeleteAll={onDeleteAll}/> : ""}
+			{tasks.length ? 
+				<DeleteTasks onDeleteAll={onDeleteAll} settings={settings} setSettings={setSettings}/>
+			: ""}
 		</Stack>
 	)
 }
