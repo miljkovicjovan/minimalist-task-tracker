@@ -1,4 +1,5 @@
-import { faTrashCan, faBoxArchive, faArrowUpFromBracket } from "@fortawesome/free-solid-svg-icons";
+import { faTrashCan, faBoxArchive, faArrowUpFromBracket }
+  from "@fortawesome/free-solid-svg-icons";
 import { Stack, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
@@ -6,7 +7,12 @@ import ConfirmationModal from "./ConfirmationModal";
 import { Tooltip } from "react-tooltip";
 
 function FinishedTasks(
-  { finishedTasks, setFinishedTasks, tasks, setTasks, onReset, onArchive, settings, setSettings }
+  {
+    finishedTasks, setFinishedTasks,
+    tasks, setTasks,
+    onReset, onArchive,
+    settings, setSettings
+  }
 ) {
   const [hover, setHover] = useState(false);
   const toggleHover = () => setHover(!hover);
@@ -78,9 +84,16 @@ function FinishedTasks(
         </p>       
         {finishedTasks.map((finishedTask, index) => {
           return finishedTask.archived === false ?
-            <span  key={index} className="my-1 d-flex justify-content-center align-items-center">
+            <span 
+              key={index}
+              className="my-1 d-flex justify-content-center align-items-center"
+            >
               <span>#{index + 1} {finishedTask.name}</span>
-              <Button className="ms-2" size="sm" onClick={() => handleShow(finishedTask.id)}>
+              <Button 
+                className="ms-2"
+                size="sm"
+                onClick={() => handleShow(finishedTask.id)}
+              >
                 <FontAwesomeIcon icon={faBoxArchive} className='pe-1' />
                 Archive Task
               </Button>
@@ -114,7 +127,10 @@ function FinishedTasks(
         <span className="mt-4">
           <Button 
             type='submit'
-            className={`border-primary ${hoverArchive ? "bg-dark text-primary" : "bg-primary text-white"}`}
+            className={
+              `border-primary
+              ${hoverArchive ? "bg-dark text-primary" : "bg-primary text-white"}`
+            }
             onMouseEnter={toggleHoverArchive}
             onMouseLeave={toggleHoverArchive}
             onClick={() => handleShowArchiveAll()}
@@ -126,7 +142,10 @@ function FinishedTasks(
         <span className="mt-2">
           <Button 
             type='submit'
-            className={`border-danger ${hover ? "bg-dark text-danger" : "bg-danger text-white"}`}
+            className={
+              `border-danger
+              ${hover ? "bg-dark text-danger" : "bg-danger text-white"}`
+            }
             onMouseEnter={toggleHover}
             onMouseLeave={toggleHover}
             onClick={() => handleShowDeleteAll()}
@@ -163,7 +182,7 @@ function FinishedTasks(
         color="primary"
         onToggle={() => setSettings({ 
           ...settings,
-          askForBulkArchivingConfirmation: !settings.askForBulkArchivingConfirmation 
+          askForBulkArchivingConfirmation: !settings.askForBulkArchivingConfirmation
         })}
       />
       <ConfirmationModal
@@ -179,7 +198,7 @@ function FinishedTasks(
         color="danger"
         onToggle={() => setSettings({ 
           ...settings,
-          askForBulkDeletingConfirmation: !settings.askForBulkDeletingConfirmation 
+          askForBulkDeletingConfirmation: !settings.askForBulkDeletingConfirmation
         })}
       />
       <ConfirmationModal
@@ -195,7 +214,7 @@ function FinishedTasks(
         color="danger"
         onToggle={() => setSettings({ 
           ...settings,
-          askForDeletingConfirmation: !settings.askForDeletingConfirmation 
+          askForDeletingConfirmation: !settings.askForDeletingConfirmation
         })}
       />
     </>
