@@ -12,6 +12,8 @@ function SettingsModal({ settings, setSettings }) {
 	const handleSwitchDeleteChange = (e) => setSettings({ ...settings, askForDeletingConfirmation: e.target.checked });
 	const handleSwitchBulkArchiveChange = (e) => setSettings({ ...settings, askForBulkArchivingConfirmation: e.target.checked });
 	const handleSwitchArchiveChange = (e) => setSettings({ ...settings, askForArchivingConfirmation: e.target.checked });
+	const handleSwitchBulkUnarchiveChange = (e) => setSettings({ ...settings, askForBulkUnarchivingConfirmation: e.target.checked });
+	const handleSwitchUnarchiveChange = (e) => setSettings({ ...settings, askForUnarchivingConfirmation: e.target.checked });
 
 	useEffect(() => {
     window.localStorage.setItem(
@@ -59,6 +61,18 @@ function SettingsModal({ settings, setSettings }) {
 							label="Show confirmation when archiving a task"
 							checked={settings.askForArchivingConfirmation}
 							onChange={handleSwitchArchiveChange}
+						/>
+						<Form.Check
+							type="switch"
+							label="Show confirmation when bulk unarchiving tasks"
+							checked={settings.askForBulkUnarchivingConfirmation}
+							onChange={handleSwitchBulkUnarchiveChange}
+						/>
+						<Form.Check
+							type="switch"
+							label="Show confirmation when unarchiving a task"
+							checked={settings.askForUnarchivingConfirmation}
+							onChange={handleSwitchUnarchiveChange}
 						/>
 					</Form>
 				</Modal.Body>

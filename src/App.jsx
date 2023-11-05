@@ -12,7 +12,9 @@ function App() {
 			askForBulkDeletingConfirmation: true,
 			askForDeletingConfirmation: true,
 			askForBulkArchivingConfirmation: true,
-			askForArchivingConfirmation: true
+			askForArchivingConfirmation: true,
+			askForBulkUnarchivingConfirmation: true,
+			askForUnarchivingConfirmation: true
 		}
   );
 

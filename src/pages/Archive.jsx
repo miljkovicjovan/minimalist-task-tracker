@@ -22,9 +22,32 @@ function Archive({ settings, setSettings }) {
   const [selectedTask, setSelectedTask] = useState();
   const handleClose = () => setShow(false);
   const handleShow = (id) => {
-    setShow(true); 
-    setSelectedTask(id);
-  }
+    if (settings.askForUnarchivingConfirmation) {
+      setShow(true); 
+      setSelectedTask(id);
+    } else unarchive(id);
+	};
+
+  const [showUnarchiveAll, setShowUnarchiveAll] = useState(false);
+  const handleCloseUnarchiveAll = () => setShowUnarchiveAll(false);
+  const handleShowUnarchiveAll = () => {
+		settings.askForBulkUnarchivingConfirmation ? setShowUnarchiveAll(true) : unarchiveAll();
+	};
+
+  const [showDeleteAll, setShowDeleteAll] = useState(false);
+  const handleCloseDeleteAll = () => setShowDeleteAll(false);
+	const handleShowDeleteAll = () => {
+		settings.askForBulkDeletingConfirmation ? setShowDeleteAll(true) : resetArchivedTasks();
+	};
+
+  const [showDelete, setShowDelete] = useState(false);
+  const handleCloseDelete = () => setShowDelete(false);
+  const handleShowDelete = (id) => {
+		if (settings.askForDeletingConfirmation) {
+      setShowDelete(true); 
+      setSelectedTask(id);
+    } else deleteTask(id);;
+	};
 
   function unarchive(id) {
     const updatedTasks = finishedTasks.map((task) => {
@@ -44,25 +67,6 @@ function Archive({ settings, setSettings }) {
     });
     setFinishedTasks(updatedTasks);
   }
-
-  const [showUnarchiveAll, setShowUnarchiveAll] = useState(false);
-  const handleCloseUnarchiveAll = () => setShowUnarchiveAll(false);
-  const handleShowUnarchiveAll = () => setShowUnarchiveAll(true);
-
-  const [showDeleteAll, setShowDeleteAll] = useState(false);
-  const handleCloseDeleteAll = () => setShowDeleteAll(false);
-	const handleShowDeleteAll = () => {
-		settings.askForBulkDeletingConfirmation ? setShowDeleteAll(true) : resetArchivedTasks();
-	};
-
-  const [showDelete, setShowDelete] = useState(false);
-  const handleCloseDelete = () => setShowDelete(false);
-  const handleShowDelete = (id) => {
-		if (settings.askForDeletingConfirmation) {
-      setShowDelete(true); 
-      setSelectedTask(id);
-    } else deleteTask(id);;
-	};
 
   function deleteTask(id) {
     setFinishedTasks(finishedTasks.filter((task) => task.id !== id));
@@ -138,6 +142,10 @@ function Archive({ settings, setSettings }) {
           handleClose();
         }}
         color="primary"
+        onToggle={() => setSettings({ 
+          ...settings,
+          askForUnarchivingConfirmation: !settings.askForUnarchivingConfirmation 
+        })}
       />
       <ConfirmationModal
         title="Are you sure?"
@@ -149,6 +157,10 @@ function Archive({ settings, setSettings }) {
           handleCloseUnarchiveAll();
         }}
         color="primary"
+        onToggle={() => setSettings({ 
+          ...settings,
+          askForBulkUnarchivingConfirmation: !settings.askForBulkUnarchivingConfirmation 
+        })}
       />
       <ConfirmationModal
         title="Are you sure?"
