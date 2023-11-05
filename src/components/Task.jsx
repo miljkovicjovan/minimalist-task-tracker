@@ -25,9 +25,16 @@ function Task({ id, index, name, onDelete, onEdit, onComplete, settings, setSett
   const [showEdit, setShowEdit] = useState(false);
   const handleCloseEdit = () => {
     setShowEdit(false)
-    setEditMode(false);
+    setEditMode(false); 
   };
-  const handleShowEdit = () => setShowEdit(true);
+  const handleShowEdit = (editedName, id) => {
+    if (settings.askForEditingConfirmation) {
+      setShowEdit(true)
+    } else {
+      onEdit(editedName, id);
+      setEditMode(false); 
+    }
+  };
 
   return (
     <>
@@ -133,6 +140,10 @@ function Task({ id, index, name, onDelete, onEdit, onComplete, settings, setSett
           handleCloseEdit(); 
         }}
         color="primary"
+        onToggle={() => setSettings({ 
+          ...settings,
+          askForEditingConfirmation: !settings.askForEditingConfirmation 
+        })}
       />
     </>
   )

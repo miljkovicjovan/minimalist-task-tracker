@@ -8,12 +8,20 @@ function SettingsModal({ settings, setSettings }) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-	const handleSwitchBulkDeleteChange = (e) => setSettings({ ...settings, askForBulkDeletingConfirmation: e.target.checked });
-	const handleSwitchDeleteChange = (e) => setSettings({ ...settings, askForDeletingConfirmation: e.target.checked });
-	const handleSwitchBulkArchiveChange = (e) => setSettings({ ...settings, askForBulkArchivingConfirmation: e.target.checked });
-	const handleSwitchArchiveChange = (e) => setSettings({ ...settings, askForArchivingConfirmation: e.target.checked });
-	const handleSwitchBulkUnarchiveChange = (e) => setSettings({ ...settings, askForBulkUnarchivingConfirmation: e.target.checked });
-	const handleSwitchUnarchiveChange = (e) => setSettings({ ...settings, askForUnarchivingConfirmation: e.target.checked });
+	const handleSwitchBulkDeleteChange = (e) => 
+		setSettings({ ...settings, askForBulkDeletingConfirmation: e.target.checked });
+	const handleSwitchDeleteChange = (e) => 
+		setSettings({ ...settings, askForDeletingConfirmation: e.target.checked });
+	const handleSwitchBulkArchiveChange = (e) => 
+		setSettings({ ...settings, askForBulkArchivingConfirmation: e.target.checked });
+	const handleSwitchArchiveChange = (e) => 
+		setSettings({ ...settings, askForArchivingConfirmation: e.target.checked });
+	const handleSwitchBulkUnarchiveChange = (e) => 
+		setSettings({ ...settings, askForBulkUnarchivingConfirmation: e.target.checked });
+	const handleSwitchUnarchiveChange = (e) => 
+		setSettings({ ...settings, askForUnarchivingConfirmation: e.target.checked });
+	const handleSwitchEditingChange = (e) => 
+		setSettings({ ...settings, askForEditingConfirmation: e.target.checked });
 
 	useEffect(() => {
     window.localStorage.setItem(
@@ -38,6 +46,12 @@ function SettingsModal({ settings, setSettings }) {
 				<Modal.Body className="d-flex justify-content-center">
 					<Form>
 						<h5>Confirmation Modals</h5>
+						<Form.Check
+							type="switch"
+							label="Show confirmation when editing a task"
+							checked={settings.askForEditingConfirmation}
+							onChange={handleSwitchEditingChange}
+						/>
 						<Form.Check
 							type="switch"
 							label="Show confirmation when bulk deleting tasks"

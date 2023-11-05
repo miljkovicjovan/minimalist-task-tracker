@@ -14,7 +14,8 @@ function App() {
 			askForBulkArchivingConfirmation: true,
 			askForArchivingConfirmation: true,
 			askForBulkUnarchivingConfirmation: true,
-			askForUnarchivingConfirmation: true
+			askForUnarchivingConfirmation: true,
+      askForEditingConfirmation: true
 		}
   );
 
