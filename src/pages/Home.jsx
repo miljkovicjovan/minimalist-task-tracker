@@ -83,7 +83,7 @@ function Home({ settings, setSettings }) {
       ) : (
         ""
       )}
-      {finishedTasks.length ? (
+      {finishedTasks.some(task => !task.archived) ? (
         <FinishedTasks
           finishedTasks={finishedTasks}
           setFinishedTasks={setFinishedTasks}
