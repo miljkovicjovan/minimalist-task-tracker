@@ -8,6 +8,20 @@ function SettingsModal({ settings, setSettings }) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+	const handleSwitchConfirmations = (e) => {
+		const isChecked = e.target.checked;
+		setSettings({
+			confirmations: isChecked,
+			askForBulkDeletingConfirmation: isChecked,
+			askForDeletingConfirmation: isChecked,
+			askForBulkArchivingConfirmation: isChecked,
+			askForArchivingConfirmation: isChecked,
+			askForBulkUnarchivingConfirmation: isChecked,
+			askForUnarchivingConfirmation: isChecked,
+			askForEditingConfirmation: isChecked,
+		});
+	};
+
 	const handleSwitchBulkDeleteChange = (e) => 
 		setSettings({ ...settings, askForBulkDeletingConfirmation: e.target.checked });
 	const handleSwitchDeleteChange = (e) => 
@@ -45,7 +59,15 @@ function SettingsModal({ settings, setSettings }) {
 				</Modal.Header>
 				<Modal.Body className="d-flex justify-content-center">
 					<Form>
-						<h5>Confirmation Modals</h5>
+						<span className="d-flex align-items-center">
+							<h5 className="m-0 pe-1">Show Confirmations</h5>
+							<Form.Check
+								type="switch"
+								checked={settings.confirmations}
+								onChange={handleSwitchConfirmations}
+							/>
+						</span>
+						<hr className="my-1"/>
 						<Form.Check
 							type="switch"
 							label="Show confirmation when editing a task"

@@ -9,6 +9,7 @@ import { useState } from 'react';
 function App() {
   const [settings, setSettings] = useState(
     JSON.parse(window.localStorage.getItem("my-minimalistic-tracker-settings")) || {
+      confirmations: true,
 			askForBulkDeletingConfirmation: true,
 			askForDeletingConfirmation: true,
 			askForBulkArchivingConfirmation: true,
