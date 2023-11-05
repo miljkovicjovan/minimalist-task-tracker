@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan, faBoxOpen } from "@fortawesome/free-solid-svg-icons";
 import ConfirmationModal from "../components/ConfirmationModal";
 
-function Archive() {
+function Archive({ settings, setSettings }) {
   const [hover, setHover] = useState(false);
   const toggleHover = () => setHover(!hover);
 
@@ -22,9 +22,32 @@ function Archive() {
   const [selectedTask, setSelectedTask] = useState();
   const handleClose = () => setShow(false);
   const handleShow = (id) => {
-    setShow(true); 
-    setSelectedTask(id);
-  }
+    if (settings.askForUnarchivingConfirmation) {
+      setShow(true); 
+      setSelectedTask(id);
+    } else unarchive(id);
+	};
+
+  const [showUnarchiveAll, setShowUnarchiveAll] = useState(false);
+  const handleCloseUnarchiveAll = () => setShowUnarchiveAll(false);
+  const handleShowUnarchiveAll = () => {
+		settings.askForBulkUnarchivingConfirmation ? setShowUnarchiveAll(true) : unarchiveAll();
+	};
+
+  const [showDeleteAll, setShowDeleteAll] = useState(false);
+  const handleCloseDeleteAll = () => setShowDeleteAll(false);
+	const handleShowDeleteAll = () => {
+		settings.askForBulkDeletingConfirmation ? setShowDeleteAll(true) : resetArchivedTasks();
+	};
+
+  const [showDelete, setShowDelete] = useState(false);
+  const handleCloseDelete = () => setShowDelete(false);
+  const handleShowDelete = (id) => {
+		if (settings.askForDeletingConfirmation) {
+      setShowDelete(true); 
+      setSelectedTask(id);
+    } else deleteTask(id);;
+	};
 
   function unarchive(id) {
     const updatedTasks = finishedTasks.map((task) => {
@@ -43,21 +66,6 @@ function Archive() {
       return { ...task, archived: false }
     });
     setFinishedTasks(updatedTasks);
-  }
-
-  const [showUnarchiveAll, setShowUnarchiveAll] = useState(false);
-  const handleCloseUnarchiveAll = () => setShowUnarchiveAll(false);
-  const handleShowUnarchiveAll = () => setShowUnarchiveAll(true);
-
-  const [showDeleteAll, setShowDeleteAll] = useState(false);
-  const handleCloseDeleteAll = () => setShowDeleteAll(false);
-  const handleShowDeleteAll = () => setShowDeleteAll(true);
-
-  const [showDelete, setShowDelete] = useState(false);
-  const handleCloseDelete = () => setShowDelete(false);
-  const handleShowDelete = (id) => {
-    setShowDelete(true); 
-    setSelectedTask(id);
   }
 
   function deleteTask(id) {
@@ -134,6 +142,10 @@ function Archive() {
           handleClose();
         }}
         color="primary"
+        onToggle={() => setSettings({ 
+          ...settings,
+          askForUnarchivingConfirmation: !settings.askForUnarchivingConfirmation 
+        })}
       />
       <ConfirmationModal
         title="Are you sure?"
@@ -145,6 +157,10 @@ function Archive() {
           handleCloseUnarchiveAll();
         }}
         color="primary"
+        onToggle={() => setSettings({ 
+          ...settings,
+          askForBulkUnarchivingConfirmation: !settings.askForBulkUnarchivingConfirmation 
+        })}
       />
       <ConfirmationModal
         title="Are you sure?"
@@ -157,6 +173,10 @@ function Archive() {
           handleCloseDeleteAll();
         }}
         color="danger"
+        onToggle={() => setSettings({ 
+          ...settings,
+          askForBulkDeletingConfirmation: !settings.askForBulkDeletingConfirmation 
+        })}
       />
       <ConfirmationModal
         title="Are you sure?"
@@ -169,6 +189,10 @@ function Archive() {
           handleCloseDelete();
         }}
         color="danger"
+        onToggle={() => setSettings({ 
+          ...settings,
+          askForDeletingConfirmation: !settings.askForDeletingConfirmation 
+        })}
       />
     </>
   )

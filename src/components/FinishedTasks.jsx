@@ -4,10 +4,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import ConfirmationModal from "./ConfirmationModal";
 
-function FinishedTasks({ finishedTasks, setFinishedTasks, tasks, onReset, onArchive }) {
+function FinishedTasks(
+  { finishedTasks, setFinishedTasks, tasks, onReset, onArchive, settings, setSettings }
+) {
   const [hover, setHover] = useState(false);
   const toggleHover = () => setHover(!hover);
-
 
   const [hoverArchive, setHoverArchive] = useState(false);
   const toggleHoverArchive = () => setHoverArchive(!hoverArchive);
@@ -16,24 +17,32 @@ function FinishedTasks({ finishedTasks, setFinishedTasks, tasks, onReset, onArch
   const [selectedTask, setSelectedTask] = useState();
   const handleClose = () => setShow(false);
   const handleShow = (id) => {
-    setShow(true); 
-    setSelectedTask(id);
+    if (settings.askForArchivingConfirmation) {
+      setShow(true); 
+      setSelectedTask(id);
+    } else onArchive(id);
   }
 
   const [showArchiveAll, setShowArchiveAll] = useState(false);
   const handleCloseArchiveAll = () => setShowArchiveAll(false);
-  const handleShowArchiveAll = () => setShowArchiveAll(true);
+  const handleShowArchiveAll = () => {
+    settings.askForBulkArchivingConfirmation ? setShowArchiveAll(true) : archiveAll();
+  };
 
   const [showDeleteAll, setShowDeleteAll] = useState(false);
   const handleCloseDeleteAll = () => setShowDeleteAll(false);
-  const handleShowDeleteAll = () => setShowDeleteAll(true);
+	const handleShowDeleteAll = () => {
+		settings.askForBulkDeletingConfirmation ? setShowDeleteAll(true) : onReset();
+	};
 
   const [showDelete, setShowDelete] = useState(false);
   const handleCloseDelete = () => setShowDelete(false);
   const handleShowDelete = (id) => {
-    setShowDelete(true); 
-    setSelectedTask(id);
-  }
+		if (settings.askForDeletingConfirmation) {
+      setShowDelete(true); 
+      setSelectedTask(id);
+    } else deleteTask(id);
+	};
 
   function deleteTask(id) {
     setFinishedTasks(finishedTasks.filter((task) => task.id !== id));
@@ -111,6 +120,10 @@ function FinishedTasks({ finishedTasks, setFinishedTasks, tasks, onReset, onArch
           handleClose();
         }}
         color="primary"
+        onToggle={() => setSettings({ 
+          ...settings,
+          askForArchivingConfirmation: !settings.askForArchivingConfirmation 
+        })}
       />
       <ConfirmationModal
         title="Are you sure?"
@@ -122,6 +135,10 @@ function FinishedTasks({ finishedTasks, setFinishedTasks, tasks, onReset, onArch
           handleCloseArchiveAll();
         }}
         color="primary"
+        onToggle={() => setSettings({ 
+          ...settings,
+          askForBulkArchivingConfirmation: !settings.askForBulkArchivingConfirmation 
+        })}
       />
       <ConfirmationModal
         title="Are you sure?"
@@ -134,6 +151,10 @@ function FinishedTasks({ finishedTasks, setFinishedTasks, tasks, onReset, onArch
           handleCloseDeleteAll();
         }}
         color="danger"
+        onToggle={() => setSettings({ 
+          ...settings,
+          askForBulkDeletingConfirmation: !settings.askForBulkDeletingConfirmation 
+        })}
       />
       <ConfirmationModal
         title="Are you sure?"
@@ -146,6 +167,10 @@ function FinishedTasks({ finishedTasks, setFinishedTasks, tasks, onReset, onArch
           handleCloseDelete();
         }}
         color="danger"
+        onToggle={() => setSettings({ 
+          ...settings,
+          askForDeletingConfirmation: !settings.askForDeletingConfirmation 
+        })}
       />
     </>
   )

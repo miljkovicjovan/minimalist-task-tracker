@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Tooltip } from "react-tooltip";
 import ConfirmationModal from "./ConfirmationModal";
 
-function Task({ id, index, name, onDelete, onEdit, onComplete }) {
+function Task({ id, index, name, onDelete, onEdit, onComplete, settings, setSettings }) {
   const [editedName, setEditedName] = useState(name);
   const [editMode, setEditMode] = useState(false);
 
@@ -18,14 +18,23 @@ function Task({ id, index, name, onDelete, onEdit, onComplete }) {
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShow = () => {
+		settings.askForDeletingConfirmation ? setShow(true) : onDelete(id);;
+	};
 
   const [showEdit, setShowEdit] = useState(false);
   const handleCloseEdit = () => {
     setShowEdit(false)
-    setEditMode(false);
+    setEditMode(false); 
   };
-  const handleShowEdit = () => setShowEdit(true);
+  const handleShowEdit = (editedName, id) => {
+    if (settings.askForEditingConfirmation) {
+      setShowEdit(true)
+    } else {
+      onEdit(editedName, id);
+      setEditMode(false); 
+    }
+  };
 
   return (
     <>
@@ -114,6 +123,10 @@ function Task({ id, index, name, onDelete, onEdit, onComplete }) {
           onDelete(id);
         }}
         color="danger"
+        onToggle={() => setSettings({ 
+          ...settings,
+          askForDeletingConfirmation: !settings.askForDeletingConfirmation 
+        })}
       />
       <ConfirmationModal
         title="Are you sure?"
@@ -127,6 +140,10 @@ function Task({ id, index, name, onDelete, onEdit, onComplete }) {
           handleCloseEdit(); 
         }}
         color="primary"
+        onToggle={() => setSettings({ 
+          ...settings,
+          askForEditingConfirmation: !settings.askForEditingConfirmation 
+        })}
       />
     </>
   )
