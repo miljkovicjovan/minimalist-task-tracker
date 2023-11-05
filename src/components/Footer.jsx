@@ -2,16 +2,18 @@ import GitHubButton from 'react-github-btn';
 
 function Footer() {
   return (
-    <footer className="py-3 d-flex justify-content-center align-items-center text-white">
-      Contribute or support us on{" "}
-      <a
-        href="https://github.com/miljkovicjovan/minimalist-task-tracker"
-        target="_blank"
-        rel="noreferrer"
-        className="text-primary text-decoration-none mx-2"
-      >
-        GitHub &#10084;&#65039;
-      </a>
+    <footer className="py-3 text-white text-center">
+      <p>
+        Support us or Contribute on{" "}
+        <a
+          href="https://github.com/miljkovicjovan/minimalist-task-tracker"
+          target="_blank"
+          rel="noreferrer"
+          className="text-primary text-decoration-none mx-2"
+        >
+          GitHub &#10084;&#65039;
+        </a>
+      </p>
       <GitHubButton
         href="https://github.com/miljkovicjovan/minimalist-task-tracker"
         data-icon="octicon-star"
