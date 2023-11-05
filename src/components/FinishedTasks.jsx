@@ -17,13 +17,17 @@ function FinishedTasks(
   const [selectedTask, setSelectedTask] = useState();
   const handleClose = () => setShow(false);
   const handleShow = (id) => {
-    setShow(true); 
-    setSelectedTask(id);
+    if (settings.askForArchivingConfirmation) {
+      setShow(true); 
+      setSelectedTask(id);
+    } else onArchive(id);
   }
 
   const [showArchiveAll, setShowArchiveAll] = useState(false);
   const handleCloseArchiveAll = () => setShowArchiveAll(false);
-  const handleShowArchiveAll = () => setShowArchiveAll(true);
+  const handleShowArchiveAll = () => {
+    settings.askForBulkArchivingConfirmation ? setShowArchiveAll(true) : archiveAll();
+  };
 
   const [showDeleteAll, setShowDeleteAll] = useState(false);
   const handleCloseDeleteAll = () => setShowDeleteAll(false);
@@ -37,7 +41,7 @@ function FinishedTasks(
 		if (settings.askForDeletingConfirmation) {
       setShowDelete(true); 
       setSelectedTask(id);
-    } else deleteTask(id);;
+    } else deleteTask(id);
 	};
 
   function deleteTask(id) {
@@ -116,6 +120,10 @@ function FinishedTasks(
           handleClose();
         }}
         color="primary"
+        onToggle={() => setSettings({ 
+          ...settings,
+          askForArchivingConfirmation: !settings.askForArchivingConfirmation 
+        })}
       />
       <ConfirmationModal
         title="Are you sure?"
@@ -127,6 +135,10 @@ function FinishedTasks(
           handleCloseArchiveAll();
         }}
         color="primary"
+        onToggle={() => setSettings({ 
+          ...settings,
+          askForBulkArchivingConfirmation: !settings.askForBulkArchivingConfirmation 
+        })}
       />
       <ConfirmationModal
         title="Are you sure?"
