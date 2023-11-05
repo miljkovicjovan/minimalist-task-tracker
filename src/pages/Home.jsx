@@ -88,6 +88,7 @@ function Home({ settings, setSettings }) {
           finishedTasks={finishedTasks}
           setFinishedTasks={setFinishedTasks}
           tasks={tasks}
+          setTasks={setTasks}
           onReset={resetFinishedTask}
           onArchive={archiveTask}
           settings={settings}

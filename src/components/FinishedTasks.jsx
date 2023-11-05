@@ -1,11 +1,12 @@
-import { faTrashCan, faBoxArchive } from "@fortawesome/free-solid-svg-icons";
+import { faTrashCan, faBoxArchive, faArrowUpFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { Stack, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import ConfirmationModal from "./ConfirmationModal";
+import { Tooltip } from "react-tooltip";
 
 function FinishedTasks(
-  { finishedTasks, setFinishedTasks, tasks, onReset, onArchive, settings, setSettings }
+  { finishedTasks, setFinishedTasks, tasks, setTasks, onReset, onArchive, settings, setSettings }
 ) {
   const [hover, setHover] = useState(false);
   const toggleHover = () => setHover(!hover);
@@ -54,6 +55,13 @@ function FinishedTasks(
     });
     setFinishedTasks(updatedTasks);
   }
+
+  const handleReactivate = (id, name) => {
+    const newTask = { id, name };
+    setTasks([...tasks, newTask]);
+    setFinishedTasks(finishedTasks.filter((task) => task.id !== id));
+  }
+
   return (
     <>
       <Stack className="text-center pt-4">
@@ -63,7 +71,10 @@ function FinishedTasks(
           {`Finished: ${finishedTasks.length} `}
           {`- Archived: ${finishedTasks.filter((task) => task.archived).length} `}
           {`- Total: ${finishedTasks.length+tasks.length} `}
-          {`- Percentage: ${Math.round((finishedTasks.length / (finishedTasks.length+tasks.length)) * 100)}% `}
+          {`- Percentage: ${Math.round(
+            (finishedTasks.length / 
+            (finishedTasks.length+tasks.length)) * 100)}% `
+          }
         </p>       
         {finishedTasks.map((finishedTask, index) => {
           return finishedTask.archived === false ?
@@ -82,6 +93,21 @@ function FinishedTasks(
               >
                 <FontAwesomeIcon icon={faTrashCan} />
               </Button>
+              <Button 
+                type="submit"
+                variant="success"
+                size="sm"
+                className="ms-2 reactivate-task"
+                onClick={() => handleReactivate(finishedTask.id, finishedTask.name)}
+              >
+                <FontAwesomeIcon icon={faArrowUpFromBracket} />
+              </Button>
+              <Tooltip
+                className="d-none d-lg-block"
+                anchorSelect=".reactivate-task"
+                content="Reactivate Task"
+                place="right"
+              />
             </span>
           : ""
         })}
