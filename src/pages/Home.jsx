@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import AddTask from "../components/AddTask";
 import Tasks from "../components/Tasks";
 import FinishedTasks from "../components/FinishedTasks";
-import '../styles.scss';
-
 
 function Home() {
   const [tasks, setTasks] = useState(

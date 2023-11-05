@@ -3,8 +3,6 @@ import { Stack, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan, faBoxOpen } from "@fortawesome/free-solid-svg-icons";
 import ConfirmationModal from "../components/ConfirmationModal";
-import '../styles.scss';
-
 
 function Archive() {
   const [hover, setHover] = useState(false);
