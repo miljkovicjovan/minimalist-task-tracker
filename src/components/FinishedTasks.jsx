@@ -27,7 +27,9 @@ function FinishedTasks(
 
   const [showDeleteAll, setShowDeleteAll] = useState(false);
   const handleCloseDeleteAll = () => setShowDeleteAll(false);
-  const handleShowDeleteAll = () => setShowDeleteAll(true);
+	const handleShowDeleteAll = () => {
+		settings.askForBulkDeletingConfirmation ? setShowDeleteAll(true) : onReset();
+	};
 
   const [showDelete, setShowDelete] = useState(false);
   const handleCloseDelete = () => setShowDelete(false);
@@ -137,6 +139,10 @@ function FinishedTasks(
           handleCloseDeleteAll();
         }}
         color="danger"
+        onToggle={() => setSettings({ 
+          ...settings,
+          askForBulkDeletingConfirmation: !settings.askForBulkDeletingConfirmation 
+        })}
       />
       <ConfirmationModal
         title="Are you sure?"
