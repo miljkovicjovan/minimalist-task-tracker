@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import AddTask from "../components/AddTask";
 import Tasks from "../components/Tasks";
 import FinishedTasks from "../components/FinishedTasks";
+import '../styles.scss';
+
 
 function Home() {
   const [tasks, setTasks] = useState(
@@ -68,7 +70,7 @@ function Home() {
   }, [tasks, finishedTasks]);
 
   return (
-    <div className="text-white text-center" style={{'minHeight':'calc(100vh - 250px)'}}>
+    <div className="text-white text-center footer-push">
       <AddTask onAdd={addTask} />
       {tasks.length ? (
         <Tasks

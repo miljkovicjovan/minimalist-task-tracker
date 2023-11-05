@@ -3,6 +3,8 @@ import { Stack, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan, faBoxOpen } from "@fortawesome/free-solid-svg-icons";
 import ConfirmationModal from "../components/ConfirmationModal";
+import '../styles.scss';
+
 
 function Archive() {
   const [hover, setHover] = useState(false);
@@ -72,7 +74,7 @@ function Archive() {
   }, [finishedTasks]);
   return (
     <>
-      <Stack className="text-white text-center pt-4" style={{'minHeight':'calc(100vh - 250px)'}}>
+      <Stack className="text-white text-center pt-4 footer-push">
         {finishedTasks.some(task => task.archived === true) ? (
           <>
             <hr className="mx-auto w-25"/>

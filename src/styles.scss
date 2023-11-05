@@ -9,3 +9,7 @@ input {
   flex-direction: column;
   align-items: center;
 }
+
+.footer-push{
+  min-height: calc(100vh - 250px);
+}
