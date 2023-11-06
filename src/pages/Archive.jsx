@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { Stack, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashCan, faBoxOpen } from "@fortawesome/free-solid-svg-icons";
+import { faTrashCan, faBoxOpen, faArrowUpFromBracket } from "@fortawesome/free-solid-svg-icons";
 import ConfirmationModal from "../components/ConfirmationModal";
+import { Tooltip } from "react-tooltip";
 
 function Archive({ settings, setSettings }) {
   const [hover, setHover] = useState(false);
@@ -11,10 +12,15 @@ function Archive({ settings, setSettings }) {
   const [hoverUnarchive, setHoverUnarchive] = useState(false);
   const toggleHoverUnarchive = () => setHoverUnarchive(!hoverUnarchive);
 
+  const [tasks, setTasks] = useState(
+    JSON.parse(
+      window.localStorage.getItem("my-minimalistic-tracker-tasks") || "[]"
+    )
+  );
+
   const [finishedTasks, setFinishedTasks] = useState(
     JSON.parse(
-      window.localStorage.getItem("my-minimalistic-tracker-tasks-finished") ||
-        "[]"
+      window.localStorage.getItem("my-minimalistic-tracker-tasks-finished") || "[]"
     )
   );
 
@@ -72,12 +78,23 @@ function Archive({ settings, setSettings }) {
     setFinishedTasks(finishedTasks.filter((task) => task.id !== id));
   }
 
+  const handleReactivate = (id, name) => {
+    const newTask = { id, name };
+    setTasks([...tasks, newTask]);
+    setFinishedTasks(finishedTasks.filter((task) => task.id !== id));
+  }
+
   useEffect(() => {
+    window.localStorage.setItem(
+      "my-minimalistic-tracker-tasks",
+      JSON.stringify(tasks)
+    );
     window.localStorage.setItem(
       "my-minimalistic-tracker-tasks-finished",
       JSON.stringify(finishedTasks)
     );
-  }, [finishedTasks]);
+  }, [tasks, finishedTasks]);
+
   return (
     <>
       <Stack className="text-white text-center pt-4 footer-push">
@@ -102,6 +119,21 @@ function Archive({ settings, setSettings }) {
                   >
                     <FontAwesomeIcon icon={faTrashCan} />
                   </Button>
+                  <Button 
+                    type="submit"
+                    variant="success"
+                    size="sm"
+                    className="ms-2 reactivate-task"
+                    onClick={() => handleReactivate(finishedTask.id, finishedTask.name)}
+                  >
+                    <FontAwesomeIcon icon={faArrowUpFromBracket} />
+                  </Button>
+                  <Tooltip
+                    className="d-none d-lg-block"
+                    anchorSelect=".reactivate-task"
+                    content="Reactivate Task"
+                    place="right"
+                  />
                 </span>
               : ""
             })}
