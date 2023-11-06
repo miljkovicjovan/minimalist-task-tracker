@@ -12,6 +12,9 @@ function Archive({ settings, setSettings }) {
   const [hoverUnarchive, setHoverUnarchive] = useState(false);
   const toggleHoverUnarchive = () => setHoverUnarchive(!hoverUnarchive);
 
+  const [hoverReactivate, setHoverReactivate] = useState(false);
+  const toggleHoverReactivate = () => setHoverReactivate(!hoverReactivate);
+
   const [tasks, setTasks] = useState(
     JSON.parse(
       window.localStorage.getItem("my-minimalistic-tracker-tasks") || "[]"
@@ -83,6 +86,18 @@ function Archive({ settings, setSettings }) {
     setTasks([...tasks, newTask]);
     setFinishedTasks(finishedTasks.filter((task) => task.id !== id));
   }
+
+  const reactivateAll = () => {
+    const updatedTasks = [...tasks];
+    const tasksToReactivate = finishedTasks.filter(task => task.archived);
+  
+    tasksToReactivate.forEach(task => {
+      updatedTasks.push({ id: task.id, name: task.name });
+    });
+  
+    setTasks(updatedTasks);
+    setFinishedTasks(finishedTasks.filter(task => !task.archived));
+  };
 
   useEffect(() => {
     window.localStorage.setItem(
@@ -159,6 +174,21 @@ function Archive({ settings, setSettings }) {
               >
                   <FontAwesomeIcon icon={faTrashCan} className='pe-1'/>
                   Delete Archived Tasks
+              </Button>
+            </span>
+            <span className="mt-2">
+              <Button 
+                type='submit'
+                className={
+                  `border-success
+                  ${hoverReactivate ? "bg-dark text-success" : "bg-success text-white"}`
+                }
+                onMouseEnter={toggleHoverReactivate}
+                onMouseLeave={toggleHoverReactivate}
+                onClick={() => reactivateAll()}
+              >
+                <FontAwesomeIcon icon={faArrowUpFromBracket} className='pe-1'/>
+                Reactivate All Tasks
               </Button>
             </span>
           </>
