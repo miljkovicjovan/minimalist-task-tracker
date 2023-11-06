@@ -136,9 +136,25 @@ function Archive({ settings, setSettings }) {
             <h4 className="text-decoration-underline">Archived Tasks &#128193;</h4>
             {finishedTasks.map((finishedTask, index) => {
               return finishedTask.archived === true ?
-                <span key={index} className="my-1 d-flex justify-content-center align-items-center">
-                  <span>#{index + 1} {finishedTask.name}</span>
-                  <Button className="ms-2" size="sm" variant="primary" onClick={() => handleShow(finishedTask.id)}>
+                <span
+                  key={index}
+                  className="my-1 d-flex justify-content-center align-items-center"
+                >
+                  <span>
+                    <span className="text-secondary">
+                      #{index + 1 + " "}
+                    </span>
+                    {finishedTask.name + " "}
+                    <i className="text-secondary">
+                      {finishedTask.createdAt.slice(11,16)}
+                    </i>
+                  </span>
+                  <Button 
+                    className="ms-2"
+                    size="sm"
+                    variant="primary"
+                    onClick={() => handleShow(finishedTask.id)}
+                  >
                     <FontAwesomeIcon icon={faBoxOpen} className="pe-1"/>
                     Unarchive Task
                   </Button>
@@ -172,7 +188,10 @@ function Archive({ settings, setSettings }) {
             <span className="mt-4">
               <Button 
                 type='submit'
-                className={`border-primary ${hoverUnarchive ? "bg-dark text-primary" : "bg-primary text-white"}`}
+                className={
+                  `border-primary
+                  ${hoverUnarchive ? "bg-dark text-primary" : "bg-primary text-white"}`
+                }
                 onMouseEnter={toggleHoverUnarchive}
                 onMouseLeave={toggleHoverUnarchive}
                 onClick={() => handleShowUnarchiveAll()}
@@ -184,7 +203,10 @@ function Archive({ settings, setSettings }) {
             <span className="mt-2">
               <Button 
                 type='submit'
-                className={`border-danger ${hover ? "bg-dark text-danger" : "bg-danger text-white"}`}
+                className={
+                  `border-danger 
+                  ${hover ? "bg-dark text-danger" : "bg-danger text-white"}`
+                }
                 onMouseEnter={toggleHover}
                 onMouseLeave={toggleHover}
                 onClick={() => handleShowDeleteAll()}
