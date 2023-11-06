@@ -58,6 +58,23 @@ function Archive({ settings, setSettings }) {
     } else deleteTask(id);;
 	};
 
+  const [showReactivateAll, setShowReactivateAll] = useState(false);
+  const handleCloseReactivateAll = () => setShowReactivateAll(false);
+	const handleShowReactivateAll = () => {
+		settings.askForBulkReactivatingConfirmation ? setShowReactivateAll(true) : reactivateAll();
+	};
+
+  const [showReactivate, setShowReactivate] = useState(false);
+  const [selectedId, setSelectedId] = useState();
+  const handleCloseReactivate = () => setShowReactivate(false);
+  const handleShowReactivate = (id, name) => {
+		if (settings.askForReactivatingConfirmation) {
+      setShowReactivate(true); 
+      setSelectedTask(name);
+      setSelectedId(id);
+    } else handleReactivate(id, name);
+	};
+
   function unarchive(id) {
     const updatedTasks = finishedTasks.map((task) => {
       return task.id === id ? { ...task, archived: false } : task;
@@ -139,7 +156,7 @@ function Archive({ settings, setSettings }) {
                     variant="success"
                     size="sm"
                     className="ms-2 reactivate-task"
-                    onClick={() => handleReactivate(finishedTask.id, finishedTask.name)}
+                    onClick={() => handleShowReactivate(finishedTask.id, finishedTask.name)}
                   >
                     <FontAwesomeIcon icon={faArrowUpFromBracket} />
                   </Button>
@@ -185,7 +202,7 @@ function Archive({ settings, setSettings }) {
                 }
                 onMouseEnter={toggleHoverReactivate}
                 onMouseLeave={toggleHoverReactivate}
-                onClick={() => reactivateAll()}
+                onClick={() => handleShowReactivateAll()}
               >
                 <FontAwesomeIcon icon={faArrowUpFromBracket} className='pe-1'/>
                 Reactivate All Tasks
@@ -194,6 +211,36 @@ function Archive({ settings, setSettings }) {
           </>
         ) : "There are currently no archived tasks."}
       </Stack>
+      <ConfirmationModal
+        title="Are you sure?"
+        body="Are you sure you want to reactivate all of these tasks?"
+        handleClose={handleCloseReactivateAll}
+        handleShow={showReactivateAll}
+        onConfirm={() => {
+          reactivateAll();
+          handleCloseReactivateAll();
+        }}
+        color="success"
+        onToggle={() => setSettings({ 
+          ...settings,
+          askForBulkReactivatingConfirmation: !settings.askForBulkReactivatingConfirmation
+        })}
+      />
+      <ConfirmationModal
+        title="Are you sure?"
+        body="Are you sure you want to reactivate this task?"
+        handleClose={handleCloseReactivate}
+        handleShow={showReactivate}
+        onConfirm={() => {
+          handleReactivate(selectedId, selectedTask);
+          handleCloseReactivate();
+        }}
+        color="success"
+        onToggle={() => setSettings({ 
+          ...settings,
+          askForReactivatingConfirmation: !settings.askForReactivatingConfirmation
+        })}
+      />
       <ConfirmationModal
         title="Are you sure?"
         body="Are you sure you want to unarchive this task?"
