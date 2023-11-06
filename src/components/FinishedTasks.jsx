@@ -16,10 +16,8 @@ function FinishedTasks(
 ) {
   const [hover, setHover] = useState(false);
   const toggleHover = () => setHover(!hover);
-
   const [hoverArchive, setHoverArchive] = useState(false);
   const toggleHoverArchive = () => setHoverArchive(!hoverArchive);
-
   const [hoverReactivate, setHoverReactivate] = useState(false);
   const toggleHoverReactivate = () => setHoverReactivate(!hoverReactivate);
 
@@ -52,6 +50,23 @@ function FinishedTasks(
       setShowDelete(true); 
       setSelectedTask(id);
     } else deleteTask(id);
+	};
+
+  const [showReactivateAll, setShowReactivateAll] = useState(false);
+  const handleCloseReactivateAll = () => setShowReactivateAll(false);
+	const handleShowReactivateAll = () => {
+		settings.askForBulkReactivatingConfirmation ? setShowReactivateAll(true) : reactivateAll();
+	};
+
+  const [showReactivate, setShowReactivate] = useState(false);
+  const [selectedId, setSelectedId] = useState();
+  const handleCloseReactivate = () => setShowReactivate(false);
+  const handleShowReactivate = (id, name) => {
+		if (settings.askForReactivatingConfirmation) {
+      setShowReactivate(true); 
+      setSelectedTask(name);
+      setSelectedId(id);
+    } else handleReactivate(id, name);
 	};
 
   function deleteTask(id) {
@@ -126,7 +141,7 @@ function FinishedTasks(
                 variant="success"
                 size="sm"
                 className="ms-2 reactivate-task"
-                onClick={() => handleReactivate(finishedTask.id, finishedTask.name)}
+                onClick={() => handleShowReactivate(finishedTask.id, finishedTask.name)}
               >
                 <FontAwesomeIcon icon={faArrowUpFromBracket} />
               </Button>
@@ -178,13 +193,43 @@ function FinishedTasks(
             }
             onMouseEnter={toggleHoverReactivate}
             onMouseLeave={toggleHoverReactivate}
-            onClick={() => reactivateAll()}
+            onClick={() => handleShowReactivateAll()}
           >
             <FontAwesomeIcon icon={faArrowUpFromBracket} className='pe-1'/>
             Reactivate All Tasks
           </Button>
         </span>
       </Stack>
+      <ConfirmationModal
+        title="Are you sure?"
+        body="Are you sure you want to reactivate all of these tasks?"
+        handleClose={handleCloseReactivateAll}
+        handleShow={showReactivateAll}
+        onConfirm={() => {
+          reactivateAll();
+          handleCloseReactivateAll();
+        }}
+        color="success"
+        onToggle={() => setSettings({ 
+          ...settings,
+          askForBulkReactivatingConfirmation: !settings.askForBulkReactivatingConfirmation
+        })}
+      />
+      <ConfirmationModal
+        title="Are you sure?"
+        body="Are you sure you want to reactivate this task?"
+        handleClose={handleCloseReactivate}
+        handleShow={showReactivate}
+        onConfirm={() => {
+          handleReactivate(selectedId, selectedTask);
+          handleCloseReactivate();
+        }}
+        color="success"
+        onToggle={() => setSettings({ 
+          ...settings,
+          askForReactivatingConfirmation: !settings.askForReactivatingConfirmation
+        })}
+      />
       <ConfirmationModal
         title="Are you sure?"
         body="Are you sure you want to archive this task?"
