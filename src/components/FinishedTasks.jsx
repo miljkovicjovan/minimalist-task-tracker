@@ -20,6 +20,9 @@ function FinishedTasks(
   const [hoverArchive, setHoverArchive] = useState(false);
   const toggleHoverArchive = () => setHoverArchive(!hoverArchive);
 
+  const [hoverReactivate, setHoverReactivate] = useState(false);
+  const toggleHoverReactivate = () => setHoverReactivate(!hoverReactivate);
+
   const [show, setShow] = useState(false);
   const [selectedTask, setSelectedTask] = useState();
   const handleClose = () => setShow(false);
@@ -67,6 +70,18 @@ function FinishedTasks(
     setTasks([...tasks, newTask]);
     setFinishedTasks(finishedTasks.filter((task) => task.id !== id));
   }
+
+  const reactivateAll = () => {
+    const updatedTasks = [...tasks];
+    const tasksToReactivate = finishedTasks.filter(task => !task.archived);
+  
+    tasksToReactivate.forEach(task => {
+      updatedTasks.push({ id: task.id, name: task.name });
+    });
+  
+    setTasks(updatedTasks);
+    setFinishedTasks(finishedTasks.filter(task => task.archived));
+  };
 
   return (
     <>
@@ -153,7 +168,22 @@ function FinishedTasks(
               <FontAwesomeIcon icon={faTrashCan} className='pe-1'/>
               Delete All Tasks
           </Button>
-        </span> 
+        </span>
+        <span className="mt-2">
+          <Button 
+            type='submit'
+            className={
+              `border-success
+              ${hoverReactivate ? "bg-dark text-success" : "bg-success text-white"}`
+            }
+            onMouseEnter={toggleHoverReactivate}
+            onMouseLeave={toggleHoverReactivate}
+            onClick={() => reactivateAll()}
+          >
+            <FontAwesomeIcon icon={faArrowUpFromBracket} className='pe-1'/>
+            Reactivate All Tasks
+          </Button>
+        </span>
       </Stack>
       <ConfirmationModal
         title="Are you sure?"
