@@ -12,6 +12,8 @@ function SettingsModal({ settings, setSettings }) {
 		const isChecked = e.target.checked;
 		setSettings({
 			confirmations: isChecked,
+			askForBulkReactivatingConfirmation: isChecked,
+      askForReactivatingConfirmation: isChecked,
 			askForBulkDeletingConfirmation: isChecked,
 			askForDeletingConfirmation: isChecked,
 			askForBulkArchivingConfirmation: isChecked,
@@ -22,6 +24,10 @@ function SettingsModal({ settings, setSettings }) {
 		});
 	};
 
+	const handleSwitchBulkReactivateChange = (e) => 
+		setSettings({ ...settings, askForBulkReactivatingConfirmation: e.target.checked });
+	const handleSwitchReactivateChange = (e) => 
+		setSettings({ ...settings, askForReactivatingConfirmation: e.target.checked });
 	const handleSwitchBulkDeleteChange = (e) => 
 		setSettings({ ...settings, askForBulkDeletingConfirmation: e.target.checked });
 	const handleSwitchDeleteChange = (e) => 
@@ -68,6 +74,18 @@ function SettingsModal({ settings, setSettings }) {
 							/>
 						</span>
 						<hr className="my-1"/>
+						<Form.Check
+							type="switch"
+							label="Show confirmation when reactivating a task"
+							checked={settings.askForReactivatingConfirmation}
+							onChange={handleSwitchReactivateChange}
+						/>
+						<Form.Check
+							type="switch"
+							label="Show confirmation when bulk reactivating tasks"
+							checked={settings.askForBulkReactivatingConfirmation}
+							onChange={handleSwitchBulkReactivateChange}
+						/>
 						<Form.Check
 							type="switch"
 							label="Show confirmation when editing a task"

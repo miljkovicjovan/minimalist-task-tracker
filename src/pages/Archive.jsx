@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { Stack, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashCan, faBoxOpen } from "@fortawesome/free-solid-svg-icons";
+import { faTrashCan, faBoxOpen, faArrowUpFromBracket } from "@fortawesome/free-solid-svg-icons";
 import ConfirmationModal from "../components/ConfirmationModal";
+import { Tooltip } from "react-tooltip";
 
 function Archive({ settings, setSettings }) {
   const [hover, setHover] = useState(false);
@@ -11,10 +12,18 @@ function Archive({ settings, setSettings }) {
   const [hoverUnarchive, setHoverUnarchive] = useState(false);
   const toggleHoverUnarchive = () => setHoverUnarchive(!hoverUnarchive);
 
+  const [hoverReactivate, setHoverReactivate] = useState(false);
+  const toggleHoverReactivate = () => setHoverReactivate(!hoverReactivate);
+
+  const [tasks, setTasks] = useState(
+    JSON.parse(
+      window.localStorage.getItem("my-minimalistic-tracker-tasks") || "[]"
+    )
+  );
+
   const [finishedTasks, setFinishedTasks] = useState(
     JSON.parse(
-      window.localStorage.getItem("my-minimalistic-tracker-tasks-finished") ||
-        "[]"
+      window.localStorage.getItem("my-minimalistic-tracker-tasks-finished") || "[]"
     )
   );
 
@@ -49,6 +58,23 @@ function Archive({ settings, setSettings }) {
     } else deleteTask(id);;
 	};
 
+  const [showReactivateAll, setShowReactivateAll] = useState(false);
+  const handleCloseReactivateAll = () => setShowReactivateAll(false);
+	const handleShowReactivateAll = () => {
+		settings.askForBulkReactivatingConfirmation ? setShowReactivateAll(true) : reactivateAll();
+	};
+
+  const [showReactivate, setShowReactivate] = useState(false);
+  const [selectedId, setSelectedId] = useState();
+  const handleCloseReactivate = () => setShowReactivate(false);
+  const handleShowReactivate = (id, name) => {
+		if (settings.askForReactivatingConfirmation) {
+      setShowReactivate(true); 
+      setSelectedTask(name);
+      setSelectedId(id);
+    } else handleReactivate(id, name);
+	};
+
   function unarchive(id) {
     const updatedTasks = finishedTasks.map((task) => {
       return task.id === id ? { ...task, archived: false } : task;
@@ -72,12 +98,35 @@ function Archive({ settings, setSettings }) {
     setFinishedTasks(finishedTasks.filter((task) => task.id !== id));
   }
 
+  const handleReactivate = (id, name) => {
+    const newTask = { id, name };
+    setTasks([...tasks, newTask]);
+    setFinishedTasks(finishedTasks.filter((task) => task.id !== id));
+  }
+
+  const reactivateAll = () => {
+    const updatedTasks = [...tasks];
+    const tasksToReactivate = finishedTasks.filter(task => task.archived);
+  
+    tasksToReactivate.forEach(task => {
+      updatedTasks.push({ id: task.id, name: task.name });
+    });
+  
+    setTasks(updatedTasks);
+    setFinishedTasks(finishedTasks.filter(task => !task.archived));
+  };
+
   useEffect(() => {
+    window.localStorage.setItem(
+      "my-minimalistic-tracker-tasks",
+      JSON.stringify(tasks)
+    );
     window.localStorage.setItem(
       "my-minimalistic-tracker-tasks-finished",
       JSON.stringify(finishedTasks)
     );
-  }, [finishedTasks]);
+  }, [tasks, finishedTasks]);
+
   return (
     <>
       <Stack className="text-white text-center pt-4 footer-push">
@@ -102,6 +151,21 @@ function Archive({ settings, setSettings }) {
                   >
                     <FontAwesomeIcon icon={faTrashCan} />
                   </Button>
+                  <Button 
+                    type="submit"
+                    variant="success"
+                    size="sm"
+                    className="ms-2 reactivate-task"
+                    onClick={() => handleShowReactivate(finishedTask.id, finishedTask.name)}
+                  >
+                    <FontAwesomeIcon icon={faArrowUpFromBracket} />
+                  </Button>
+                  <Tooltip
+                    className="d-none d-lg-block"
+                    anchorSelect=".reactivate-task"
+                    content="Reactivate Task"
+                    place="right"
+                  />
                 </span>
               : ""
             })}
@@ -129,9 +193,54 @@ function Archive({ settings, setSettings }) {
                   Delete Archived Tasks
               </Button>
             </span>
+            <span className="mt-2">
+              <Button 
+                type='submit'
+                className={
+                  `border-success
+                  ${hoverReactivate ? "bg-dark text-success" : "bg-success text-white"}`
+                }
+                onMouseEnter={toggleHoverReactivate}
+                onMouseLeave={toggleHoverReactivate}
+                onClick={() => handleShowReactivateAll()}
+              >
+                <FontAwesomeIcon icon={faArrowUpFromBracket} className='pe-1'/>
+                Reactivate All Tasks
+              </Button>
+            </span>
           </>
         ) : "There are currently no archived tasks."}
       </Stack>
+      <ConfirmationModal
+        title="Are you sure?"
+        body="Are you sure you want to reactivate all of these tasks?"
+        handleClose={handleCloseReactivateAll}
+        handleShow={showReactivateAll}
+        onConfirm={() => {
+          reactivateAll();
+          handleCloseReactivateAll();
+        }}
+        color="success"
+        onToggle={() => setSettings({ 
+          ...settings,
+          askForBulkReactivatingConfirmation: !settings.askForBulkReactivatingConfirmation
+        })}
+      />
+      <ConfirmationModal
+        title="Are you sure?"
+        body="Are you sure you want to reactivate this task?"
+        handleClose={handleCloseReactivate}
+        handleShow={showReactivate}
+        onConfirm={() => {
+          handleReactivate(selectedId, selectedTask);
+          handleCloseReactivate();
+        }}
+        color="success"
+        onToggle={() => setSettings({ 
+          ...settings,
+          askForReactivatingConfirmation: !settings.askForReactivatingConfirmation
+        })}
+      />
       <ConfirmationModal
         title="Are you sure?"
         body="Are you sure you want to unarchive this task?"
