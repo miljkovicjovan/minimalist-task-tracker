@@ -20,9 +20,10 @@ function Home({ settings, setSettings }) {
   }
 
   function completeTask(name, oldId) {
+    const createdAt = new Date();
     const id = Math.floor(Math.random() * 1000) + 1;
     const archived = false;
-    const data = { id: id, name: name, archived: archived };
+    const data = { id: id, name: name, archived: archived, createdAt: createdAt };
     setFinishedTasks([...finishedTasks, data]);
     setTasks(tasks.filter((task) => task.id !== oldId));
   }
