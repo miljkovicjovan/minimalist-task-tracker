@@ -59,7 +59,7 @@ function SettingsModal({ settings, setSettings }) {
 			>
 				<FontAwesomeIcon icon={faGear}/>
 			</Button>
-			<Modal show={show} onHide={handleClose}>
+			<Modal fullscreen="sm-down" show={show} onHide={handleClose}>
 				<Modal.Header closeButton>
 						<Modal.Title>Settings</Modal.Title>
 				</Modal.Header>

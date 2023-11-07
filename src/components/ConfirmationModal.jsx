@@ -2,7 +2,7 @@ import { Modal, Button } from "react-bootstrap";
 
 function ConfirmationModal({ title, body, handleClose, handleShow, onConfirm, color, onToggle }) {
   return (
-    <Modal show={handleShow} onHide={handleClose}>
+    <Modal fullscreen="sm-down" show={handleShow} onHide={handleClose}>
 			<Modal.Header closeButton>
 					<Modal.Title>{title}</Modal.Title>
 			</Modal.Header>
