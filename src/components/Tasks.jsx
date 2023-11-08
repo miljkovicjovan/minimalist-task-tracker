@@ -1,7 +1,7 @@
 import { Stack } from "react-bootstrap";
 import Task from "./Task";
 import DeleteTasks from "./DeleteTasks";
-import CompleteAllTasks from "./CompleteAllTasks";
+import CompleteTasks from "./CompleteTasks";
 
 function Tasks({ tasks, onDelete, onEdit, onComplete, onDeleteAll, onCompleteAll, settings, setSettings }) {
 	return (
@@ -29,7 +29,7 @@ function Tasks({ tasks, onDelete, onEdit, onComplete, onDeleteAll, onCompleteAll
 			{tasks.length ? 
 			<div className="flex row w-20 mx-auto">
 				<DeleteTasks onDeleteAll={onDeleteAll} settings={settings} setSettings={setSettings}/>
-				<CompleteAllTasks onCompleteAll={onCompleteAll} settings={settings} setSettings={setSettings}/>
+				<CompleteTasks onCompleteAll={onCompleteAll} settings={settings} setSettings={setSettings}/>
 				</div>
 			: ""}
 		</Stack>

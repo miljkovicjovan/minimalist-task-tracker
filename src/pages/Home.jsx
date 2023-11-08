@@ -29,7 +29,16 @@ function Home({ settings, setSettings }) {
   }
 
   function completeAllTasks() {
-    tasks.forEach((task) => completeTask(task.name, task.id))
+    let completedTasks = [];
+    tasks.forEach((task) => {
+      const createdAt = new Date();
+      const id = Math.floor(Math.random() * 1000) + 1;
+      const archived = false;
+      const data = { id: id, name: task.name, archived: archived, createdAt: createdAt };
+      completedTasks.push(data);
+    });
+    setFinishedTasks([...finishedTasks, ...completedTasks]);
+    deleteAll();
   }
 
   function addTask(name) {
