@@ -43,6 +43,20 @@ function SettingsModal({ settings, setSettings }) {
 	const handleSwitchEditingChange = (e) => 
 		setSettings({ ...settings, askForEditingConfirmation: e.target.checked });
 
+	function isSwitched() {
+		if (settings.askForBulkReactivatingConfirmation &&
+      settings.askForReactivatingConfirmation &&
+			settings.askForBulkDeletingConfirmation &&
+			settings.askForDeletingConfirmation &&
+			settings.askForBulkArchivingConfirmation &&
+			settings.askForArchivingConfirmation &&
+			settings.askForBulkUnarchivingConfirmation &&
+			settings.askForUnarchivingConfirmation &&
+			settings.askForEditingConfirmation) {
+				return true;
+		} else return false;
+	}
+
 	useEffect(() => {
     window.localStorage.setItem(
       "my-minimalistic-tracker-settings",
@@ -69,7 +83,7 @@ function SettingsModal({ settings, setSettings }) {
 							<h5 className="m-0 pe-1">Show Confirmations</h5>
 							<Form.Check
 								type="switch"
-								checked={settings.confirmations}
+								checked={settings.confirmations || isSwitched()}
 								onChange={handleSwitchConfirmations}
 							/>
 						</span>
