@@ -14,6 +14,7 @@ function App() {
       askForBulkReactivatingConfirmation: true,
       askForReactivatingConfirmation: true,
 			askForBulkDeletingConfirmation: true,
+			askForBulkCompletingConfirmation: true,
 			askForDeletingConfirmation: true,
 			askForBulkArchivingConfirmation: true,
 			askForArchivingConfirmation: true,

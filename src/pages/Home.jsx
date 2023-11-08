@@ -28,6 +28,19 @@ function Home({ settings, setSettings }) {
     setTasks(tasks.filter((task) => task.id !== oldId));
   }
 
+  function completeAllTasks() {
+    let completedTasks = [];
+    tasks.forEach((task) => {
+      const createdAt = new Date();
+      const id = Math.floor(Math.random() * 1000) + 1;
+      const archived = false;
+      const data = { id: id, name: task.name, archived: archived, createdAt: createdAt };
+      completedTasks.push(data);
+    });
+    setFinishedTasks([...finishedTasks, ...completedTasks]);
+    deleteAll();
+  }
+
   function addTask(name) {
     const id = Math.floor(Math.random() * 1000) + 1;
     const newTask = { id, ...name };
@@ -74,6 +87,7 @@ function Home({ settings, setSettings }) {
       {tasks.length ? (
         <Tasks
           onComplete={completeTask}
+          onCompleteAll={completeAllTasks}
           onDelete={deleteTask}
           onEdit={editTask}
           tasks={tasks}
