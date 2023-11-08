@@ -3,7 +3,6 @@ import { Stack, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan, faBoxOpen, faArrowUpFromBracket } from "@fortawesome/free-solid-svg-icons";
 import ConfirmationModal from "../components/ConfirmationModal";
-import { Tooltip } from "react-tooltip";
 
 function Archive({ settings, setSettings }) {
   const [hover, setHover] = useState(false);
@@ -150,13 +149,21 @@ function Archive({ settings, setSettings }) {
                     </i>
                   </span>
                   <Button 
+                    type="submit"
+                    variant="success"
+                    size="sm"
+                    className="ms-2"
+                    onClick={() => handleShowReactivate(finishedTask.id, finishedTask.name)}
+                  >
+                    <FontAwesomeIcon icon={faArrowUpFromBracket} />
+                  </Button>
+                  <Button 
                     className="ms-2"
                     size="sm"
                     variant="primary"
                     onClick={() => handleShow(finishedTask.id)}
                   >
-                    <FontAwesomeIcon icon={faBoxOpen} className="pe-1"/>
-                    Unarchive Task
+                    <FontAwesomeIcon icon={faBoxOpen} />
                   </Button>
                   <Button 
                     type="submit"
@@ -167,25 +174,25 @@ function Archive({ settings, setSettings }) {
                   >
                     <FontAwesomeIcon icon={faTrashCan} />
                   </Button>
-                  <Button 
-                    type="submit"
-                    variant="success"
-                    size="sm"
-                    className="ms-2 reactivate-task"
-                    onClick={() => handleShowReactivate(finishedTask.id, finishedTask.name)}
-                  >
-                    <FontAwesomeIcon icon={faArrowUpFromBracket} />
-                  </Button>
-                  <Tooltip
-                    className="d-none d-lg-block"
-                    anchorSelect=".reactivate-task"
-                    content="Reactivate Task"
-                    place="right"
-                  />
                 </span>
               : ""
             })}
             <span className="mt-4">
+              <Button 
+                type='submit'
+                className={
+                  `border-success
+                  ${hoverReactivate ? "bg-dark text-success" : "bg-success text-white"}`
+                }
+                onMouseEnter={toggleHoverReactivate}
+                onMouseLeave={toggleHoverReactivate}
+                onClick={() => handleShowReactivateAll()}
+              >
+                <FontAwesomeIcon icon={faArrowUpFromBracket} className='pe-1'/>
+                Reactivate All Tasks
+              </Button>
+            </span>
+            <span className="mt-2">
               <Button 
                 type='submit'
                 className={
@@ -213,21 +220,6 @@ function Archive({ settings, setSettings }) {
               >
                   <FontAwesomeIcon icon={faTrashCan} className='pe-1'/>
                   Delete Archived Tasks
-              </Button>
-            </span>
-            <span className="mt-2">
-              <Button 
-                type='submit'
-                className={
-                  `border-success
-                  ${hoverReactivate ? "bg-dark text-success" : "bg-success text-white"}`
-                }
-                onMouseEnter={toggleHoverReactivate}
-                onMouseLeave={toggleHoverReactivate}
-                onClick={() => handleShowReactivateAll()}
-              >
-                <FontAwesomeIcon icon={faArrowUpFromBracket} className='pe-1'/>
-                Reactivate All Tasks
               </Button>
             </span>
           </>

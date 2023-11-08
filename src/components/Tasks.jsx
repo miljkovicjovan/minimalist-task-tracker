@@ -27,9 +27,9 @@ function Tasks({ tasks, onDelete, onEdit, onComplete, onDeleteAll, onCompleteAll
 				/>
 			))}
 			{tasks.length ? 
-			<div className="flex row w-20 mx-auto">
-				<DeleteTasks onDeleteAll={onDeleteAll} settings={settings} setSettings={setSettings}/>
-				<CompleteTasks onCompleteAll={onCompleteAll} settings={settings} setSettings={setSettings}/>
+				<div className="flex row w-20 mx-auto">
+					<CompleteTasks onCompleteAll={onCompleteAll} settings={settings} setSettings={setSettings}/>
+					<DeleteTasks onDeleteAll={onDeleteAll} settings={settings} setSettings={setSettings}/>
 				</div>
 			: ""}
 		</Stack>

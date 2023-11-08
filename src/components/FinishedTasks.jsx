@@ -4,7 +4,6 @@ import { Stack, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import ConfirmationModal from "./ConfirmationModal";
-import { Tooltip } from "react-tooltip";
 
 function FinishedTasks(
   {
@@ -120,12 +119,20 @@ function FinishedTasks(
             >
               <span>#{index + 1} {finishedTask.name}</span>
               <Button 
+                type="submit"
+                variant="success"
+                size="sm"
+                className="ms-2 reactivate-task"
+                onClick={() => handleShowReactivate(finishedTask.id, finishedTask.name)}
+              >
+                <FontAwesomeIcon icon={faArrowUpFromBracket} />
+              </Button>
+              <Button 
                 className="ms-2"
                 size="sm"
                 onClick={() => handleShow(finishedTask.id)}
               >
-                <FontAwesomeIcon icon={faBoxArchive} className='pe-1' />
-                Archive Task
+                <FontAwesomeIcon icon={faBoxArchive} />
               </Button>
               <Button 
                 type="submit"
@@ -136,25 +143,25 @@ function FinishedTasks(
               >
                 <FontAwesomeIcon icon={faTrashCan} />
               </Button>
-              <Button 
-                type="submit"
-                variant="success"
-                size="sm"
-                className="ms-2 reactivate-task"
-                onClick={() => handleShowReactivate(finishedTask.id, finishedTask.name)}
-              >
-                <FontAwesomeIcon icon={faArrowUpFromBracket} />
-              </Button>
-              <Tooltip
-                className="d-none d-lg-block"
-                anchorSelect=".reactivate-task"
-                content="Reactivate Task"
-                place="right"
-              />
             </span>
           : ""
         })}
         <span className="mt-4">
+          <Button 
+            type='submit'
+            className={
+              `border-success
+              ${hoverReactivate ? "bg-dark text-success" : "bg-success text-white"}`
+            }
+            onMouseEnter={toggleHoverReactivate}
+            onMouseLeave={toggleHoverReactivate}
+            onClick={() => handleShowReactivateAll()}
+          >
+            <FontAwesomeIcon icon={faArrowUpFromBracket} className='pe-1'/>
+            Reactivate All Tasks
+          </Button>
+        </span>
+        <span className="mt-2">
           <Button 
             type='submit'
             className={
@@ -182,21 +189,6 @@ function FinishedTasks(
           >
               <FontAwesomeIcon icon={faTrashCan} className='pe-1'/>
               Delete All Tasks
-          </Button>
-        </span>
-        <span className="mt-2">
-          <Button 
-            type='submit'
-            className={
-              `border-success
-              ${hoverReactivate ? "bg-dark text-success" : "bg-success text-white"}`
-            }
-            onMouseEnter={toggleHoverReactivate}
-            onMouseLeave={toggleHoverReactivate}
-            onClick={() => handleShowReactivateAll()}
-          >
-            <FontAwesomeIcon icon={faArrowUpFromBracket} className='pe-1'/>
-            Reactivate All Tasks
           </Button>
         </span>
       </Stack>
