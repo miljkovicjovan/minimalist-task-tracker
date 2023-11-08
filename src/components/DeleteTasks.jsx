@@ -16,7 +16,7 @@ function DeleteTasks({ onDeleteAll, settings, setSettings }) {
     return (
 			<>
 				<Button 
-					className={`mx-auto mt-3 border-danger 
+					className={`mx-auto mt-2 border-danger 
 					${hover ? "bg-dark text-danger" : "bg-danger text-white"}`}
 					onMouseEnter={toggleHover}
 					onMouseLeave={toggleHover}
