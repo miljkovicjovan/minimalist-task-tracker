@@ -2,7 +2,7 @@ import GitHubButton from 'react-github-btn';
 
 function Footer() {
   return (
-    <footer className="py-3 text-white text-center">
+    <footer className="safari_only py-3 text-white text-center">
       <p>
         Support us or Contribute on{" "}
         <a

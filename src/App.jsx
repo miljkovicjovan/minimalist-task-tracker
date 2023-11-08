@@ -25,13 +25,15 @@ function App() {
 
   return (
     <Router>
-      <SettingsModal settings={settings} setSettings={setSettings}/>
-      <Header/>
-      <Routes>
-        <Route path="/" exact element={<Home settings={settings} setSettings={setSettings}/>} />
-        <Route path="/archive" element={<Archive settings={settings} setSettings={setSettings}/>} />
-      </Routes>
-      <Footer />
+      <span className='vh-100'>
+        <SettingsModal settings={settings} setSettings={setSettings}/>
+        <Header/>
+        <Routes>
+          <Route path="/" exact element={<Home settings={settings} setSettings={setSettings}/>} />
+          <Route path="/archive" element={<Archive settings={settings} setSettings={setSettings}/>} />
+        </Routes>
+        <Footer/>
+      </span>
     </Router>
   );
 }
