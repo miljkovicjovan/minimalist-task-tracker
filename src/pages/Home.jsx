@@ -28,6 +28,10 @@ function Home({ settings, setSettings }) {
     setTasks(tasks.filter((task) => task.id !== oldId));
   }
 
+  function completeAllTasks() {
+    tasks.forEach((task) => completeTask(task.name, task.id))
+  }
+
   function addTask(name) {
     const id = Math.floor(Math.random() * 1000) + 1;
     const newTask = { id, ...name };
@@ -74,6 +78,7 @@ function Home({ settings, setSettings }) {
       {tasks.length ? (
         <Tasks
           onComplete={completeTask}
+          onCompleteAll={completeAllTasks}
           onDelete={deleteTask}
           onEdit={editTask}
           tasks={tasks}
