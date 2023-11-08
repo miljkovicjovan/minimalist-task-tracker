@@ -10,12 +10,12 @@ input {
   align-items: center;
 }
 
-.footer-push{
+.footer-push {
   min-height: calc(100vh - 250px);
 }
 
 @media screen and (max-width: 767px) {
-  _::-webkit-full-page-media, _:future, :root .safari_only {
-    padding: 0 !important;
+  _::-webkit-full-page-media, _:future, :root .footer-push {
+    min-height: calc(100vh - 350px);
   }
 }
