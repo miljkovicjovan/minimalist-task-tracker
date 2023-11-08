@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 
 function Header() {
   return (
-    <Nav className="pt-4 d-flex justify-content-center align-items-center">
+    <Nav className="pt-4 d-flex flex-column flex-md-row justify-content-center align-items-center">
       {/* This item is hidden in order to make the Logo be centered horizontally */}
-      <Nav.Item style={{ visibility: 'hidden' }}>
+      <Nav.Item className="d-md-block d-none" style={{ visibility: 'hidden' }}>
         <Link to="/archive">
           Archived Tasks
         </Link>
@@ -16,7 +16,7 @@ function Header() {
           <img draggable="false" loading="eager" width="245" src={LOGO} alt="logo" />
         </Link>
       </Nav.Item>
-      <Nav.Item className="nav-link m-0 p-0">
+      <Nav.Item className="nav-link m-0 px-0 pt-2 pb-0">
         <Link to="/archive">
           Archived Tasks
         </Link>
