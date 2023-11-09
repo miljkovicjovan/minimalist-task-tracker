@@ -97,6 +97,30 @@ function FinishedTasks(
     setFinishedTasks(finishedTasks.filter(task => task.archived));
   };
 
+  const getDayString = (dateString) => {
+    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const date = new Date(dateString);
+    const day = date.getDate();
+    const month = months[date.getMonth()];
+    const year = date.getFullYear();
+    const daySuffix = getDaySuffix(day);
+  
+    return `${days[date.getDay()]}, ${day}${daySuffix} of ${month} ${year}`;
+  };
+  
+  const getDaySuffix = (day) => {
+    if (day > 3 && day < 21) return 'th';
+    switch (day % 10) {
+      case 1: return 'st';
+      case 2: return 'nd';
+      case 3: return 'rd';
+      default: return 'th';
+    }
+  };
+
+  let displayedDays = [];
+
   return (
     <>
       <Stack className="text-center pt-4">
@@ -112,38 +136,45 @@ function FinishedTasks(
           }
         </p>       
         {finishedTasks.map((finishedTask, index) => {
-          return finishedTask.archived === false ?
-            <span 
-              key={index}
-              className="my-1 d-flex justify-content-center align-items-center"
-            >
-              <span>#{index + 1} {finishedTask.name}</span>
-              <Button 
-                type="submit"
-                variant="success"
-                size="sm"
-                className="ms-2 reactivate-task"
-                onClick={() => handleShowReactivate(finishedTask.id, finishedTask.name)}
+          const dayString = getDayString(finishedTask.createdAt);
+          return finishedTask.archived === false ? (
+            <>
+              {!displayedDays.includes(dayString) ? 
+                displayedDays.push(dayString) &&
+                <h6 className="pt-2 mb-1 text-decoration-underline">{dayString}</h6>
+              : ""}
+              <span 
+                key={index}
+                className="my-1 d-flex justify-content-center align-items-center"
               >
-                <FontAwesomeIcon icon={faArrowUpFromBracket} />
-              </Button>
-              <Button 
-                className="ms-2"
-                size="sm"
-                onClick={() => handleShow(finishedTask.id)}
-              >
-                <FontAwesomeIcon icon={faBoxArchive} />
-              </Button>
-              <Button 
-                type="submit"
-                variant="danger"
-                size="sm"
-                className="ms-2"
-                onClick={() => handleShowDelete(finishedTask.id)}
-              >
-                <FontAwesomeIcon icon={faTrashCan} />
-              </Button>
-            </span>
+                <span>#{index + 1} {finishedTask.name}</span>
+                <Button 
+                  type="submit"
+                  variant="success"
+                  size="sm"
+                  className="ms-2 reactivate-task"
+                  onClick={() => handleShowReactivate(finishedTask.id, finishedTask.name)}
+                >
+                  <FontAwesomeIcon icon={faArrowUpFromBracket} />
+                </Button>
+                <Button 
+                  className="ms-2"
+                  size="sm"
+                  onClick={() => handleShow(finishedTask.id)}
+                >
+                  <FontAwesomeIcon icon={faBoxArchive} />
+                </Button>
+                <Button 
+                  type="submit"
+                  variant="danger"
+                  size="sm"
+                  className="ms-2"
+                  onClick={() => handleShowDelete(finishedTask.id)}
+                >
+                  <FontAwesomeIcon icon={faTrashCan} />
+                </Button>
+              </span>
+            </>)
           : ""
         })}
         <span className="mt-4">
