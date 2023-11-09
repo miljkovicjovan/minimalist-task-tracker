@@ -115,6 +115,30 @@ function Archive({ settings, setSettings }) {
     setFinishedTasks(finishedTasks.filter(task => !task.archived));
   };
 
+  const getDayString = (dateString) => {
+    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const date = new Date(dateString);
+    const day = date.getDate();
+    const month = months[date.getMonth()];
+    const year = date.getFullYear();
+    const daySuffix = getDaySuffix(day);
+  
+    return `${days[date.getDay()]}, ${day}${daySuffix} of ${month} ${year}`;
+  };
+  
+  const getDaySuffix = (day) => {
+    if (day > 3 && day < 21) return 'th';
+    switch (day % 10) {
+      case 1: return 'st';
+      case 2: return 'nd';
+      case 3: return 'rd';
+      default: return 'th';
+    }
+  };
+
+  let displayedDays = [];
+
   useEffect(() => {
     window.localStorage.setItem(
       "my-minimalistic-tracker-tasks",
@@ -132,49 +156,56 @@ function Archive({ settings, setSettings }) {
         {finishedTasks.some(task => task.archived === true) ? (
           <>
             <hr className="mx-auto w-25"/>
-            <h4 className="text-decoration-underline">Archived Tasks &#128193;</h4>
+            <h4 className="text-decoration-underline mb-1">Archived Tasks &#128193;</h4>
             {finishedTasks.map((finishedTask, index) => {
-              return finishedTask.archived === true ?
-                <span
-                  key={index}
-                  className="my-1 d-flex justify-content-center align-items-center"
-                >
-                  <span>
-                    <span className="text-secondary">
-                      #{index + 1 + " "}
+              const dayString = getDayString(finishedTask.createdAt);
+              return finishedTask.archived === true ? (
+                <>
+                  {!displayedDays.includes(dayString) ? 
+                    displayedDays.push(dayString) &&
+                    <h6 className="pt-2 mb-1 text-decoration-underline">{dayString}</h6>
+                  : ""}
+                  <span
+                    key={index}
+                    className="my-1 d-flex justify-content-center align-items-center"
+                  >
+                    <span>
+                      <span className="text-secondary">
+                        #{index + 1 + " "}
+                      </span>
+                      {finishedTask.name + " "}
+                      <i className="text-secondary">
+                        {finishedTask.createdAt.slice(11,16)}
+                      </i>
                     </span>
-                    {finishedTask.name + " "}
-                    <i className="text-secondary">
-                      {finishedTask.createdAt.slice(11,16)}
-                    </i>
+                    <Button 
+                      type="submit"
+                      variant="success"
+                      size="sm"
+                      className="ms-2"
+                      onClick={() => handleShowReactivate(finishedTask.id, finishedTask.name)}
+                    >
+                      <FontAwesomeIcon icon={faArrowUpFromBracket} />
+                    </Button>
+                    <Button 
+                      className="ms-2"
+                      size="sm"
+                      variant="primary"
+                      onClick={() => handleShow(finishedTask.id)}
+                    >
+                      <FontAwesomeIcon icon={faBoxOpen} />
+                    </Button>
+                    <Button 
+                      type="submit"
+                      variant="danger"
+                      size="sm"
+                      className="ms-2"
+                      onClick={() => handleShowDelete(finishedTask.id)}
+                    >
+                      <FontAwesomeIcon icon={faTrashCan} />
+                    </Button>
                   </span>
-                  <Button 
-                    type="submit"
-                    variant="success"
-                    size="sm"
-                    className="ms-2"
-                    onClick={() => handleShowReactivate(finishedTask.id, finishedTask.name)}
-                  >
-                    <FontAwesomeIcon icon={faArrowUpFromBracket} />
-                  </Button>
-                  <Button 
-                    className="ms-2"
-                    size="sm"
-                    variant="primary"
-                    onClick={() => handleShow(finishedTask.id)}
-                  >
-                    <FontAwesomeIcon icon={faBoxOpen} />
-                  </Button>
-                  <Button 
-                    type="submit"
-                    variant="danger"
-                    size="sm"
-                    className="ms-2"
-                    onClick={() => handleShowDelete(finishedTask.id)}
-                  >
-                    <FontAwesomeIcon icon={faTrashCan} />
-                  </Button>
-                </span>
+                </>)
               : ""
             })}
             <span className="mt-4">
