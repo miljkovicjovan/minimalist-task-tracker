@@ -66,6 +66,9 @@ Thanks to these wonderful people for contributing:
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/bidzy1617"><img src="https://avatars.githubusercontent.com/u/105366189?v=4?s=100" width="100px;" alt="bidzy1617"/><br /><sub><b>bidzy1617</b></sub></a><br /><a href="https://github.com/miljkovicjovan/minimalist-task-tracker/issues?q=author%3Abidzy1617" title="Bug reports">🐛</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/IrfanSalim"><img src="https://avatars.githubusercontent.com/u/109443065?v=4?s=100" width="100px;" alt="Md Irfan Salim"/><br /><sub><b>Md Irfan Salim</b></sub></a><br /><a href="https://github.com/miljkovicjovan/minimalist-task-tracker/commits?author=IrfanSalim" title="Code">💻</a></td>
     </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://bio.link/divya"><img src="https://avatars.githubusercontent.com/u/56636487?v=4?s=100" width="100px;" alt="Divya Kelaskar"/><br /><sub><b>Divya Kelaskar</b></sub></a><br /><a href="https://github.com/miljkovicjovan/minimalist-task-tracker/commits?author=divyakelaskar" title="Code">💻</a></td>
+    </tr>
   </tbody>
 </table>
 
