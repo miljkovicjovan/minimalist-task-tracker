@@ -79,8 +79,8 @@ function SettingsModal({ settings, setSettings }) {
 				</Modal.Header>
 				<Modal.Body className="d-flex justify-content-center">
 					<Form>
-						<span className="d-flex align-items-center">
-							<h5 className="m-0 pe-1">Show Confirmations</h5>
+						<span className="d-flex align-items-center gap-4">
+							<h5 className="m-0 pe-1">Show Confirmations When</h5>
 							<Form.Check
 								type="switch"
 								checked={settings.confirmations || isSwitched()}
@@ -90,55 +90,55 @@ function SettingsModal({ settings, setSettings }) {
 						<hr className="my-1"/>
 						<Form.Check
 							type="switch"
-							label="Show confirmation when reactivating a task"
+							label="reactivating a task"
 							checked={settings.askForReactivatingConfirmation}
 							onChange={handleSwitchReactivateChange}
 						/>
 						<Form.Check
 							type="switch"
-							label="Show confirmation when bulk reactivating tasks"
+							label="bulk reactivating tasks"
 							checked={settings.askForBulkReactivatingConfirmation}
 							onChange={handleSwitchBulkReactivateChange}
 						/>
 						<Form.Check
 							type="switch"
-							label="Show confirmation when editing a task"
+							label="editing a task"
 							checked={settings.askForEditingConfirmation}
 							onChange={handleSwitchEditingChange}
 						/>
 						<Form.Check
 							type="switch"
-							label="Show confirmation when bulk deleting tasks"
+							label="bulk deleting tasks"
 							checked={settings.askForBulkDeletingConfirmation}
 							onChange={handleSwitchBulkDeleteChange}
 						/>
 						<Form.Check
 							type="switch"
-							label="Show confirmation when deleting a task"
+							label="deleting a task"
 							checked={settings.askForDeletingConfirmation}
 							onChange={handleSwitchDeleteChange}
 						/>
 						<Form.Check
 							type="switch"
-							label="Show confirmation when bulk archiving tasks"
+							label="bulk archiving tasks"
 							checked={settings.askForBulkArchivingConfirmation}
 							onChange={handleSwitchBulkArchiveChange}
 						/>
 						<Form.Check
 							type="switch"
-							label="Show confirmation when archiving a task"
+							label="archiving a task"
 							checked={settings.askForArchivingConfirmation}
 							onChange={handleSwitchArchiveChange}
 						/>
 						<Form.Check
 							type="switch"
-							label="Show confirmation when bulk unarchiving tasks"
+							label="bulk unarchiving tasks"
 							checked={settings.askForBulkUnarchivingConfirmation}
 							onChange={handleSwitchBulkUnarchiveChange}
 						/>
 						<Form.Check
 							type="switch"
-							label="Show confirmation when unarchiving a task"
+							label="unarchiving a task"
 							checked={settings.askForUnarchivingConfirmation}
 							onChange={handleSwitchUnarchiveChange}
 						/>
