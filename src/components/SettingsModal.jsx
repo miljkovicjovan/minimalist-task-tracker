@@ -90,55 +90,55 @@ function SettingsModal({ settings, setSettings }) {
 						<hr className="my-1"/>
 						<Form.Check
 							type="switch"
-							label="reactivating a task"
+							label="Reactivating a task"
 							checked={settings.askForReactivatingConfirmation}
 							onChange={handleSwitchReactivateChange}
 						/>
 						<Form.Check
 							type="switch"
-							label="bulk reactivating tasks"
+							label="Bulk reactivating tasks"
 							checked={settings.askForBulkReactivatingConfirmation}
 							onChange={handleSwitchBulkReactivateChange}
 						/>
 						<Form.Check
 							type="switch"
-							label="editing a task"
+							label="Editing a task"
 							checked={settings.askForEditingConfirmation}
 							onChange={handleSwitchEditingChange}
 						/>
 						<Form.Check
 							type="switch"
-							label="bulk deleting tasks"
+							label="Bulk deleting tasks"
 							checked={settings.askForBulkDeletingConfirmation}
 							onChange={handleSwitchBulkDeleteChange}
 						/>
 						<Form.Check
 							type="switch"
-							label="deleting a task"
+							label="Deleting a task"
 							checked={settings.askForDeletingConfirmation}
 							onChange={handleSwitchDeleteChange}
 						/>
 						<Form.Check
 							type="switch"
-							label="bulk archiving tasks"
+							label="Bulk archiving tasks"
 							checked={settings.askForBulkArchivingConfirmation}
 							onChange={handleSwitchBulkArchiveChange}
 						/>
 						<Form.Check
 							type="switch"
-							label="archiving a task"
+							label="Archiving a task"
 							checked={settings.askForArchivingConfirmation}
 							onChange={handleSwitchArchiveChange}
 						/>
 						<Form.Check
 							type="switch"
-							label="bulk unarchiving tasks"
+							label="Bulk unarchiving tasks"
 							checked={settings.askForBulkUnarchivingConfirmation}
 							onChange={handleSwitchBulkUnarchiveChange}
 						/>
 						<Form.Check
 							type="switch"
-							label="unarchiving a task"
+							label="Unarchiving a task"
 							checked={settings.askForUnarchivingConfirmation}
 							onChange={handleSwitchUnarchiveChange}
 						/>
