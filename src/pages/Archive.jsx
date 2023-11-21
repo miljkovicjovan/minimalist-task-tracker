@@ -5,14 +5,6 @@ import { faTrashCan, faBoxOpen, faArrowUpFromBracket } from "@fortawesome/free-s
 import ConfirmationModal from "../components/ConfirmationModal";
 
 function Archive({ settings, setSettings }) {
-  const [hover, setHover] = useState(false);
-  const toggleHover = () => setHover(!hover);
-
-  const [hoverUnarchive, setHoverUnarchive] = useState(false);
-  const toggleHoverUnarchive = () => setHoverUnarchive(!hoverUnarchive);
-
-  const [hoverReactivate, setHoverReactivate] = useState(false);
-  const toggleHoverReactivate = () => setHoverReactivate(!hoverReactivate);
 
   const [tasks, setTasks] = useState(
     JSON.parse(
@@ -211,12 +203,8 @@ function Archive({ settings, setSettings }) {
             <span className="mt-4">
               <Button 
                 type='submit'
-                className={
-                  `border-success
-                  ${hoverReactivate ? "bg-dark text-success" : "bg-success text-white"}`
-                }
-                onMouseEnter={toggleHoverReactivate}
-                onMouseLeave={toggleHoverReactivate}
+                className={`border-success`}
+                variant="outline-success"
                 onClick={() => handleShowReactivateAll()}
               >
                 <FontAwesomeIcon icon={faArrowUpFromBracket} className='pe-1'/>
@@ -226,12 +214,8 @@ function Archive({ settings, setSettings }) {
             <span className="mt-2">
               <Button 
                 type='submit'
-                className={
-                  `border-primary
-                  ${hoverUnarchive ? "bg-dark text-primary" : "bg-primary text-white"}`
-                }
-                onMouseEnter={toggleHoverUnarchive}
-                onMouseLeave={toggleHoverUnarchive}
+                className={`border-primary`}
+                variant="outline-primary"
                 onClick={() => handleShowUnarchiveAll()}
               >
                 <FontAwesomeIcon icon={faBoxOpen} className='pe-1'/>
@@ -241,12 +225,8 @@ function Archive({ settings, setSettings }) {
             <span className="mt-2">
               <Button 
                 type='submit'
-                className={
-                  `border-danger 
-                  ${hover ? "bg-dark text-danger" : "bg-danger text-white"}`
-                }
-                onMouseEnter={toggleHover}
-                onMouseLeave={toggleHover}
+                className={`border-danger`}
+                variant="outline-danger"
                 onClick={() => handleShowDeleteAll()}
               >
                   <FontAwesomeIcon icon={faTrashCan} className='pe-1'/>

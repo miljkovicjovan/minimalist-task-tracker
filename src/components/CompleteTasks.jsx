@@ -5,8 +5,7 @@ import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import ConfirmationModal from "./ConfirmationModal";
 
 function CompleteTasks({ onCompleteAll, settings, setSettings }) {
-	const [hover, setHover] = useState(false);
-	const toggleHover = () => setHover(!hover);
+
 
 	const [show, setShow] = useState(false);
 	const handleClose = () => setShow(false);
@@ -16,10 +15,8 @@ function CompleteTasks({ onCompleteAll, settings, setSettings }) {
     return (
 			<>
 				<Button 
-					className={`mx-auto mt-3 border-success 
-					${hover ? "bg-dark text-success" : "bg-success text-light"}`}
-					onMouseEnter={toggleHover}
-					onMouseLeave={toggleHover}
+					className={`mx-auto mt-3`}
+					variant="outline-success"
 					onClick={handleShow}
 				>
 					<FontAwesomeIcon icon={faCheck} className='pe-1'/>

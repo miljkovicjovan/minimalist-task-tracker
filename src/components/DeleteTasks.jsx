@@ -5,9 +5,6 @@ import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import ConfirmationModal from "./ConfirmationModal";
 
 function DeleteTasks({ onDeleteAll, settings, setSettings }) {
-	const [hover, setHover] = useState(false);
-	const toggleHover = () => setHover(!hover);
-
 	const [show, setShow] = useState(false);
 	const handleClose = () => setShow(false);
 	const handleShow = () => {
@@ -16,10 +13,8 @@ function DeleteTasks({ onDeleteAll, settings, setSettings }) {
     return (
 			<>
 				<Button 
-					className={`mx-auto mt-2 border-danger 
-					${hover ? "bg-dark text-danger" : "bg-danger text-white"}`}
-					onMouseEnter={toggleHover}
-					onMouseLeave={toggleHover}
+					className={`mx-auto mt-2`}
+					variant="outline-danger"
 					onClick={handleShow}
 				>
 					<FontAwesomeIcon icon={faTrashCan} className='pe-1'/>

@@ -8,14 +8,7 @@ import ConfirmationModal from "./ConfirmationModal";
 function Task({ id, index, name, onDelete, onEdit, onComplete, settings, setSettings }) {
   const [editedName, setEditedName] = useState(name);
   const [editMode, setEditMode] = useState(false);
-
-  const [finishHover, setFinishHover] = useState(false);
-  const toggleHoverFinish = () => setFinishHover(!finishHover);
-  const [editHover, setEditHover] = useState(false);
-  const toggleHoverEdit = () => setEditHover(!editHover);
-  const [deleteHover, setDeleteHover] = useState(false);
-  const toggleHoverDelete = () => setDeleteHover(!deleteHover);
-
+  
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => {
@@ -61,11 +54,9 @@ function Task({ id, index, name, onDelete, onEdit, onComplete, settings, setSett
         <span>
           <Button 
             className={`border-success border-2 rounded-0 finish-task 
-            ${finishHover ? "bg-light border-light text-success" : "bg-success text-light"}
             ${editMode && "bg-dark text-light border-light"}`}
             disabled={editMode === true ? true : false}
-            onMouseEnter={toggleHoverFinish}
-            onMouseLeave={toggleHoverFinish}
+            variant="outline-success"
             onClick={() => onComplete(name, id)}
           >
             <FontAwesomeIcon icon={faCheck}/>
@@ -77,11 +68,9 @@ function Task({ id, index, name, onDelete, onEdit, onComplete, settings, setSett
           />
           <Button 
             className={`border-primary border-2 rounded-0 edit-task 
-            ${editHover ? "bg-light border-light text-primary" : "bg-primary text-light"}
             ${editMode && "bg-dark text-light border-light"}`}
             disabled={editMode === true ? true : false}
-            onMouseEnter={toggleHoverEdit}
-            onMouseLeave={toggleHoverEdit}
+            variant="outline-primary"
             onClick={() => {
               setEditMode(true);
               setEditedName(name);
@@ -96,11 +85,9 @@ function Task({ id, index, name, onDelete, onEdit, onComplete, settings, setSett
           />
           <Button 
             className={`border-danger border-2 rounded-0 rounded-end delete-task 
-            ${deleteHover ? "bg-light border-light text-danger" : "bg-danger text-light"}
             ${editMode && "bg-dark text-light border-light"}`}
             disabled={editMode === true ? true : false}
-            onMouseEnter={toggleHoverDelete}
-            onMouseLeave={toggleHoverDelete}
+            variant="outline-danger"
             onClick={handleShow}
           >
             <FontAwesomeIcon icon={faTrash}/>

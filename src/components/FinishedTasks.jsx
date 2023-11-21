@@ -13,13 +13,7 @@ function FinishedTasks(
     settings, setSettings
   }
 ) {
-  const [hover, setHover] = useState(false);
-  const toggleHover = () => setHover(!hover);
-  const [hoverArchive, setHoverArchive] = useState(false);
-  const toggleHoverArchive = () => setHoverArchive(!hoverArchive);
-  const [hoverReactivate, setHoverReactivate] = useState(false);
-  const toggleHoverReactivate = () => setHoverReactivate(!hoverReactivate);
-
+  
   const [show, setShow] = useState(false);
   const [selectedTask, setSelectedTask] = useState();
   const handleClose = () => setShow(false);
@@ -180,12 +174,7 @@ function FinishedTasks(
         <span className="mt-4">
           <Button 
             type='submit'
-            className={
-              `border-success
-              ${hoverReactivate ? "bg-dark text-success" : "bg-success text-white"}`
-            }
-            onMouseEnter={toggleHoverReactivate}
-            onMouseLeave={toggleHoverReactivate}
+            variant="outline-success"
             onClick={() => handleShowReactivateAll()}
           >
             <FontAwesomeIcon icon={faArrowUpFromBracket} className='pe-1'/>
@@ -195,12 +184,7 @@ function FinishedTasks(
         <span className="mt-2">
           <Button 
             type='submit'
-            className={
-              `border-primary
-              ${hoverArchive ? "bg-dark text-primary" : "bg-primary text-white"}`
-            }
-            onMouseEnter={toggleHoverArchive}
-            onMouseLeave={toggleHoverArchive}
+            variant="outline-primary"
             onClick={() => handleShowArchiveAll()}
           >
             <FontAwesomeIcon icon={faBoxArchive} className='pe-1'/>
@@ -210,12 +194,7 @@ function FinishedTasks(
         <span className="mt-2">
           <Button 
             type='submit'
-            className={
-              `border-danger
-              ${hover ? "bg-dark text-danger" : "bg-danger text-white"}`
-            }
-            onMouseEnter={toggleHover}
-            onMouseLeave={toggleHover}
+            variant="outline-danger"
             onClick={() => handleShowDeleteAll()}
           >
               <FontAwesomeIcon icon={faTrashCan} className='pe-1'/>
