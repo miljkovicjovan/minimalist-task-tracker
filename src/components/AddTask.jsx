@@ -4,7 +4,7 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { Tooltip } from "react-tooltip";
 
-function AddTask({ onAdd }) {
+function AddTask({ onAdd, settings }) {
   const [name, setName] = useState("");
   const [hover, setHover] = useState(false);
   const toggleHover = () => setHover(!hover);
@@ -31,14 +31,15 @@ function AddTask({ onAdd }) {
         type="text"
         value={name}
         placeholder="Add a Task"
-        className="bg-dark text-light rounded p-1 me-3"
+        className={`rounded p-1 me-3 ${settings.askForSwitchDarkMode ? "bg-light text-dark" :"bg-dark text-light" }`}
+        style= {{border : settings.askForSwitchDarkMode ? "1px solid black" :"1px solid white" }}
         onChange={(e) => setName(e.target.value)}
       />
       <Button
         type="submit"
-        className={`border-light add-task ${
-          hover ? "bg-dark text-light" : "bg-light text-dark"
-        }`}
+      className={`add-task ${settings.askForSwitchDarkMode ? "border-dark": "border-light"} 
+      ${hover ? (settings.askForSwitchDarkMode ? "bg-white text-dark" : "bg-dark text-white") : 
+            (settings.askForSwitchDarkMode ? "bg-dark text-light" : "bg-light text-dark")}`}
         onMouseEnter={toggleHover}
         onMouseLeave={toggleHover}
       >
@@ -47,6 +48,8 @@ function AddTask({ onAdd }) {
       </Button>
       <Tooltip
         className="d-none d-lg-block"
+        style={{backgroundColor: settings.askForSwitchDarkMode ? "#f8f9fa" : "#212529",
+                color: settings.askForSwitchDarkMode ? "black" : "white" }}
         anchorSelect=".add-task"
         content="Add a Task"
         place="right"
