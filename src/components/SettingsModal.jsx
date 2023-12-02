@@ -1,4 +1,4 @@
-import { Button, Modal, Form } from "react-bootstrap";
+import { Button, Modal, Form, CloseButton } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGear } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
@@ -21,6 +21,7 @@ function SettingsModal({ settings, setSettings }) {
 			askForBulkUnarchivingConfirmation: isChecked,
 			askForUnarchivingConfirmation: isChecked,
 			askForEditingConfirmation: isChecked,
+			askForSwitchDarkMode:isChecked,
 		});
 	};
 
@@ -42,7 +43,9 @@ function SettingsModal({ settings, setSettings }) {
 		setSettings({ ...settings, askForUnarchivingConfirmation: e.target.checked });
 	const handleSwitchEditingChange = (e) => 
 		setSettings({ ...settings, askForEditingConfirmation: e.target.checked });
-
+	const handleSwitchDarkMode = (e) => 
+		setSettings({ ...settings, askForSwitchDarkMode: e.target.checked });
+		
 	function isSwitched() {
 		if (settings.askForBulkReactivatingConfirmation &&
       settings.askForReactivatingConfirmation &&
@@ -52,7 +55,8 @@ function SettingsModal({ settings, setSettings }) {
 			settings.askForArchivingConfirmation &&
 			settings.askForBulkUnarchivingConfirmation &&
 			settings.askForUnarchivingConfirmation &&
-			settings.askForEditingConfirmation) {
+			settings.askForEditingConfirmation && 
+			settings.askForSwitchDarkMode) {
 				return true;
 		} else return false;
 	}
@@ -66,18 +70,19 @@ function SettingsModal({ settings, setSettings }) {
   return (
 		<>
 			<Button 
-				variant="dark"
-				className="rounded-circle position-fixed"
+				variant={settings.askForSwitchDarkMode ? "white" : "dark"} 
+				className={`position-fixed rounded-circle ${settings.askForSwitchDarkMode ? "border-light" : "border-dark"} `}
 				style={{top:"15px", right:"15px"}}
 				onClick={() => handleShow()}
 			>
 				<FontAwesomeIcon icon={faGear}/>
 			</Button>
-			<Modal fullscreen="sm-down" show={show} onHide={handleClose}>
-				<Modal.Header closeButton>
+			<Modal fullscreen="sm-down" show={show} onHide={handleClose} >
+				<Modal.Header className={settings.askForSwitchDarkMode ? 'text-light bg-dark' : 'text-dark bg-light'}>
 						<Modal.Title>Settings</Modal.Title>
+						<CloseButton bordered={false} className="outline-none" onClick={handleClose} variant={settings.askForSwitchDarkMode ? "white" : "primary"} />
 				</Modal.Header>
-				<Modal.Body className="d-flex justify-content-center">
+				<Modal.Body className={settings.askForSwitchDarkMode ? "d-flex justify-content-center text-light bg-dark" : "d-flex justify-content-center text-dark bg-light"}>
 					<Form>
 						<span className="d-flex align-items-center gap-4">
 							<h5 className="m-0 pe-1">Show Confirmations When</h5>
@@ -141,6 +146,12 @@ function SettingsModal({ settings, setSettings }) {
 							label="Unarchiving a task"
 							checked={settings.askForUnarchivingConfirmation}
 							onChange={handleSwitchUnarchiveChange}
+						/>
+						<Form.Check
+							type="switch"
+							label="Switch Mode"
+							checked={settings.askForSwitchDarkMode}
+							onChange={handleSwitchDarkMode}
 						/>
 					</Form>
 				</Modal.Body>

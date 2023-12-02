@@ -20,9 +20,11 @@ function App() {
 			askForArchivingConfirmation: true,
 			askForBulkUnarchivingConfirmation: true,
 			askForUnarchivingConfirmation: true,
-      askForEditingConfirmation: true
+      askForEditingConfirmation: true,
+      askForSwitchDarkMode: true,
 		}
   );
+document.body.style.background = settings.askForSwitchDarkMode ? '#f5f5f5' :'#212529';
 
   return (
     <Router>
@@ -33,7 +35,7 @@ function App() {
           <Route path="/" exact element={<Home settings={settings} setSettings={setSettings}/>} />
           <Route path="/archive" element={<Archive settings={settings} setSettings={setSettings}/>} />
         </Routes>
-        <Footer/>
+        <Footer settings={settings}/>
       </span>
     </Router>
   );
