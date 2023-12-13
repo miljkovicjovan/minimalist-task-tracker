@@ -77,12 +77,15 @@ function Home({ settings, setSettings }) {
   }
 
   useEffect(() => {
-    const storedTasks = JSON.parse(localStorage.getItem("tasks"));
-    const storedFinishedTasks = JSON.parse(localStorage.getItem("finishedTasks"));
-  
-    if (storedTasks) setTasks(storedTasks);
-    if (storedFinishedTasks) setFinishedTasks(storedFinishedTasks);
-  }, []);
+    window.localStorage.setItem(
+      "my-minimalistic-tracker-tasks",
+      JSON.stringify(tasks)
+    );
+    window.localStorage.setItem(
+      "my-minimalistic-tracker-tasks-finished",
+      JSON.stringify(finishedTasks)
+    );
+  }, [tasks, finishedTasks]);
   
   useEffect(() => {
     // Clear the message after 3 seconds
