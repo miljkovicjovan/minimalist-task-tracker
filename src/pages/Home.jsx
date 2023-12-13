@@ -121,6 +121,9 @@ function Home({ settings, setSettings }) {
           tasks={tasks}
           setTasks={setTasks}
           onReset={resetFinishedTask}
+          onArchive={archiveTask}
+          settings={settings}
+          setSettings={setSettings}
         />
       ) : (
         ""
