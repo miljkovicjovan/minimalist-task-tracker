@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import AddTask from "../components/AddTask";
 import Tasks from "../components/Tasks";
 import FinishedTasks from "../components/FinishedTasks";
+import Notification from "../components/Notification";
 
 function Home({ settings, setSettings }) {
   const [tasks, setTasks] = useState(
@@ -14,9 +15,11 @@ function Home({ settings, setSettings }) {
       window.localStorage.getItem("my-minimalistic-tracker-tasks-finished") || "[]"
     )
   );
+  const [message, setMessage] = useState("");
 
   function deleteTask(id) {
     setTasks(tasks.filter((task) => task.id !== id));
+    setMessage("Task deleted successfully!");
   }
 
   function completeTask(name, oldId) {
@@ -26,6 +29,7 @@ function Home({ settings, setSettings }) {
     const data = { id: id, name: name, archived: archived, createdAt: createdAt };
     setFinishedTasks([...finishedTasks, data]);
     setTasks(tasks.filter((task) => task.id !== oldId));
+    setMessage("Task completed successfully!");
   }
 
   function completeAllTasks() {
@@ -45,6 +49,7 @@ function Home({ settings, setSettings }) {
     const id = Math.floor(Math.random() * 1000) + 1;
     const newTask = { id, ...name };
     setTasks([...tasks, newTask]);
+    setMessage("Task added successfully!");
   }
 
   function editTask(name, id) {
@@ -52,6 +57,7 @@ function Home({ settings, setSettings }) {
       return task.id === id ? { ...task, name: name } : task;
     });
     setTasks(updatedTasks);
+    setMessage("Task edited successfully");
   }
 
   function resetFinishedTask() {
@@ -80,7 +86,17 @@ function Home({ settings, setSettings }) {
       JSON.stringify(finishedTasks)
     );
   }, [tasks, finishedTasks]);
-
+  
+  useEffect(() => {
+    // Clear the message after 3 seconds
+    const timer = setTimeout(() => {
+      setMessage("");
+    }, 3000);
+  
+    // Clear the timeout when the component is unmounted
+    return () => clearTimeout(timer);
+  }, [message]);
+  
   return (
     <div className="text-white text-center footer-push">
       <AddTask onAdd={addTask} />
@@ -112,6 +128,8 @@ function Home({ settings, setSettings }) {
       ) : (
         ""
       )}
+      {/* Display the message at the bottom */}
+      { message !== "" ? <Notification message={message} /> : ""}
     </div>
   );
 }
