@@ -125,6 +125,7 @@ git push origin <branch-name>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://bio.link/divya"><img src="https://avatars.githubusercontent.com/u/56636487?v=4?s=100" width="100px;" alt="Divya Kelaskar"/><br /><sub><b>Divya Kelaskar</b></sub></a><br /><a href="https://github.com/miljkovicjovan/minimalist-task-tracker/commits?author=divyakelaskar" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/bhavik001"><img src="https://avatars.githubusercontent.com/u/95668553?v=4?s=100" width="100px;" alt="bhavik001"/><br /><sub><b>bhavik001</b></sub></a><br /><a href="https://github.com/miljkovicjovan/minimalist-task-tracker/commits?author=bhavik001" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://neuronize.dev"><img src="https://avatars.githubusercontent.com/u/46224156?v=4?s=100" width="100px;" alt="Sahil"/><br /><sub><b>Sahil</b></sub></a><br /><a href="https://github.com/miljkovicjovan/minimalist-task-tracker/commits?author=dotslashbit" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
