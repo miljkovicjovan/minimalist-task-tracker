@@ -40,7 +40,7 @@ function Task({ id, index, name, onDelete, onEdit, onComplete, settings, setSett
     <>
       <Stack 
         direction="horizontal" 
-        className="task m-2 mx-auto border rounded d-flex justify-content-between"
+        className={`task m-2 mx-auto border rounded d-flex justify-content-between ${settings.askForSwitchDarkMode ? "border-dark text-dark":"border-light text-light"}`}
       >
         {!editMode ? <span className="p-2">#{index+1} {name}</span> :
         <span className="d-flex align-items-center">
@@ -53,7 +53,7 @@ function Task({ id, index, name, onDelete, onEdit, onComplete, settings, setSett
               type="text" 
               value={editedName}
               placeholder="Add a Task"
-              className="bg-dark text-light rounded p-1 border-0"
+              className={`rounded p-1 border-0 ${settings.askForSwitchDarkMode ? "bg-white text-dark":"bg-dark text-light"}`}
               onChange={(e) => setEditedName(e.target.value)}
             />
           </form>        
