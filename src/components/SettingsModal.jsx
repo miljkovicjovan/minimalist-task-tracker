@@ -1,6 +1,8 @@
 import { Button, Modal, Form, CloseButton } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGear } from "@fortawesome/free-solid-svg-icons";
+import  moon  from "../assets/moon.png"
+import  sun  from "../assets/sun.png"
 import { useState, useEffect } from "react";
 
 function SettingsModal({ settings, setSettings }) {
@@ -21,7 +23,6 @@ function SettingsModal({ settings, setSettings }) {
 			askForBulkUnarchivingConfirmation: isChecked,
 			askForUnarchivingConfirmation: isChecked,
 			askForEditingConfirmation: isChecked,
-			askForSwitchDarkMode:isChecked,
 		});
 	};
 
@@ -43,8 +44,8 @@ function SettingsModal({ settings, setSettings }) {
 		setSettings({ ...settings, askForUnarchivingConfirmation: e.target.checked });
 	const handleSwitchEditingChange = (e) => 
 		setSettings({ ...settings, askForEditingConfirmation: e.target.checked });
-	const handleSwitchDarkMode = (e) => 
-		setSettings({ ...settings, askForSwitchDarkMode: e.target.checked });
+	const handleSwitchDarkMode = () => 
+		setSettings({ ...settings, askForSwitchDarkMode: !settings.askForSwitchDarkMode });
 		
 	function isSwitched() {
 		if (settings.askForBulkReactivatingConfirmation &&
@@ -55,8 +56,7 @@ function SettingsModal({ settings, setSettings }) {
 			settings.askForArchivingConfirmation &&
 			settings.askForBulkUnarchivingConfirmation &&
 			settings.askForUnarchivingConfirmation &&
-			settings.askForEditingConfirmation && 
-			settings.askForSwitchDarkMode) {
+			settings.askForEditingConfirmation) {
 				return true;
 		} else return false;
 	}
@@ -69,14 +69,22 @@ function SettingsModal({ settings, setSettings }) {
   }, [settings]);
   return (
 		<>
-			<Button 
-				variant={settings.askForSwitchDarkMode ? "white" : "dark"} 
-				className={`position-fixed rounded-circle ${settings.askForSwitchDarkMode ? "border-light" : "border-dark"} `}
-				style={{top:"15px", right:"15px"}}
-				onClick={() => handleShow()}
-			>
-				<FontAwesomeIcon icon={faGear}/>
-			</Button>
+			<div style={{paddingBottom:"26px"}}>
+				<img src={settings.askForSwitchDarkMode ? moon : sun} 
+					alt="switchModeImage"  
+					className="position-fixed "
+					style={{top:"20px", right:"65px", height:"25px" , width:"25px", borderRadius:"15px", cursor:"pointer"}}
+					onClick={() => handleSwitchDarkMode()}
+				/>
+				<Button 
+					variant={settings.askForSwitchDarkMode ? "white" : "dark"} 
+					className={`position-fixed rounded-circle ${settings.askForSwitchDarkMode ? "border-light" : "border-dark"} `}
+					style={{top:"15px", right:"15px"}}
+					onClick={() => handleShow()}
+				>
+					<FontAwesomeIcon icon={faGear}/>
+				</Button>
+			</div>	
 			<Modal fullscreen="sm-down" show={show} onHide={handleClose} >
 				<Modal.Header className={settings.askForSwitchDarkMode ? 'text-light bg-dark' : 'text-dark bg-light'}>
 						<Modal.Title>Settings</Modal.Title>
@@ -146,12 +154,6 @@ function SettingsModal({ settings, setSettings }) {
 							label="Unarchiving a task"
 							checked={settings.askForUnarchivingConfirmation}
 							onChange={handleSwitchUnarchiveChange}
-						/>
-						<Form.Check
-							type="switch"
-							label="Switch Mode"
-							checked={settings.askForSwitchDarkMode}
-							onChange={handleSwitchDarkMode}
 						/>
 					</Form>
 				</Modal.Body>
