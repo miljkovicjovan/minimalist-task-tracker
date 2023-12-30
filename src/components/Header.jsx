@@ -1,8 +1,11 @@
 import LOGO from "../assets/logo.png";
 import { Nav } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 function Header() {
+  const location = useLocation();
+  const isArchivedPage = location.pathname === '/archive';
+
   return (
     <Nav className="pt-4 d-flex flex-column flex-md-row justify-content-center align-items-center">
       {/* This item is hidden in order to make the Logo be centered horizontally */}
@@ -17,9 +20,13 @@ function Header() {
         </Link>
       </Nav.Item>
       <Nav.Item className="nav-link m-0 px-0 pt-2 pb-0">
-        <Link to="/archive">
-          Archived Tasks
-        </Link>
+      {isArchivedPage ? (
+          <Link to="/">Back to Home</Link>
+        ) : (
+          <Link to="/archive">
+            Archived Tasks
+          </Link>
+        )}
       </Nav.Item>
     </Nav>
   );
