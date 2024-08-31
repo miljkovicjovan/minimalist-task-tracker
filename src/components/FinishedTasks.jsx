@@ -123,7 +123,7 @@ function FinishedTasks(
 
   return (
     <>
-      <Stack className="text-center pt-4">
+      <Stack className={`text-center pt-4 ${settings.askForSwitchDarkMode ?  "text-dark" : "text-light"}`}>
         <hr className="mx-auto w-25"/>
         <h4 className="text-decoration-underline">Finished Tasks &#129321;</h4>
         <p className="text-secondary">
@@ -182,7 +182,7 @@ function FinishedTasks(
             type='submit'
             className={
               `border-success
-              ${hoverReactivate ? "bg-dark text-success" : "bg-success text-white"}`
+              ${hoverReactivate ? (settings.askForSwitchDarkMode ?  "bg-white text-success" : "bg-dark text-success") : "bg-success text-white"}`
             }
             onMouseEnter={toggleHoverReactivate}
             onMouseLeave={toggleHoverReactivate}
@@ -197,7 +197,7 @@ function FinishedTasks(
             type='submit'
             className={
               `border-primary
-              ${hoverArchive ? "bg-dark text-primary" : "bg-primary text-white"}`
+              ${hoverArchive ? (settings.askForSwitchDarkMode ?  "bg-white text-primary" : "bg-dark text-primary") : "bg-primary text-white"}`
             }
             onMouseEnter={toggleHoverArchive}
             onMouseLeave={toggleHoverArchive}
@@ -212,7 +212,7 @@ function FinishedTasks(
             type='submit'
             className={
               `border-danger
-              ${hover ? "bg-dark text-danger" : "bg-danger text-white"}`
+              ${hover ? (settings.askForSwitchDarkMode ?  "bg-white text-danger" : "bg-dark text-danger") : "bg-danger text-white"}`
             }
             onMouseEnter={toggleHover}
             onMouseLeave={toggleHover}

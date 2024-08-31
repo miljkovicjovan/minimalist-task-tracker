@@ -17,7 +17,7 @@ function CompleteTasks({ onCompleteAll, settings, setSettings }) {
 			<>
 				<Button 
 					className={`mx-auto mt-3 border-success 
-					${hover ? "bg-dark text-success" : "bg-success text-light"}`}
+					${hover ? (settings.askForSwitchDarkMode ?  "bg-white text-success" : "bg-dark text-success") : "bg-success text-light"}`}
 					onMouseEnter={toggleHover}
 					onMouseLeave={toggleHover}
 					onClick={handleShow}

@@ -1,8 +1,8 @@
 import GitHubButton from 'react-github-btn';
 
-function Footer() {
+function Footer({settings}) {
   return (
-    <footer className="safari_only py-3 text-white text-center">
+    <footer className={`safari_only py-3 text-center ${settings.askForSwitchDarkMode ? "text-dark":"text-white"}`}>
       <p>
         Support us or Contribute on{" "}
         <a

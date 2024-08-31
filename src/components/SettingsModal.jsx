@@ -1,6 +1,8 @@
-import { Button, Modal, Form } from "react-bootstrap";
+import { Button, Modal, Form, CloseButton } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGear } from "@fortawesome/free-solid-svg-icons";
+import  moon  from "../assets/moon.png"
+import  sun  from "../assets/sun.png"
 import { useState, useEffect } from "react";
 
 function SettingsModal({ settings, setSettings }) {
@@ -42,7 +44,9 @@ function SettingsModal({ settings, setSettings }) {
 		setSettings({ ...settings, askForUnarchivingConfirmation: e.target.checked });
 	const handleSwitchEditingChange = (e) => 
 		setSettings({ ...settings, askForEditingConfirmation: e.target.checked });
-
+	const handleSwitchDarkMode = () => 
+		setSettings({ ...settings, askForSwitchDarkMode: !settings.askForSwitchDarkMode });
+		
 	function isSwitched() {
 		if (settings.askForBulkReactivatingConfirmation &&
       settings.askForReactivatingConfirmation &&
@@ -65,19 +69,28 @@ function SettingsModal({ settings, setSettings }) {
   }, [settings]);
   return (
 		<>
-			<Button 
-				variant="dark"
-				className="rounded-circle position-fixed"
-				style={{top:"15px", right:"15px"}}
-				onClick={() => handleShow()}
-			>
-				<FontAwesomeIcon icon={faGear}/>
-			</Button>
-			<Modal fullscreen="sm-down" show={show} onHide={handleClose}>
-				<Modal.Header closeButton>
+			<div style={{paddingBottom:"26px"}}>
+				<img src={settings.askForSwitchDarkMode ? moon : sun} 
+					alt="switchModeImage"  
+					className="position-fixed "
+					style={{top:"20px", right:"65px", height:"25px" , width:"25px", borderRadius:"15px", cursor:"pointer"}}
+					onClick={() => handleSwitchDarkMode()}
+				/>
+				<Button 
+					variant={settings.askForSwitchDarkMode ? "white" : "dark"} 
+					className={`position-fixed rounded-circle ${settings.askForSwitchDarkMode ? "border-light" : "border-dark"} `}
+					style={{top:"15px", right:"15px"}}
+					onClick={() => handleShow()}
+				>
+					<FontAwesomeIcon icon={faGear}/>
+				</Button>
+			</div>	
+			<Modal fullscreen="sm-down" show={show} onHide={handleClose} >
+				<Modal.Header className={settings.askForSwitchDarkMode ? 'text-light bg-dark' : 'text-dark bg-light'}>
 						<Modal.Title>Settings</Modal.Title>
+						<CloseButton bordered={false} className="outline-none" onClick={handleClose} variant={settings.askForSwitchDarkMode ? "white" : "primary"} />
 				</Modal.Header>
-				<Modal.Body className="d-flex justify-content-center">
+				<Modal.Body className={settings.askForSwitchDarkMode ? "d-flex justify-content-center text-light bg-dark" : "d-flex justify-content-center text-dark bg-light"}>
 					<Form>
 						<span className="d-flex align-items-center gap-4">
 							<h5 className="m-0 pe-1">Show Confirmations When</h5>

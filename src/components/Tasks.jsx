@@ -5,7 +5,7 @@ import CompleteTasks from "./CompleteTasks";
 
 function Tasks({ tasks, onDelete, onEdit, onComplete, onDeleteAll, onCompleteAll, settings, setSettings }) {
 	return (
-		<Stack className="my-3 mx-5">
+		<Stack className={`my-3 mx-5 ${settings.askForSwitchDarkMode ? "text-black":"text-light"}`}>
 			{tasks.length ? 
 				<>
 					<hr className="mx-auto w-25"/>

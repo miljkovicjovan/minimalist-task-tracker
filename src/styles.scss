@@ -1,5 +1,5 @@
 input {
-  border: 1px solid white;
+  // border: 1px solid white;
   outline: none;
 }
 
@@ -15,7 +15,9 @@ input {
 }
 
 @media screen and (max-width: 767px) {
-  _::-webkit-full-page-media, _:future, :root .footer-push {
+  _::-webkit-full-page-media,
+  _:future,
+  :root .footer-push {
     min-height: calc(100vh - 350px);
   }
 }

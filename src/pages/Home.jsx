@@ -99,7 +99,9 @@ function Home({ settings, setSettings }) {
   
   return (
     <div className="text-white text-center footer-push">
-      <AddTask onAdd={addTask} />
+      <AddTask onAdd={addTask} 
+              settings={settings}
+            />
       {tasks.length ? (
         <Tasks
           onComplete={completeTask}

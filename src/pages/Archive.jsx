@@ -152,7 +152,7 @@ function Archive({ settings, setSettings }) {
 
   return (
     <>
-      <Stack className="text-white text-center pt-4 footer-push">
+      <Stack className={`text-center pt-4 footer-push ${settings.askForSwitchDarkMode ?  "text-dark" : " text-light"}`} >
         {finishedTasks.some(task => task.archived === true) ? (
           <>
             <hr className="mx-auto w-25"/>
@@ -213,7 +213,7 @@ function Archive({ settings, setSettings }) {
                 type='submit'
                 className={
                   `border-success
-                  ${hoverReactivate ? "bg-dark text-success" : "bg-success text-white"}`
+                  ${hoverReactivate ? (settings.askForSwitchDarkMode ?  "bg-white text-success" : "bg-dark text-success") : "bg-success text-white"}`
                 }
                 onMouseEnter={toggleHoverReactivate}
                 onMouseLeave={toggleHoverReactivate}
@@ -228,7 +228,7 @@ function Archive({ settings, setSettings }) {
                 type='submit'
                 className={
                   `border-primary
-                  ${hoverUnarchive ? "bg-dark text-primary" : "bg-primary text-white"}`
+                  ${hoverUnarchive ? (settings.askForSwitchDarkMode ?  "bg-white text-primary" : "bg-dark text-primary") : "bg-primary text-white"}`
                 }
                 onMouseEnter={toggleHoverUnarchive}
                 onMouseLeave={toggleHoverUnarchive}
@@ -243,7 +243,7 @@ function Archive({ settings, setSettings }) {
                 type='submit'
                 className={
                   `border-danger 
-                  ${hover ? "bg-dark text-danger" : "bg-danger text-white"}`
+                  ${hover ? (settings.askForSwitchDarkMode ?  "bg-white text-danger" : "bg-dark text-danger") : "bg-danger text-white"}`
                 }
                 onMouseEnter={toggleHover}
                 onMouseLeave={toggleHover}
